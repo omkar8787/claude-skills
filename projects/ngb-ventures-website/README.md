@@ -39,6 +39,20 @@ Requires Node 20+ (tested on Node 22).
 
 `npm run build && npm start`, then in another terminal `npm run preview:export -- http://localhost:3000 preview-export`. This writes a relative-path copy of all pages to `preview-export/site/` that works under any sub-path (used for the private Claude Artifact preview). Forms show a "preview only" notice in this export.
 
+### Live static site (GitHub Pages)
+
+The live site is served from the `gh-pages` branch at https://omkar8787.github.io/claude-skills/. To redeploy:
+
+```bash
+NEXT_PUBLIC_SITE_URL=https://omkar8787.github.io/claude-skills \
+NEXT_PUBLIC_CONTACT_EMAIL=you@domain.com NEXT_PUBLIC_WHATSAPP_NUMBER=91XXXXXXXXXX \
+npm run build && npm start &
+LIVE_BASE=/claude-skills/ CONTACT_EMAIL=you@domain.com node scripts/export-preview.mjs http://localhost:3000 out-live
+# copy out-live/site/* (including .nojekyll) to the gh-pages branch root, then commit and push
+```
+
+GitHub Pages is static, so `/api/enquiry` isn't available there and forms show a "contact us by email" notice instead of submitting. For working online forms, deploy to Vercel (below) and point the domain at it.
+
 ## Deployment
 
 **Recommended: Vercel** (zero-config for Next.js).

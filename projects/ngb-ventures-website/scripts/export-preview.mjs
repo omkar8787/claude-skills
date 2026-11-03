@@ -5,6 +5,11 @@
  *
  *   node scripts/export-preview.mjs [baseUrl=http://localhost:3000] [outDir=preview-export]
  *
+ * LIVE MODE (static hosting such as GitHub Pages): set LIVE_BASE to the site's base path, e.g.
+ *   LIVE_BASE=/claude-skills/ CONTACT_EMAIL=hello@example.com node scripts/export-preview.mjs http://localhost:3000 out
+ * → absolute base-path links, extensionless page URLs, no preview badge, 404.html, sitemap.xml,
+ *   robots.txt, opengraph-image.png and .nojekyll; forms show a contact fallback (no server on static hosts).
+ *
  * What it does:
  *  - Crawls every URL in /sitemap.xml and saves it as site/<path>.html
  *  - Rewrites root-relative href/src ("/industries/x", "/_next/...", "/maps/...") to relative paths
@@ -23,9 +28,15 @@ fs.rmSync(out, { recursive: true, force: true });
 fs.mkdirSync(site, { recursive: true });
 
 const sitemap = await (await fetch(base + "/sitemap.xml")).text();
-const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => new URL(m[1]).pathname);
+const basePathPrefix = (process.env.LIVE_BASE || "").replace(/\/$/, "");
+const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => { const p = new URL(m[1]).pathname; return (basePathPrefix && p.startsWith(basePathPrefix) ? p.slice(basePathPrefix.length) : p) || "/"; });
 const routeSet = new Set(routes);
 
+const LIVE = process.env.LIVE_BASE || "";
+const CONTACT = process.env.CONTACT_EMAIL || "";
+const formMsg = LIVE
+  ? (CONTACT ? `Online submission is being connected. Please email your request to ${CONTACT}. We read every message.` : "Our online enquiry inbox is being connected. Please check back shortly or reach us through the Contact page.")
+  : "Preview only: form submissions are disabled here. On the live site this sends your enquiry to the NGB team.";
 const fileFor = (route) => (route === "/" ? "index.html" : route.replace(/^\//, "") + ".html");
 
 const badge = (prefix) => `<div style="position:fixed;right:12px;bottom:12px;z-index:9999;font:500 11px/1.2 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;background:#151515;color:#C9AD85;border:1px solid rgba(201,173,133,.4);border-radius:999px;padding:8px 12px;display:flex;gap:10px;align-items:center"><span>Preview</span><a href="${prefix}all-pages.html" style="color:#F6F3ED;text-decoration:underline">All pages</a></div>`;
@@ -35,26 +46,26 @@ const shim = (prefix) => `<script>(function(){
   window.addEventListener("click",function(e){var a=e.target&&e.target.closest&&e.target.closest("a[href]");if(!a)return;var h=a.getAttribute("href");if(!h||h.charAt(0)==="#"||/^[a-z]+:/i.test(h)||a.target==="_blank")return;e.stopPropagation();},true);
   // 2) Forms: no backend in the preview. Return an honest notice instead of a fake success.
   var f=window.fetch;window.fetch=function(u,o){var s=String(u&&u.url||u);
-    if(s.indexOf("/api/enquiry")>-1){return Promise.resolve(new Response(JSON.stringify({ok:false,code:"preview",message:"Preview only: form submissions are disabled here. On the live site this sends your enquiry to the NGB team."}),{status:503,headers:{"content-type":"application/json"}}));}
+    if(s.indexOf("/api/enquiry")>-1){return Promise.resolve(new Response(JSON.stringify({ok:false,code:${JSON.stringify(LIVE ? "not_configured" : "preview")},message:${JSON.stringify(formMsg)}}),{status:503,headers:{"content-type":"application/json"}}));}
     if(s.indexOf("_rsc=")>-1||(o&&o.headers&&(o.headers.RSC||o.headers.rsc))){return new Promise(function(){});}
     return f.apply(this,arguments);};
   // 3) Preview badge, added after hydration so React's markup is untouched
-  window.addEventListener("load",function(){setTimeout(function(){var d=document.createElement("div");d.innerHTML=${JSON.stringify(badge(prefix))};document.body.appendChild(d.firstChild);},300);});
+  ${LIVE ? "" : `window.addEventListener("load",function(){setTimeout(function(){var d=document.createElement("div");d.innerHTML=${JSON.stringify(badge(prefix))};document.body.appendChild(d.firstChild);},300);});`}
 })();</script>`;
 
 
 function rewrite(html, depth) {
-  const prefix = depth ? "../".repeat(depth) : "./";
+  const prefix = LIVE || (depth ? "../".repeat(depth) : "./");
   const fix = (url) => {
     if (!url.startsWith("/") || url.startsWith("//")) return url;
     const [pathAndQuery, hash] = url.split("#");
     const [p, q] = pathAndQuery.split("?");
     let target;
     if (p.startsWith("/_next/") || /\.[a-z0-9]{2,5}$/i.test(p)) target = p.slice(1);
-    else if (p === "/") target = "index.html";
-    else if (routeSet.has(p)) target = p.slice(1) + ".html";
-    else if (p === "/tools") target = "resources.html";
-    else target = "index.html";
+    else if (p === "/") target = LIVE ? "" : "index.html";
+    else if (routeSet.has(p)) target = p.slice(1) + (LIVE ? "" : ".html");
+    else if (p === "/tools") target = LIVE ? "insights" : "insights.html";
+    else target = LIVE ? "" : "index.html";
     return prefix + target + (q ? "?" + q : "") + (hash !== undefined ? "#" + hash : "");
   };
   html = html.replace(/(\s(?:href|src|action|poster))="([^"]*)"/g, (m, attr, url) => `${attr}="${fix(url)}"`);
@@ -63,6 +74,7 @@ function rewrite(html, depth) {
   html = html.replace(/<script>self\.__next_f\.push\(([\s\S]*?)\)<\/script>/g, (m, body) =>
     `<script>self.__next_f.push(${body.replace(/(?<!children\\":)\\"(\/[^"\\]*)\\"/g, (mm, url) => `\\"${fix(url)}\\"`)})</script>`);
   html = html.replace("<head>", "<head>" + shim(prefix));
+  if (LIVE) html = html.replace(/opengraph-image\?[^"\\]*/g, "opengraph-image.png");
   return html;
 }
 
@@ -97,4 +109,11 @@ for (const f of fs.readdirSync(path.join(site, "_next/static/chunks")).filter((x
 }
 // Some hosts reject literal U+FFFD; Next's polyfills use it inside string literals, so escape it.
 (function esc(d) { for (const f of fs.readdirSync(d)) { const p = path.join(d, f); if (fs.statSync(p).isDirectory()) esc(p); else if (f.endsWith(".js")) { const t = fs.readFileSync(p, "utf8"); if (t.includes("\uFFFD")) fs.writeFileSync(p, t.split("\uFFFD").join("\\uFFFD")); } } })(path.join(site, "_next"));
-console.log(`exported ${n} pages to ${out}`);
+if (LIVE) {
+  const nf = await fetch(base + "/__ngb_missing_page__");
+  fs.writeFileSync(path.join(site, "404.html"), rewrite(await nf.text(), 0));
+  for (const [src, dst] of [["/sitemap.xml", "sitemap.xml"], ["/robots.txt", "robots.txt"]]) fs.writeFileSync(path.join(site, dst), await (await fetch(base + src)).text());
+  fs.writeFileSync(path.join(site, "opengraph-image.png"), Buffer.from(await (await fetch(base + "/opengraph-image")).arrayBuffer()));
+  fs.writeFileSync(path.join(site, ".nojekyll"), "");
+}
+console.log(`exported ${n} pages to ${out}${LIVE ? ` (live mode, base ${LIVE})` : ""}`);

@@ -3,7 +3,8 @@ import { createElement } from "react";
 import { site } from "@/content/site";
 import type { FAQ } from "@/content/types";
 
-export const absUrl = (p = "/") => new URL(p, site.url).toString();
+/** Absolute URL that respects a base path in the site URL (e.g. https://user.github.io/repo). */
+export const absUrl = (p = "/") => site.url.replace(/\/$/, "") + (p.startsWith("/") ? p : `/${p}`);
 
 /** Keeps titles ≤ ~65 chars: drops trailing " | segment" when too long, appends brand only if it fits. */
 export function seoTitle(raw: string) {
