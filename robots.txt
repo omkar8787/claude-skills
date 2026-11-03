@@ -1,0 +1,7 @@
+User-Agent: *
+Allow: /
+Disallow: /api/
+Disallow: /thank-you
+
+Host: https://omkar8787.github.io/claude-skills/
+Sitemap: https://omkar8787.github.io/claude-skills/sitemap.xml
