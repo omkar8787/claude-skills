@@ -9,7 +9,8 @@ import { LedgerTicker } from "@/components/sections/LedgerTicker";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { WorldMarkets } from "@/components/maps/WorldMarkets";
 import { AtlasLazy } from "@/components/maps/AtlasLazy";
-import { HeroMosaic, ParallelManifesto, PinnedJourney, HorizontalSpotlight, SourceQuickStart, DivisionList, BeforeAfter } from "@/components/home/Interactive";
+import { HeroMosaic, ParallelManifesto, PinnedJourney, HorizontalSpotlight, SourceQuickStart, DivisionList } from "@/components/home/Interactive";
+import { BrandStudio } from "@/components/home/BrandStudio";
 import { divisions, journeyStages } from "@/content/divisions";
 import { spotlightItems } from "@/content/discovery";
 import { giProducts, giStatusLabel } from "@/content/gi";
@@ -75,7 +76,7 @@ export default function Home() {
     <>
       {/* ═════════ HERO ═════════ */}
       <section className="on-dark tone-light relative isolate overflow-hidden bg-charcoal text-ivory" aria-labelledby="hero-h">
-        <div className="absolute inset-0 -z-10 opacity-40"><Plate plate={P("home-hero", "jali", "sand", "")} className="h-full w-full" intensity="quiet" /></div>
+        <div className="absolute inset-0 -z-10 opacity-30 mix-blend-soft-light"><Plate plate={P("home-hero", "jali", "sand", "")} className="h-full w-full" intensity="quiet" /></div>
         <div className="container-x grid min-h-[100svh] items-center gap-12 pb-12 pt-28 lg:grid-cols-12 lg:pb-16 lg:pt-32">
           <div className="lg:col-span-6">
             <p className="eyebrow fade-up mb-8">{site.positioning}</p>
@@ -98,7 +99,7 @@ export default function Home() {
           </div>
           <dl className="col-span-full grid grid-cols-2 gap-6 border-t border-ivory/15 pt-6 md:grid-cols-4">
             {[["Philosophy", site.philosophy], ["Base", "Pune, Maharashtra, India"], ["Divisions", "Sourcing · Manufacturing · Export · Brand · Inclusive procurement"], ["Supplier diversity", site.dobeStatus]].map(([k, v]) => (
-              <div key={k}><dt className="ledger text-ivory/60">{k}</dt><dd className="mt-2 text-sm text-ivory/85">{v}</dd></div>
+              <div key={k}><dt className="ledger text-ivory/75">{k}</dt><dd className="mt-2 text-sm text-ivory/85">{v}</dd></div>
             ))}
           </dl>
         </div>
@@ -151,7 +152,7 @@ export default function Home() {
 
 
       {/* ═════════ ONE-STOP: CATEGORIES ═════════ */}
-      <section className="container-x py-24 lg:py-32" aria-labelledby="cat-h">
+      <section className="cv-auto container-x py-24 lg:py-32" aria-labelledby="cat-h">
         <SectionHead id="cat-h" eyebrow="One country. Every category." title={<>Your one-stop desk for <em>everything India makes.</em></>} lede="From the farm to the factory to the craft workshop: one partner to find it, check it, brand it and ship it." />
         <ul className="mt-14 grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-4">
           {oneStop.map((c, i) => (
@@ -172,14 +173,14 @@ export default function Home() {
             <p className="eyebrow mb-6">Source anything from India</p>
             <h2 id="src-h" className="display text-[clamp(2.6rem,5vw,4.8rem)]">Can&apos;t find it? <em>We&apos;ll help you source it.</em></h2>
             <p className="lede mt-8">You don&apos;t need to know where India makes it. That&apos;s what we help you discover.</p>
-            <p className="mt-6 max-w-md text-sm leading-relaxed text-ivory/60">{messaging.honesty} We don&apos;t offer instant quotes or live inventory. A person researches every request.</p>
+            <p className="mt-6 max-w-md text-sm leading-relaxed text-ivory/75">{messaging.honesty} We don&apos;t offer instant quotes or live inventory. A person researches every request.</p>
           </div>
           <div className="lg:col-span-6 lg:col-start-7"><SourceQuickStart /></div>
         </div>
       </section>
 
       {/* ═════════ LEAD PATHWAYS ═════════ */}
-      <section className="container-x py-24 lg:py-32" aria-labelledby="path-h">
+      <section className="cv-auto container-x py-24 lg:py-32" aria-labelledby="path-h">
         <SectionHead id="path-h" eyebrow="Choose your path" title={<>However you buy, <em>start here.</em></>} lede="Each path leads to a short form that asks only what matters for your kind of request." />
         <ul className="mt-14 grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-3">
           {pathways.map((pw, i) => (
@@ -203,7 +204,7 @@ export default function Home() {
       </section>
 
       {/* ═════════ ORIGIN COLLECTION ═════════ */}
-      <section className="container-x py-24 lg:py-32" aria-labelledby="origin-h">
+      <section className="cv-auto container-x py-24 lg:py-32" aria-labelledby="origin-h">
         <SectionHead id="origin-h" eyebrow="India's Origin Collection" title={<>Shaped by geography. <em>Protected by law.</em></>} lede="Products whose character comes from where they're made, with their Geographical Indication registration details, sources and verification dates on every page." />
         <ul className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {featuredGi.map((g) => (
@@ -227,7 +228,7 @@ export default function Home() {
       </section>
 
       {/* ═════════ BRAND ═════════ */}
-      <section className="bg-paper py-24 lg:py-32" aria-labelledby="brand-h">
+      <section className="cv-auto bg-paper py-24 lg:py-32" aria-labelledby="brand-h">
         <div className="container-x">
           <SectionHead id="brand-h" eyebrow="Brand development & advertising" title={<>We don&apos;t just source products. <em>We help build brands that sell.</em></>} lede="Positioning, identity, packaging, Amazon, Meta and Google advertising, and D2C growth, for products made in India and sold anywhere." />
           <ol className="mt-14 flex snap-x gap-px overflow-x-auto bg-line scrollbar-none" aria-label="From factory floor to global customer">
@@ -235,19 +236,17 @@ export default function Home() {
               <li key={s} className="min-w-[10.5rem] flex-1 snap-start bg-paper p-5"><span className="ledger text-bronze-ink">{String(i + 1).padStart(2, "0")}</span><p className="mt-6 font-display text-[1.4rem] leading-tight">{s}</p></li>
             ))}
           </ol>
-          <div className="mt-14 grid gap-12 lg:grid-cols-12 lg:items-center">
-            <div className="lg:col-span-7"><BeforeAfter /></div>
-            <div className="lg:col-span-4 lg:col-start-9">
-              <h3 className="display text-[clamp(2rem,3.4vw,3rem)]">From factory sample to <em>shelf-ready brand.</em></h3>
-              <p className="mt-5 leading-relaxed text-stone-ink">Drag the slider. The same product reads very differently once it has a position, an identity and packaging built for its channel.</p>
-              <div className="mt-8 flex flex-wrap gap-3"><Link href="/brand-development" className="btn btn-primary">Launch your brand with NGB <ArrowRight className="arrow h-4 w-4" /></Link><Link href="/advertising" className="btn btn-ghost">Advertising services</Link></div>
-            </div>
+          <div className="mt-20 grid gap-6 lg:grid-cols-12 lg:items-end">
+            <h3 className="display text-[clamp(2rem,3.4vw,3rem)] lg:col-span-7">From factory sample to <em>shelf-ready brand.</em></h3>
+            <p className="leading-relaxed text-stone-ink lg:col-span-4 lg:col-start-9">Watch one product move through our four stages, or tap a stage to explore. Same product. Very different value.</p>
           </div>
+          <div className="mt-10"><BrandStudio /></div>
+          <div className="mt-10 flex flex-wrap gap-3"><Link href="/brand-development" className="btn btn-primary">Launch your brand with NGB <ArrowRight className="arrow h-4 w-4" /></Link><Link href="/advertising" className="btn btn-ghost">Advertising services</Link></div>
         </div>
       </section>
 
       {/* ═════════ EXPORT ═════════ */}
-      <section className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="exp-h">
+      <section className="cv-auto on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="exp-h">
         <div className="container-x">
           <SectionHead id="exp-h" dark eyebrow="Global export solutions" title={<>Made in India. <em>Ready for the world.</em></>} lede="Tariffs, product rules and import requirements depend on HS classification and destination. We help you ask the right questions early and coordinate licensed partners to move the goods." />
           <div className="mt-14"><WorldMarkets /></div>
@@ -256,7 +255,7 @@ export default function Home() {
       </section>
 
       {/* ═════════ DOBE / INCLUSIVE ═════════ */}
-      <section className="on-dark bg-forest py-24 text-ivory lg:py-32" aria-labelledby="dobe-h">
+      <section className="cv-auto on-dark bg-forest py-24 text-ivory lg:py-32" aria-labelledby="dobe-h">
         <div className="container-x grid gap-12 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
             <p className="eyebrow mb-6">Inclusive procurement</p>
@@ -274,7 +273,7 @@ export default function Home() {
       </section>
 
       {/* ═════════ JOURNAL ═════════ */}
-      <section className="bg-paper py-24 lg:py-32" aria-labelledby="journal-h">
+      <section className="cv-auto bg-paper py-24 lg:py-32" aria-labelledby="journal-h">
         <div className="container-x">
           <SectionHead id="journal-h" eyebrow="Insights & stories" title={<>Know India <em>before you buy.</em></>} lede="Stories from India's craft and food regions, and practical buyer guides, written for international teams." />
           <ul className="mt-14 grid gap-10 md:grid-cols-3">

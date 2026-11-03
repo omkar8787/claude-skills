@@ -45,7 +45,7 @@ export function PageHero({ plate, eyebrow, title, italic, lede, crumbs, ctas = [
         </div>
         {meta && meta.length > 0 && (
           <dl className="mt-16 grid grid-cols-2 gap-6 border-t border-ivory/15 pt-6 md:grid-cols-4">
-            {meta.map((m) => <div key={m.k}><dt className="ledger text-ivory/60">{m.k}</dt><dd className="mt-2 text-sm text-ivory/85">{m.v}</dd></div>)}
+            {meta.map((m) => <div key={m.k}><dt className="ledger text-ivory/75">{m.k}</dt><dd className="mt-2 text-sm text-ivory/85">{m.v}</dd></div>)}
           </dl>
         )}
       </div>

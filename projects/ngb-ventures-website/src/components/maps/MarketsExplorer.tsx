@@ -31,7 +31,7 @@ export function MarketsExplorer({ w, h, origin, regions, base }: { w: number; h:
         {regions.map((g) => (
           <button key={g.id} type="button" onClick={() => setActive(g.id)} aria-pressed={g.id === active} className="group absolute -translate-x-1/2 -translate-y-1/2 p-3" style={{ left: `${(g.x / w) * 100}%`, top: `${(g.y / h) * 100}%` }}>
             <span className={`block rounded-full transition-all duration-500 ${g.id === active ? "h-3.5 w-3.5 bg-bronze ring-4 ring-bronze/25" : "h-2.5 w-2.5 bg-ivory group-hover:bg-bronze-soft"}`} />
-            <span className={`ledger absolute hidden whitespace-nowrap text-[0.6rem] sm:block ${g.id === "uk" ? "bottom-full right-1/2 mb-0.5" : g.id === "eu" ? "left-full top-1/2 ml-1 -translate-y-1/2" : "left-1/2 top-full -translate-x-1/2"} ${g.id === active ? "text-bronze-soft" : "text-ivory/60"}`}>{g.label}</span>
+            <span className={`ledger absolute hidden whitespace-nowrap text-[0.6rem] sm:block ${g.id === "uk" ? "bottom-full right-1/2 mb-0.5" : g.id === "eu" ? "left-full top-1/2 ml-1 -translate-y-1/2" : "left-1/2 top-full -translate-x-1/2"} ${g.id === active ? "text-bronze-soft" : "text-ivory/75"}`}>{g.label}</span>
             <span className="sr-only">{g.label}</span>
           </button>
         ))}
@@ -40,9 +40,9 @@ export function MarketsExplorer({ w, h, origin, regions, base }: { w: number; h:
       <div className="mt-10 grid gap-8 lg:grid-cols-12">
         <div className="flex gap-2 overflow-x-auto scrollbar-none lg:col-span-4 lg:flex-col lg:overflow-visible" role="tablist" aria-label="Regions">
           {regions.map((g) => (
-            <button key={g.id} role="tab" aria-selected={g.id === active} onClick={() => setActive(g.id)} className={`flex shrink-0 items-baseline justify-between gap-6 border-b py-3 text-left transition-colors lg:w-full ${g.id === active ? "border-bronze text-ivory" : "border-ivory/10 text-ivory/50 hover:text-ivory"}`}>
+            <button key={g.id} role="tab" aria-selected={g.id === active} onClick={() => setActive(g.id)} className={`flex shrink-0 items-baseline justify-between gap-6 border-b py-3 text-left transition-colors lg:w-full ${g.id === active ? "border-bronze text-ivory" : "border-ivory/10 text-ivory/75 hover:text-ivory"}`}>
               <span className="font-display text-2xl">{g.label}</span>
-              <span className="ledger hidden text-ivory/60 lg:inline">{g.markets.length ? `${g.markets.length} ${g.markets.length > 1 ? "guides" : "guide"}` : "on request"}</span>
+              <span className="ledger hidden text-ivory/75 lg:inline">{g.markets.length ? `${g.markets.length} ${g.markets.length > 1 ? "guides" : "guide"}` : "on request"}</span>
             </button>
           ))}
         </div>
@@ -60,14 +60,14 @@ export function MarketsExplorer({ w, h, origin, regions, base }: { w: number; h:
                   <div>
                     <p className="font-display text-3xl">{m.name}</p>
                     <p className="mt-3 text-[0.95rem] leading-relaxed text-ivory/65">{m.line}</p>
-                    <p className="mt-4 text-sm leading-relaxed text-ivory/60">{m.trade.split(". ")[0]}.</p>
+                    <p className="mt-4 text-sm leading-relaxed text-ivory/75">{m.trade.split(". ")[0]}.</p>
                   </div>
                   <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-bronze-soft">Sourcing for {m.name} <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
                 </Link>
               ))}
             </motion.div>
           </AnimatePresence>
-          <p className="mt-6 text-sm text-ivory/60">NGB Ventures operates from Pune, India, and supports buyers in these markets remotely. We do not have offices outside India.</p>
+          <p className="mt-6 text-sm text-ivory/75">NGB Ventures operates from Pune, India, and supports buyers in these markets remotely. We do not have offices outside India.</p>
         </div>
       </div>
     </div>

@@ -41,7 +41,7 @@ export function ClusterExplorer({ points, map, initial = "tirupur", filterable =
       <div className="lg:col-span-7">
         {filterable && (
           <div className="mb-6 flex flex-wrap items-center gap-3">
-            <label htmlFor="cluster-filter" className="ledger text-ivory/55">Filter by industry</label>
+            <label htmlFor="cluster-filter" className="ledger text-ivory/75">Filter by industry</label>
             <select id="cluster-filter" value={industry} onChange={(e) => setIndustry(e.target.value)} className="field max-w-xs py-2 text-sm">
               <option value="all">All industries</option>
               {industryOptions.map(([slug, name]) => <option key={slug} value={slug}>{name}</option>)}
@@ -79,14 +79,14 @@ export function ClusterExplorer({ points, map, initial = "tirupur", filterable =
                       {on && <span className="absolute -inset-2 animate-ping rounded-full border border-bronze/70" />}
                     </span>
                     {(p.featured || on) && (
-                      <span className={`ledger pointer-events-none absolute top-1/2 hidden -translate-y-1/2 whitespace-nowrap text-[0.6rem] transition-colors sm:block ${left ? "right-full mr-1" : "left-full ml-1"} ${on ? "text-bronze-soft" : "text-ivory/60 group-hover:text-ivory"}`}>{p.name}</span>
+                      <span className={`ledger pointer-events-none absolute top-1/2 hidden -translate-y-1/2 whitespace-nowrap text-[0.6rem] transition-colors sm:block ${left ? "right-full mr-1" : "left-full ml-1"} ${on ? "text-bronze-soft" : "text-ivory/75 group-hover:text-ivory"}`}>{p.name}</span>
                     )}
                   </button>
                 </li>
               );
             })}
           </ul>
-          <p className="ledger absolute bottom-0 left-0 text-[0.58rem] text-ivory/55">Indicative positions · Map data CC BY 4.0</p>
+          <p className="ledger absolute bottom-0 left-0 text-[0.58rem] text-ivory/75">Indicative positions · Map data CC BY 4.0</p>
         </div>
       </div>
 
@@ -98,14 +98,14 @@ export function ClusterExplorer({ points, map, initial = "tirupur", filterable =
               <h3 className="display mt-4 text-[clamp(3rem,6vw,5.5rem)]">{current.name}</h3>
               <p className="mt-2 font-display text-2xl italic text-ivory/80">{current.specialization}</p>
               <p className="mt-6 leading-relaxed text-ivory/70">{current.summary}</p>
-              {current.gi && <p className="mt-4 border-l border-bronze/60 pl-4 text-sm text-ivory/60">{current.gi}</p>}
+              {current.gi && <p className="mt-4 border-l border-bronze/60 pl-4 text-sm text-ivory/75">{current.gi}</p>}
               <div className="mt-8 grid gap-8 sm:grid-cols-2">
                 <div>
-                  <p className="ledger mb-3 text-ivory/60">Typical products</p>
+                  <p className="ledger mb-3 text-ivory/75">Typical products</p>
                   <ul className="space-y-1.5 text-[0.95rem] text-ivory/80">{current.products.slice(0, 5).map((x) => <li key={x}>{x}</li>)}</ul>
                 </div>
                 <div>
-                  <p className="ledger mb-3 text-ivory/60">Related industries</p>
+                  <p className="ledger mb-3 text-ivory/75">Related industries</p>
                   <ul className="space-y-1.5 text-[0.95rem]">{current.industries.map((i) => <li key={i.slug}><Link href={`/industries/${i.slug}`} className="link-u text-ivory/80 hover:text-ivory">{i.name}</Link></li>)}</ul>
                 </div>
               </div>
@@ -117,7 +117,7 @@ export function ClusterExplorer({ points, map, initial = "tirupur", filterable =
           </AnimatePresence>
 
           <div className="mt-12">
-            <p className="ledger mb-3 text-ivory/60">All clusters</p>
+            <p className="ledger mb-3 text-ivory/75">All clusters</p>
             <div className="flex flex-wrap gap-2">
               {points.filter(visible).map((p) => (
                 <button key={p.slug} type="button" onClick={() => setActive(p.slug)} aria-pressed={p.slug === active} className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${p.slug === active ? "border-bronze bg-bronze text-charcoal" : "border-ivory/20 text-ivory/70 hover:border-ivory/60 hover:text-ivory"}`}>

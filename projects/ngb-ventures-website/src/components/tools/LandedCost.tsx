@@ -112,16 +112,16 @@ export function LandedCost() {
           </div>
           <dl className="mt-6 divide-y divide-ivory/10 text-sm">
             {parts.map((p) => (
-              <div key={p.k} className="flex justify-between gap-4 py-2.5"><dt className="text-ivory/60">{p.k}</dt><dd className="tabular-nums">{fmt(p.x, v.currency)}</dd></div>
+              <div key={p.k} className="flex justify-between gap-4 py-2.5"><dt className="text-ivory/75">{p.k}</dt><dd className="tabular-nums">{fmt(p.x, v.currency)}</dd></div>
             ))}
-            <div className="flex justify-between gap-4 py-2.5 text-ivory/60"><dt>Customs value ({v.basis})</dt><dd className="tabular-nums">{fmt(r.customsValue, v.currency)}</dd></div>
-            <div className="flex justify-between gap-4 py-2.5 text-ivory/60"><dt>VAT/GST base</dt><dd className="tabular-nums">{fmt(r.vatBase, v.currency)}</dd></div>
+            <div className="flex justify-between gap-4 py-2.5 text-ivory/75"><dt>Customs value ({v.basis})</dt><dd className="tabular-nums">{fmt(r.customsValue, v.currency)}</dd></div>
+            <div className="flex justify-between gap-4 py-2.5 text-ivory/75"><dt>VAT/GST base</dt><dd className="tabular-nums">{fmt(r.vatBase, v.currency)}</dd></div>
           </dl>
           <div className="mt-6 flex flex-wrap gap-2">
             <button type="button" className="btn btn-ghost h-10 min-h-0 px-4 text-xs" onClick={() => navigator.clipboard?.writeText(summary())}><Copy className="h-3.5 w-3.5" /> Copy summary</button>
             <button type="button" className="btn btn-ghost h-10 min-h-0 px-4 text-xs" onClick={() => window.print()}><Printer className="h-3.5 w-3.5" /> Print</button>
           </div>
-          <p className="mt-6 border-t border-ivory/10 pt-5 text-xs leading-relaxed text-ivory/50">
+          <p className="mt-6 border-t border-ivory/10 pt-5 text-xs leading-relaxed text-ivory/75">
             <strong className="text-ivory/80">Estimate only. This isn&apos;t an official customs assessment.</strong> Duty and tax rates are entered by you. Actual duties depend on classification, origin, valuation, trade-agreement eligibility and rules in force on the date of import. Confirm with a licensed customs broker.
           </p>
         </div>

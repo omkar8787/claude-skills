@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { getDivision } from "@/content/divisions";
 import { DivisionHero, DeliveredCoordinated, NextDivisions } from "@/components/division/DivisionTemplate";
-import { BeforeAfter } from "@/components/home/Interactive";
+import { BrandStudio } from "@/components/home/BrandStudio";
 import { Plate } from "@/components/ui/Plate";
 import { Reveal } from "@/components/ui/Reveal";
 import { Faq } from "@/components/sections/Faq";
@@ -47,10 +47,8 @@ export default function BrandDev() {
         </div>
       </section>
       <section className="container-x py-24 lg:py-32">
-        <div className="grid gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-7"><BeforeAfter /></div>
-          <div className="lg:col-span-4 lg:col-start-9"><p className="eyebrow mb-6">Brand Launch Studio</p><h2 className="display text-[clamp(2rem,3.6vw,3.2rem)]">Same product. <em>Different value.</em></h2><p className="mt-5 leading-relaxed text-stone-ink">Drag to compare a generic factory sample with a positioned, packaged, listing-ready brand concept.</p></div>
-        </div>
+        <div className="grid gap-6 lg:grid-cols-12 lg:items-end"><div className="lg:col-span-7"><p className="eyebrow mb-6">Brand Launch Studio</p><h2 className="display text-[clamp(2rem,3.6vw,3.2rem)]">Same product. <em>Different value.</em></h2></div><p className="leading-relaxed text-stone-ink lg:col-span-4 lg:col-start-9">Four stages take a generic factory sample to a positioned, packaged, listing-ready brand. Tap a stage to explore.</p></div>
+        <div className="mt-10"><BrandStudio /></div>
         <div className="mt-24"><p className="eyebrow mb-6">Concept portfolio</p><h3 className="display text-[clamp(2rem,3.6vw,3.2rem)]">Studio concepts</h3>
           <p className="mt-3 max-w-2xl text-sm text-stone-ink">These are fictional brands created to show our thinking. They aren&apos;t client work, and no results are implied. We publish real case studies only with client permission.</p>
           <ul className="mt-10 grid gap-8 md:grid-cols-3">

@@ -31,7 +31,7 @@ export default function Publishers() {
       </section>
       <SplitBlock dark eyebrow="Print clusters" title={<>Where India <em>prints.</em></>}>
         <dl className="divide-y divide-ivory/10 border-y border-ivory/10">{clusters.map(([k, v]) => <div key={k} className="grid gap-2 py-5 sm:grid-cols-[12rem_1fr]"><dt className="font-display text-2xl text-bronze-soft">{k}</dt><dd className="leading-relaxed text-ivory/75">{v}</dd></div>)}</dl>
-        <p className="mt-6 text-sm text-ivory/55">Cluster descriptions are general research. We don&apos;t publish supplier names until they&apos;re verified and have agreed to be listed.</p>
+        <p className="mt-6 text-sm text-ivory/75">Cluster descriptions are general research. We don&apos;t publish supplier names until they&apos;re verified and have agreed to be listed.</p>
       </SplitBlock>
       <SplitBlock eyebrow="What we can coordinate" title={<>From file <em>to finished carton.</em></>}>
         <ul className="grid gap-x-8 gap-y-3 sm:grid-cols-2">{["Children's, activity and colouring books", "Sticker books and sticker sheets", "Custom and private-label publishing production", "Journals, notebooks and diaries", "Educational print and flash cards", "Printed packaging, labels and inserts", "Pre-press checks and proofs", "Paper, board and finish specification", "Safety testing for children's products (e.g. EN 71-3 for inks where relevant)", "Export packing and documentation"].map((x) => <li key={x} className="border-b border-line py-2.5">{x}</li>)}</ul>

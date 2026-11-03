@@ -75,7 +75,7 @@ export function MarketReadiness() {
       <div className="lg:col-span-6 lg:col-start-7" aria-live="polite">
         <div className="rounded-sm bg-charcoal p-7 text-ivory md:p-9 lg:sticky lg:top-28">
           <p className="ledger text-bronze-soft">Preliminary checklist · {d.name}</p>
-          <p className="display mt-3 text-5xl">{items.length} <span className="text-2xl text-ivory/60">questions to resolve</span></p>
+          <p className="display mt-3 text-5xl">{items.length} <span className="text-2xl text-ivory/75">questions to resolve</span></p>
           <ul className="mt-6 divide-y divide-ivory/10 border-y border-ivory/10">{items.map((i, n) => <li key={n} className="grid gap-1 py-3.5 sm:grid-cols-[8.5rem_1fr]"><span className="ledger pt-0.5 text-[0.6rem] text-bronze-soft">{i.area}</span><span className="text-sm leading-relaxed text-ivory/85">{i.text}</span></li>)}</ul>
           <div className="mt-5 rounded-sm bg-ivory/5 p-4 text-sm leading-relaxed text-ivory/75"><strong className="text-ivory">Trade agreement:</strong> {d.origin}</div>
           <div className="mt-6 flex flex-wrap gap-2">
@@ -83,7 +83,7 @@ export function MarketReadiness() {
             <button type="button" className="btn btn-ghost h-10 min-h-0 px-4 text-xs" onClick={() => navigator.clipboard?.writeText(summary).catch(() => {})}><Copy className="h-3.5 w-3.5" /> Copy checklist</button>
             <Link href={`/quote?type=sourcing&country=${encodeURIComponent(d.name === "European Union" ? "Other EU country" : d.name)}`} className="btn btn-bronze h-10 min-h-0 px-4 text-xs">Get help with this</Link>
           </div>
-          <p className="mt-6 text-xs leading-relaxed text-ivory/55">A preliminary list of questions, not legal, regulatory or customs advice. Requirements depend on the exact product, HS classification and current rules. Confirm with your compliance advisor, an accredited lab and a licensed customs broker.</p>
+          <p className="mt-6 text-xs leading-relaxed text-ivory/75">A preliminary list of questions, not legal, regulatory or customs advice. Requirements depend on the exact product, HS classification and current rules. Confirm with your compliance advisor, an accredited lab and a licensed customs broker.</p>
         </div>
       </div>
     </div>

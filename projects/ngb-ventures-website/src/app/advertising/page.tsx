@@ -33,7 +33,7 @@ export default function Advertising() {
         <dl className="divide-y divide-ivory/10 border-y border-ivory/10">
           {metrics.map(([k, v]) => <div key={k} className="grid grid-cols-[6rem_1fr] gap-6 py-6"><dt className="display text-4xl text-bronze-soft">{k}</dt><dd className="leading-relaxed text-ivory/75">{v}</dd></div>)}
         </dl>
-        <p className="mt-8 text-sm text-ivory/60">We report every month in plain language. We don&apos;t publish client results we don&apos;t have, and we don&apos;t promise outcomes.</p>
+        <p className="mt-8 text-sm text-ivory/75">We report every month in plain language. We don&apos;t publish client results we don&apos;t have, and we don&apos;t promise outcomes.</p>
       </SplitBlock>
       <Faq faqs={[
         { q: "What does a typical engagement include?", a: "Usually an audit or launch plan, account setup or restructure, creative and listing work, campaign management and monthly reporting. Scope and fees are agreed per brand." },

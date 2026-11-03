@@ -112,7 +112,7 @@ export function PinnedJourney({ stages, plates, mobilePlates }: { stages: Stage[
             <div className="col-span-5">
               <ol className="flex flex-wrap gap-x-3 gap-y-2" aria-label="Journey stages">
                 {stages.map((s, i) => (
-                  <li key={s.key} className={`ledger flex items-center gap-3 transition-colors duration-500 ${i === active ? "text-bronze-soft" : i < active ? "text-ivory/70" : "text-ivory/50"}`}>
+                  <li key={s.key} className={`ledger flex items-center gap-3 transition-colors duration-500 ${i === active ? "text-bronze-soft" : i < active ? "text-ivory/70" : "text-ivory/75"}`}>
                     {s.label}{i < stages.length - 1 && <span aria-hidden>→</span>}
                   </li>
                 ))}
@@ -177,7 +177,7 @@ export function HorizontalSpotlight({ cards, plates }: { cards: SpotCard[]; plat
   const pinned = desktop && !reduce;
   return (
     <div ref={wrap} style={pinned ? { height: `calc(100vh + ${dist}px)` } : undefined} className="relative">
-      {!pinned && <p className="ledger mb-4 flex items-center gap-2 px-5 text-ivory/60 md:px-10"><MoveHorizontal className="h-4 w-4" /> Swipe to explore</p>}
+      {!pinned && <p className="ledger mb-4 flex items-center gap-2 px-5 text-ivory/75 md:px-10"><MoveHorizontal className="h-4 w-4" /> Swipe to explore</p>}
       <div className={pinned ? "sticky top-0 flex h-screen flex-col justify-center overflow-hidden" : ""} onMouseMove={pinned ? (e) => setCursor({ x: e.clientX, y: e.clientY }) : undefined} onMouseLeave={() => setCursor(null)}>
         <motion.div style={pinned ? { x } : undefined}>{list}</motion.div>
         {pinned && cursor && (
@@ -211,7 +211,7 @@ export function SourceQuickStart() {
       <div className="md:col-span-4"><label htmlFor="qs-country" className="field-label">Ship to</label><select id="qs-country" className="field" value={v.country} onChange={(e) => setV({ ...v, country: e.target.value })}>{COUNTRIES.map((c) => <option key={c}>{c}</option>)}</select></div>
       <div className="md:col-span-4"><label htmlFor="qs-qty" className="field-label">Estimated quantity</label><input id="qs-qty" inputMode="numeric" className="field" placeholder="e.g. 2000" value={v.qty} onChange={(e) => setV({ ...v, qty: e.target.value })} /></div>
       <div className="flex flex-wrap items-center justify-between gap-4 md:col-span-12">
-        <p className="text-sm text-ivory/60">Next step: add a budget, customisation details and a reference image. It takes about 60 seconds.</p>
+        <p className="text-sm text-ivory/75">Next step: add a budget, customisation details and a reference image. It takes about 60 seconds.</p>
         <button type="submit" className="btn btn-bronze">Continue my request <ArrowRight className="arrow h-4 w-4" /></button>
       </div>
     </form>
@@ -244,58 +244,5 @@ export function DivisionList({ items, previews }: { items: { slug: string; index
         )}
       </AnimatePresence>
     </div>
-  );
-}
-
-/* ───────── 7. Before / after brand demonstration ───────── */
-export function BeforeAfter() {
-  const [v, setV] = useState(55);
-  return (
-    <figure>
-      <div className="relative aspect-[16/10] w-full select-none overflow-hidden bg-paper-2">
-        <ConceptScene branded={false} />
-        <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${v}%)` }}><ConceptScene branded /></div>
-        <div className="pointer-events-none absolute inset-y-0" style={{ left: `${v}%` }}><div className="h-full w-px bg-ivory shadow-[0_0_0_1px_rgba(21,21,21,.15)]" /><div className="absolute top-1/2 -ml-5 -mt-5 flex h-10 w-10 items-center justify-center rounded-full bg-ivory text-charcoal shadow"><MoveHorizontal className="h-4 w-4" /></div></div>
-        <span className="ledger absolute left-4 top-4 rounded-full bg-ivory/90 px-3 py-1 text-charcoal">Before · factory sample</span>
-        <span className="ledger absolute right-4 top-4 rounded-full bg-charcoal px-3 py-1 text-ivory">After · brand concept</span>
-        <label htmlFor="ba" className="sr-only">Compare before and after branding</label>
-        <input id="ba" type="range" min={5} max={95} value={v} onChange={(e) => setV(+e.target.value)} className="absolute inset-0 h-full w-full cursor-ew-resize opacity-0" />
-      </div>
-      <figcaption className="mt-4 text-sm text-stone-ink"><strong className="font-semibold text-charcoal">Concept demonstration.</strong> &ldquo;Ember &amp; Loom&rdquo; is a fictional brand created to show the process. It isn&apos;t client work.</figcaption>
-    </figure>
-  );
-}
-
-function ConceptScene({ branded }: { branded: boolean }) {
-  return (
-    <svg viewBox="0 0 800 500" className="absolute inset-0 h-full w-full" role="img" aria-label={branded ? "Branded packaging concept" : "Unbranded factory sample"} preserveAspectRatio="xMidYMid slice">
-      <rect width="800" height="500" fill={branded ? "#1c3329" : "#e2dacb"} />
-      {branded && <g opacity=".14" stroke="#c9ad85" fill="none">{Array.from({ length: 12 }).map((_, i) => <circle key={i} cx="560" cy="250" r={40 + i * 26} />)}</g>}
-      {/* box */}
-      <g transform="translate(250 120)">
-        <path d="M0 60 L150 0 L300 60 L150 120 Z" fill={branded ? "#a98758" : "#cdb998"} />
-        <path d="M0 60 L150 120 L150 300 L0 240 Z" fill={branded ? "#24402f" : "#bfa982"} />
-        <path d="M150 120 L300 60 L300 240 L150 300 Z" fill={branded ? "#2c4d3b" : "#b39d77"} />
-        {branded ? (
-          <g fill="#f6f3ed">
-            <text x="40" y="170" transform="skewY(22)" style={{ font: "italic 30px Georgia, serif" }}>Ember</text>
-            <text x="40" y="205" transform="skewY(22)" style={{ font: "italic 30px Georgia, serif" }}>&amp; Loom</text>
-            <text x="40" y="232" transform="skewY(22)" style={{ font: "500 9px monospace", letterSpacing: 3 }}>HAND-HAMMERED BRASS</text>
-            <circle cx="225" cy="150" r="22" fill="none" stroke="#c9ad85" />
-            <text x="212" y="155" style={{ font: "500 11px monospace" }} fill="#c9ad85">E&amp;L</text>
-          </g>
-        ) : (
-          <g fill="#8a7653" style={{ font: "500 11px monospace" }}><text x="30" y="190" transform="skewY(22)">ITEM 0427 · 12 PCS</text><text x="30" y="210" transform="skewY(22)">FRAGILE</text></g>
-        )}
-      </g>
-      {/* cup */}
-      <g transform="translate(590 230)">
-        <path d="M0 0 L8 120 C8 126 14 130 22 130 H58 C66 130 72 126 72 120 L80 0 Z" fill={branded ? "#c9ad85" : "#b59a62"} />
-        <ellipse cx="40" cy="0" rx="40" ry="10" fill={branded ? "#e7d3ad" : "#c7ae78"} />
-        {branded && <text x="20" y="80" style={{ font: "italic 16px Georgia, serif" }} fill="#1c3329">E&amp;L</text>}
-      </g>
-      {!branded && <text x="40" y="460" style={{ font: "500 12px monospace" }} fill="#8a7653">GENERIC CARTON · NO LISTING · NO STORY</text>}
-      {branded && <text x="40" y="460" style={{ font: "500 12px monospace", letterSpacing: 2 }} fill="#c9ad85">POSITIONING · IDENTITY · PACKAGING · LISTING-READY</text>}
-    </svg>
   );
 }

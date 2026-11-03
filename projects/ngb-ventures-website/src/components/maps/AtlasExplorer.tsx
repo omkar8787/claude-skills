@@ -63,7 +63,7 @@ export function AtlasExplorer({ states, gi, clusterSlugs, initial = "up" }: Prop
           <p className="ledger pointer-events-none absolute left-0 top-0 text-ivory/70" aria-hidden>{hoverName ?? "Select a state"}</p>
         </div>
         <div className="mx-auto max-w-[620px]">
-          <div className="ledger mt-3 flex flex-wrap gap-4 text-[0.6rem] text-ivory/60">
+          <div className="ledger mt-3 flex flex-wrap gap-4 text-[0.6rem] text-ivory/75">
             <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 bg-bronze/40" /> Profiled</span>
             <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 bg-ivory/10" /> Ask us</span>
             <span>Map: @svg-maps/india (CC BY 4.0) · indicative</span>
@@ -89,34 +89,34 @@ export function AtlasExplorer({ states, gi, clusterSlugs, initial = "up" }: Prop
                 <div className="mt-8 divide-y divide-ivory/10 border-y border-ivory/10">
                   {current.clusters.map((c) => (
                     <div key={c.name} className="flex items-baseline justify-between gap-4 py-3">
-                      <div><p className="font-display text-xl">{c.name}</p><p className="text-sm text-ivory/60">{c.focus}</p></div>
+                      <div><p className="font-display text-xl">{c.name}</p><p className="text-sm text-ivory/75">{c.focus}</p></div>
                       {c.clusterSlug && clusterSlugs.includes(c.clusterSlug) && <Link href={`/manufacturing/${c.clusterSlug}`} className="ledger shrink-0 text-bronze-soft hover:text-ivory">Cluster guide →</Link>}
                     </div>
                   ))}
                 </div>
 
                 <div className="mt-8 grid gap-8 sm:grid-cols-2">
-                  <div><p className="ledger mb-3 text-ivory/55">Traditional crafts</p><p className="text-[0.95rem] leading-relaxed text-ivory/80">{current.crafts.join(" · ")}</p></div>
-                  <div><p className="ledger mb-3 text-ivory/55">Industrial capabilities</p><p className="text-[0.95rem] leading-relaxed text-ivory/80">{current.industrial.join(" · ")}</p></div>
+                  <div><p className="ledger mb-3 text-ivory/75">Traditional crafts</p><p className="text-[0.95rem] leading-relaxed text-ivory/80">{current.crafts.join(" · ")}</p></div>
+                  <div><p className="ledger mb-3 text-ivory/75">Industrial capabilities</p><p className="text-[0.95rem] leading-relaxed text-ivory/80">{current.industrial.join(" · ")}</p></div>
                 </div>
 
                 {current.giSlugs.length > 0 && (
                   <div className="mt-8">
-                    <p className="ledger mb-3 text-ivory/55">GI products from this region</p>
+                    <p className="ledger mb-3 text-ivory/75">GI products from this region</p>
                     <ul className="flex flex-wrap gap-2">
                       {current.giSlugs.map((g) => gi[g] && (
                         <li key={g}><Link href={`/origin/${g}`} className="group inline-flex items-center gap-2 rounded-full border border-bronze/50 px-3 py-1.5 text-xs text-ivory hover:bg-bronze hover:text-charcoal">
-                          {gi[g].name}<span className="text-ivory/50 group-hover:text-charcoal/70">{gi[g].status}</span></Link></li>
+                          {gi[g].name}<span className="text-ivory/75 group-hover:text-charcoal/70">{gi[g].status}</span></Link></li>
                       ))}
                     </ul>
                   </div>
                 )}
 
-                <div className="mt-8"><p className="ledger mb-3 text-ivory/55">Sourcing ideas</p><ul className="space-y-1.5 text-[0.95rem] text-ivory/80">{current.sourcingIdeas.map((x) => <li key={x}>→ {x}</li>)}</ul></div>
+                <div className="mt-8"><p className="ledger mb-3 text-ivory/75">Sourcing ideas</p><ul className="space-y-1.5 text-[0.95rem] text-ivory/80">{current.sourcingIdeas.map((x) => <li key={x}>→ {x}</li>)}</ul></div>
 
                 <div className="mt-10 rounded-sm border border-ivory/15 p-6">
                   <p className="font-display text-2xl">Looking for something from {current.name}?</p>
-                  <p className="mt-2 text-sm text-ivory/60">These are research starting points, not existing NGB supplier relationships. Tell us what you need and we&apos;ll investigate.</p>
+                  <p className="mt-2 text-sm text-ivory/75">These are research starting points, not existing NGB supplier relationships. Tell us what you need and we&apos;ll investigate.</p>
                   <Link href={`/quote?type=sourcing&region=${encodeURIComponent(current.name)}`} className="btn btn-bronze mt-5">Request sourcing from {current.name} <ArrowRight className="arrow h-4 w-4" /></Link>
                 </div>
               </div>

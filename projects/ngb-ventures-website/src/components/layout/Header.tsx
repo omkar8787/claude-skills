@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { ArrowRight, ArrowUpRight, Menu, Plus, X } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Menu, Plus, X, Search } from "lucide-react";
 import { Logo } from "./Logo";
 import { ScrollProgress } from "./ScrollProgress";
 import type { NavItem } from "@/content/site";
@@ -54,7 +54,7 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ivory focus:px-4 focus:py-2 focus:text-charcoal">Skip to content</a>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,color,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${hidden && !open ? "-translate-y-full" : "translate-y-0"} ${solid ? "bg-ivory/92 text-charcoal shadow-[0_1px_0_rgba(21,21,21,.08)] backdrop-blur-xl" : "bg-transparent text-charcoal"}`}
+        className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,color,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${hidden && !open ? "-translate-y-full" : "translate-y-0"} ${solid ? "bg-ivory/92 text-charcoal shadow-[0_1px_0_rgba(21,21,21,.08)] backdrop-blur-xl" : "bg-transparent text-[color:var(--hero-fg)]"}`}
         onMouseLeave={leave}
       >
         <ScrollProgress />
@@ -80,7 +80,8 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href={cta.href} className={`btn hidden h-11 min-h-0 px-5 text-[0.8125rem] sm:inline-flex btn-primary`}>
+            <Link href="/search" aria-label="Search the site" className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-current/25 transition-colors hover:bg-charcoal hover:text-ivory"><Search className="h-[1.1rem] w-[1.1rem]" /></Link>
+            <Link href={cta.href} className={`btn hidden h-11 min-h-0 px-5 text-[0.8125rem] sm:inline-flex ${solid ? "btn-primary" : "btn-hero"}`}>
               {cta.label} <ArrowRight className="arrow h-4 w-4" />
             </Link>
             <button type="button" onClick={() => setMobile(true)} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-current/25 xl:hidden" aria-label="Open menu" aria-expanded={mobile} aria-controls="mobile-menu">
@@ -117,7 +118,7 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
             animate={{ clipPath: "inset(0 0 0% 0)" }}
             exit={{ clipPath: "inset(0 0 100% 0)" }}
             transition={{ duration: 0.6, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[60] flex flex-col bg-charcoal text-ivory xl:hidden"
+            className="tone-light fixed inset-0 z-[60] flex flex-col bg-charcoal text-ivory xl:hidden"
           >
             <div className="container-x flex h-[72px] shrink-0 items-center justify-between">
               <Link href="/" onClick={() => setMobile(false)}><Logo /></Link>
@@ -132,7 +133,7 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
                     <motion.li key={item.href} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25 + i * 0.04, duration: 0.5 }}>
                       <div className="flex items-center justify-between">
                         <Link href={item.href} onClick={() => setMobile(false)} className="flex flex-1 items-baseline gap-4 py-4">
-                          <span className="ledger text-ivory/60">{String(i + 1).padStart(2, "0")}</span>
+                          <span className="ledger text-ivory/75">{String(i + 1).padStart(2, "0")}</span>
                           <span className="font-display text-[2rem] leading-none">{item.label}</span>
                         </Link>
                         {sub && (
@@ -155,7 +156,7 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
                 })}
               </ul>
               <Link href={cta.href} onClick={() => setMobile(false)} className="btn btn-bronze mt-8 w-full">{cta.label} <ArrowRight className="arrow h-4 w-4" /></Link>
-              <p className="ledger mt-6 text-ivory/60">Pune · Maharashtra · India</p>
+              <p className="ledger mt-6 text-ivory/75">Pune · Maharashtra · India</p>
             </nav>
           </motion.div>
         )}

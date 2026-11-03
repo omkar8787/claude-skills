@@ -92,3 +92,21 @@ The site also keeps 16 industry, 9 product, 21 cluster, 8 market and 12 service 
 4. Real case studies and team profiles.
 5. A configured CRM, email and analytics stack.
 6. Site search.
+
+---
+
+## Round 4 (owner feedback, 3 Nov 2026): palette, categories, gifting, content, analytics
+
+| Feedback | Change |
+|---|---|
+| "Too dark" (near-black sections), then "too bright" (sand) | Theme token system with three palettes rendered on the real site. The owner chose **A · Indigo & Saffron**: chai-cream base (`#ece3d3`), deep indigo feature sections (`#1d2a45`), saffron-brass accents (`#dba35a`), teal accent sections. Switch with `data-theme` on `<html>` (`a`, `b` Peacock & Terracotta, `c` Clay & Olive) |
+| Before/after slider had spacing issues | Replaced with **Brand Studio**: a four-stage, auto-playing, keyboard-accessible demonstration (factory sample → positioning → identity & packaging → sell-ready listing), labelled as a fictional concept |
+| "More than handicrafts" | Spotlight grew from 10 to 23 products (food, nutrition, gifting, leather, jewellery, ceramics, rugs). New homepage "one-stop desk" grid with 12 categories |
+| Corporate gifting | `/corporate-gifting` landing page, plus Food, Spices & Nutrition and Corporate & Premium Gifting industry pages |
+| SEO content | 10 new stories and buyer guides with Article JSON-LD, keywords and related links; RSS feed at `/insights/feed.xml` |
+| Analytics without a rebuild | GA4 via `site-config.js` with Consent Mode v2 (EEA/UK/CH opt-in), lead, search and contact-click events; privacy policy updated |
+| Forms on a static host | Optional Formspree or Web3Forms endpoint; otherwise one-tap email or WhatsApp with the visitor's answers pre-filled |
+| Missing site search | `/search` page with a weighted client-side index of about 190 entries, a header search button, and an empty state that leads to a sourcing request |
+| Deployment | GitHub Actions workflow rebuilds and publishes `gh-pages` on every source change and preserves owner-edited settings |
+
+**Performance:** the film-grain noise filter was the mobile LCP element. It is now desktop-only, and below-the-fold homepage sections use `content-visibility: auto`. Mobile homepage Lighthouse performance rose from 76 to 84 on the same build.

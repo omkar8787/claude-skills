@@ -92,9 +92,9 @@ export default function CorporateGifting() {
 
       <SplitBlock dark eyebrow="What goes in the box" title={<>Gift ideas from <em>across India.</em></>}>
         <dl className="grid gap-x-8 sm:grid-cols-2">
-          {ideas.map(([k, v]) => <div key={k} className="flex items-baseline justify-between gap-4 border-b border-ivory/10 py-4"><dt className="font-display text-xl">{k}</dt><dd className="ledger shrink-0 text-right text-[0.6rem] text-ivory/60">{v}</dd></div>)}
+          {ideas.map(([k, v]) => <div key={k} className="flex items-baseline justify-between gap-4 border-b border-ivory/10 py-4"><dt className="font-display text-xl">{k}</dt><dd className="ledger shrink-0 text-right text-[0.6rem] text-ivory/75">{v}</dd></div>)}
         </dl>
-        <p className="mt-6 text-sm text-ivory/60">These are product directions from known craft and food regions, not existing supplier relationships. Availability and minimums are confirmed for each brief.</p>
+        <p className="mt-6 text-sm text-ivory/75">These are product directions from known craft and food regions, not existing supplier relationships. Availability and minimums are confirmed for each brief.</p>
       </SplitBlock>
 
       <section id="occasions" className="scroll-mt-24 bg-paper py-24 lg:py-32">

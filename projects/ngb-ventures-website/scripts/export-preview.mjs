@@ -30,6 +30,8 @@ fs.mkdirSync(site, { recursive: true });
 const sitemap = await (await fetch(base + "/sitemap.xml")).text();
 const basePathPrefix = (process.env.LIVE_BASE || "").replace(/\/$/, "");
 const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => { const p = new URL(m[1]).pathname; return (basePathPrefix && p.startsWith(basePathPrefix) ? p.slice(basePathPrefix.length) : p) || "/"; });
+// Pages that are deliberately not in the sitemap (noindex) but still need exporting.
+for (const extra of ["/search", "/thank-you"]) if (!routes.includes(extra)) routes.push(extra);
 const routeSet = new Set(routes);
 
 const LIVE = process.env.LIVE_BASE || "";
@@ -111,7 +113,7 @@ for (const f of fs.readdirSync(path.join(site, "_next/static/chunks")).filter((x
 if (LIVE) {
   const nf = await fetch(base + "/__ngb_missing_page__");
   fs.writeFileSync(path.join(site, "404.html"), rewrite(await nf.text(), 0));
-  for (const [src, dst] of [["/sitemap.xml", "sitemap.xml"], ["/robots.txt", "robots.txt"]]) fs.writeFileSync(path.join(site, dst), await (await fetch(base + src)).text());
+  for (const [src, dst] of [["/sitemap.xml", "sitemap.xml"], ["/robots.txt", "robots.txt"], ["/insights/feed.xml", "insights/feed.xml"]]) fs.writeFileSync(path.join(site, dst), await (await fetch(base + src)).text());
   fs.writeFileSync(path.join(site, "opengraph-image.png"), Buffer.from(await (await fetch(base + "/opengraph-image")).arrayBuffer()));
   fs.writeFileSync(path.join(site, ".nojekyll"), "");
 }

@@ -46,7 +46,7 @@ export default function Origin() {
             {[["Registered GI", "Registry details (application number, certificate, status) come from an indexed IP India GI registry record. We still recommend re-checking the live registry before commercial use."], ["Registered: renewal unconfirmed", "The record's listed validity date has passed and we couldn't confirm a renewal."], ["Reported GI: unverified", "We couldn't access the registry record. Details come from government or secondary sources and may be incomplete or conflicting."], ["Our role", "NGB Ventures doesn't own any GI and isn't an authorised user. Products marketed with a GI name or logo must come from registered authorised users in the defined area. We help buyers find and verify them."]].map(([t, b]) => (
               <div key={t} className="border-t border-ivory/15 pt-5"><p className="font-display text-2xl text-bronze-soft">{t}</p><p className="mt-2 leading-relaxed text-ivory/75">{b}</p></div>
             ))}
-            <p className="text-sm text-ivory/60">Primary register: IP India GI Registry (search.ipindia.gov.in). Research date for this collection: 3 Nov 2026.</p>
+            <p className="text-sm text-ivory/75">Primary register: IP India GI Registry (search.ipindia.gov.in). Research date for this collection: 3 Nov 2026.</p>
           </div>
         </div>
       </section>

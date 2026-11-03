@@ -76,9 +76,9 @@ export function SupplierChecklist() {
       <aside className="lg:col-span-4">
         <div className="rounded-sm bg-charcoal p-7 text-ivory lg:sticky lg:top-28">
           <p className="ledger text-bronze-soft">Evaluation score</p>
-          <p className="display mt-3 text-7xl tabular-nums">{stats.overall}<span className="text-4xl text-ivory/50">%</span></p>
+          <p className="display mt-3 text-7xl tabular-nums">{stats.overall}<span className="text-4xl text-ivory/75">%</span></p>
           <p className="mt-2 text-sm text-ivory/70">{verdict}</p>
-          <p className="ledger mt-4 text-ivory/60">{stats.answered}/{stats.total} answered · {stats.red} red flags</p>
+          <p className="ledger mt-4 text-ivory/75">{stats.answered}/{stats.total} answered · {stats.red} red flags</p>
           <ul className="mt-6 space-y-3">
             {stats.sec.map((s) => (
               <li key={s.title}><div className="mb-1 flex justify-between text-xs text-ivory/65"><span>{s.title}</span><span className="tabular-nums">{s.answered ? `${s.pct}%` : "—"}</span></div><div className="h-1 overflow-hidden rounded-full bg-ivory/10"><div className="h-full bg-bronze transition-[width] duration-700" style={{ width: `${s.answered ? s.pct : 0}%` }} /></div></li>
@@ -89,7 +89,7 @@ export function SupplierChecklist() {
             <button type="button" className="btn btn-ghost h-10 min-h-0 px-4 text-xs" onClick={() => window.print()}><Printer className="h-3.5 w-3.5" /> Print</button>
             <button type="button" className="btn btn-ghost h-10 min-h-0 px-4 text-xs" onClick={() => { setR({}); setNotes({}); setSupplier(""); }}><RotateCcw className="h-3.5 w-3.5" /> Reset</button>
           </div>
-          <p className="mt-6 text-xs leading-relaxed text-ivory/60">Saved in this browser only. Scoring is a decision aid, not a certification. Yes = 1, Partial = 0.5, No = 0, and N/A is excluded.</p>
+          <p className="mt-6 text-xs leading-relaxed text-ivory/75">Saved in this browser only. Scoring is a decision aid, not a certification. Yes = 1, Partial = 0.5, No = 0, and N/A is excluded.</p>
         </div>
       </aside>
     </div>

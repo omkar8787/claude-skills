@@ -54,7 +54,7 @@
   @media (min-width: 1280px) { .container-x { padding-inline: 4rem; } }
 
   .display { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.02em; line-height: 0.92; }
-  .display em, .display i { font-style: italic; color: #8a6a3f; }
+  .display em, .display i { font-style: italic; color: var(--color-bronze-ink); }
   .on-dark .display em, .on-dark .display i, .on-dark.display em { color: var(--color-bronze); }
 
 
@@ -106,34 +106,67 @@
   .mask-line { display: block; animation: mask-up 1.05s cubic-bezier(.16,1,.3,1) both; animation-delay: var(--d, 0s); }
   .fade-up { animation: fade-up .9s cubic-bezier(.22,1,.36,1) both; animation-delay: var(--d, 0s); }
   .grain::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .22; mix-blend-mode: overlay; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
-  /* Light tone: re-maps the dark palette inside a section, so `bg-charcoal text-ivory` markup renders as warm sand with ink text. */
+  /* Feature tone: re-maps the dark palette inside a section to the active theme's feature colours,
+     so `bg-charcoal text-ivory` markup follows the theme (jewel-dark or mid-tone). */
   .tone-light {
-    --color-ivory: #1b1a17;
-    --color-charcoal: #f3ecdf;
-    --color-ink: #efe6d4;
-    --color-bronze: #8a6a3f;
-    --color-bronze-soft: #7a5c33;
-    --color-forest: #e4ece4;
-    --color-line-dark: rgb(21 21 21 / 0.12);
+    --color-ivory: var(--f-fg);
+    --color-charcoal: var(--f-bg);
+    --color-ink: var(--f-bg2);
+    --color-bronze: var(--f-accent);
+    --color-bronze-soft: var(--f-accent-soft);
+    --color-forest: var(--f-bg2);
+    --color-stone-ink: var(--f-muted);
+    --color-bronze-ink: var(--f-accent-soft);
+    --color-line-dark: var(--f-line);
     background-color: var(--color-charcoal);
     color: var(--color-ivory);
   }
-  .tone-light .lede { color: var(--color-stone-ink); }
-  .tone-light .field { color: #151515; border-bottom-color: rgb(21 21 21 / .25); }
-  .tone-light .field-label { color: var(--color-stone-ink); }
-  .tone-light select.field { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none' stroke='%23151515' stroke-width='1.5'%3E%3Cpath d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); }
-  .tone-light .btn-bronze { color: #fbf8f2; }
-  .tone-light .btn-bronze:hover { background: #151515; color: #fbf8f2; }
-  /* Restores the original palette for text laid over artwork inside a light section. */
+  .tone-light .lede { color: var(--f-lede); }
+  .tone-light .field { color: var(--f-fg); border-bottom-color: var(--f-line-strong); }
+  .tone-light .field-label { color: var(--f-lede); }
+  .tone-light .btn-bronze { color: var(--f-btn-fg); }
+  .tone-light .btn-bronze:hover { background: var(--f-fg); color: var(--f-bg); }
+  .tone-light .map-art { filter: var(--f-map); }
+  .tone-light .display em, .tone-light .display i { color: var(--f-em); }
+  /* Restores the original palette for text laid over artwork. */
   .tone-reset { --color-ivory: #f6f3ed; --color-charcoal: #151515; --color-bronze: #a98758; --color-bronze-soft: #c9ad85; }
-  .tone-light .map-art { filter: invert(1) brightness(.55); }
+  .btn-hero { background: var(--hero-cta-bg); color: var(--hero-cta-fg); }
+  .btn-hero:hover { background: var(--color-bronze-ink); color: #fbf8f2; }
 }
 
 @layer utilities {
+  /* Skip rendering off-screen sections until they approach the viewport. */
+  .cv-auto { content-visibility: auto; contain-intrinsic-size: auto 900px; }
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
   .scrollbar-none { scrollbar-width: none; }
   .scrollbar-none::-webkit-scrollbar { display: none; }
+}
+
+/* ───────── Themes: set on <html data-theme> ───────── */
+/* A · Indigo & Saffron: warm chai base, deep indigo feature sections, saffron-brass accents */
+html[data-theme="a"] {
+  --color-bronze-ink: #6a4b22; --color-stone-ink: #514d47;
+  --color-ivory: #ece3d3; --color-paper: #e3d7c3; --color-paper-2: #d9cbb4; --color-forest: #17433f; --color-forest-2: #1e524d;
+  --f-bg: #1d2a45; --f-bg2: #233250; --f-fg: #f3eadb; --f-accent: #dba35a; --f-accent-soft: #e8c38c; --f-em: #e2ad66;
+  --f-muted: #b9bccb; --f-lede: rgb(243 234 219 / .76); --f-line: rgb(243 234 219 / .16); --f-line-strong: rgb(243 234 219 / .32);
+  --f-btn-fg: #1b1a17; --f-map: none; --hero-fg: #f3eadb; --hero-cta-bg: #dba35a; --hero-cta-fg: #1b1a17;
+}
+/* B · Peacock & Terracotta: soft clay base, peacock-teal feature sections, terracotta-brass accents */
+html[data-theme="b"] {
+  --color-bronze-ink: #6a4b22; --color-stone-ink: #514d47;
+  --color-ivory: #ebe0d1; --color-paper: #e2d3c0; --color-paper-2: #d7c6af; --color-forest: #6b2f22; --color-forest-2: #7a3a2b;
+  --f-bg: #113d40; --f-bg2: #15484b; --f-fg: #f4ebdd; --f-accent: #e09a5f; --f-accent-soft: #ebbd8f; --f-em: #eba26a;
+  --f-muted: #b5c7c4; --f-lede: rgb(244 235 221 / .76); --f-line: rgb(244 235 221 / .16); --f-line-strong: rgb(244 235 221 / .32);
+  --f-btn-fg: #1b1a17; --f-map: none; --hero-fg: #f4ebdd; --hero-cta-bg: #e09a5f; --hero-cta-fg: #1b1a17;
+}
+/* C · Clay & Olive: mid-tone throughout, no dark sections; greige base, clay features, olive accents */
+html[data-theme="c"] {
+  --color-bronze-ink: #5c4220; --color-stone-ink: #4a453f;
+  --color-ivory: #e3d9c8; --color-paper: #d8ccb7; --color-paper-2: #cdbfa7; --color-forest: #46503a; --color-forest-2: #525d44;
+  --f-bg: #cbb698; --f-bg2: #c2ac8c; --f-fg: #1d1b17; --f-accent: #5e4320; --f-accent-soft: #5e4320; --f-em: #6b4b22;
+  --f-muted: #4a4237; --f-lede: #3f382f; --f-line: rgb(29 27 23 / .16); --f-line-strong: rgb(29 27 23 / .3);
+  --f-btn-fg: #f6efe2; --f-map: invert(1) brightness(.45); --hero-fg: #1d1b17; --hero-cta-bg: #1d1b17; --hero-cta-fg: #f3eadb;
 }
 
 @keyframes fade-up { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
@@ -143,6 +176,9 @@
 @keyframes pulse-ring { 0% { r: 4; opacity: .7; } 100% { r: 16; opacity: 0; } }
 @keyframes sheen { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @keyframes marquee { to { transform: translateX(-50%); } }
+
+/* The film-grain overlay is a costly SVG noise filter; keep it for larger screens only. */
+@media (max-width: 767px) { .grain::after { display: none; } }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }

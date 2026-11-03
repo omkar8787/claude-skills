@@ -36,7 +36,7 @@ const company = [
 export function Footer() {
   const year = new Date().getFullYear();
   return (
-    <footer className="on-dark relative overflow-hidden bg-charcoal text-ivory">
+    <footer className="on-dark tone-light relative overflow-hidden bg-charcoal text-ivory">
       <div className="container-x pb-10 pt-24">
         <div className="grid gap-12 border-b border-ivory/10 pb-16 lg:grid-cols-12 lg:items-end">
           <p className="display text-[clamp(2.4rem,5vw,4.6rem)] lg:col-span-8">{messaging.promise.split(". ")[0]}. <em>{messaging.promise.split(". ")[1]}</em></p>
@@ -51,7 +51,7 @@ export function Footer() {
               {contactEmail ? <a className="link-u block w-fit" href={`mailto:${contactEmail}`}>{contactEmail}</a> : <Link className="link-u block w-fit" href="/contact">Send us an enquiry</Link>}
               {site.contact.phone && <a className="link-u block w-fit" href={`tel:${site.contact.phone.replace(/\s/g, "")}`}>{site.contact.phone}</a>}
               {whatsappHref && <a className="link-u block w-fit" href={whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>}
-              <p className="ledger pt-3 text-ivory/60">{site.city}, {site.region}, {site.country}</p>
+              <p className="ledger pt-3 text-ivory/75">{site.city}, {site.region}, {site.country}</p>
             </div>
           </div>
           <FooterCol title="Capabilities" className="lg:col-span-2" links={divisions.map((d) => ({ label: d.name, href: d.route }))} />
@@ -65,7 +65,7 @@ export function Footer() {
         </svg>
 
         <div className="rule mt-8" />
-        <div className="mt-8 flex flex-col gap-6 text-sm text-ivory/60 md:flex-row md:items-center md:justify-between">
+        <div className="mt-8 flex flex-col gap-6 text-sm text-ivory/75 md:flex-row md:items-center md:justify-between">
           <p>© {year} {site.legalName}. {site.signoff}</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {(["linkedin", "instagram", "youtube"] as const).map((k) =>

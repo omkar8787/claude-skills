@@ -29,7 +29,7 @@ export const divisions: Division[] = [
     coordinated: ["Third-party factory audits", "Independent lab testing", "Bulk procurement with the selected manufacturers"],
     outcomes: ["A feasibility answer: can India make it, where, and at what level", "A shortlist you can compare like for like", "A clear next step: samples, audit or RFQ"],
     cta: { label: "Source a product", href: "/quote?type=sourcing" },
-    glyph: "magnifier", tone: "charcoal",
+    glyph: "magnifier", tone: "indigo",
   },
   {
     slug: "manufacturing-private-label", route: "/manufacturing-private-label", index: "02", name: "Manufacturing & Private Label", kicker: "Make the product",
@@ -76,10 +76,10 @@ export const divisions: Division[] = [
 export const getDivision = (slug: string) => divisions.find((d) => d.slug === slug);
 
 export const journeyStages = [
-  { key: "source", label: "Source", title: "Find the product and the maker", body: "We map India's clusters, producers and GI origins against your requirement, then build a qualified shortlist.", glyph: "magnifier", tone: "charcoal" },
+  { key: "source", label: "Source", title: "Find the product and the maker", body: "We map India's clusters, producers and GI origins against your requirement, then build a qualified shortlist.", glyph: "magnifier", tone: "indigo" },
   { key: "manufacture", label: "Manufacture", title: "Make it to specification", body: "Samples, golden-sample approval, production follow-up and inspections, coordinated with independent manufacturers.", glyph: "gear", tone: "bronze" },
   { key: "customize", label: "Customize", title: "Make it yours", body: "Materials, finishes, sizes, private-label branding and packaging, specified and approved before bulk production.", glyph: "compass", tone: "clay" },
   { key: "brand", label: "Brand", title: "Give it a name worth remembering", body: "Positioning, identity and packaging that make the product make sense to your customers.", glyph: "tag", tone: "olive" },
   { key: "advertise", label: "Advertise", title: "Put it in front of buyers", body: "Amazon, Meta and Google campaigns, influencer seeding and PR, measured on ROAS and CAC.", glyph: "camera", tone: "indigo" },
-  { key: "export", label: "Export", title: "Ship it to the world", body: "Documentation, compliance questions and logistics, coordinated with licensed forwarders and brokers.", glyph: "ship", tone: "charcoal" },
+  { key: "export", label: "Export", title: "Ship it to the world", body: "Documentation, compliance questions and logistics, coordinated with licensed forwarders and brokers.", glyph: "ship", tone: "indigo" },
 ] as const;

@@ -98,7 +98,7 @@ export function ComplianceGrid({ items, title = "Compliance considerations" }: {
           <div className="lg:col-span-4">
             <p className="eyebrow mb-6">Regulatory</p>
             <h2 className="display text-[clamp(2.2rem,4vw,3.5rem)]">{title}</h2>
-            <p className="mt-6 text-sm leading-relaxed text-ivory/55">These are considerations to raise with your compliance advisor, testing lab or customs broker. They aren&apos;t legal advice. Regulations change, so verify current requirements for your product and market.</p>
+            <p className="mt-6 text-sm leading-relaxed text-ivory/75">These are considerations to raise with your compliance advisor, testing lab or customs broker. They aren&apos;t legal advice. Regulations change, so verify current requirements for your product and market.</p>
           </div>
           <div className="grid gap-px overflow-hidden bg-ivory/10 sm:grid-cols-2 lg:col-span-8">
             {items.map((c) => (
@@ -123,7 +123,7 @@ export function WorkflowStrip({ enquireHref }: { enquireHref: string }) {
           <li key={s.n} className="group bg-ivory p-6 transition-colors duration-500 hover:bg-charcoal hover:text-ivory">
             <span className="ledger text-bronze-ink group-hover:text-bronze-soft">{s.n}</span>
             <h3 className="mt-6 font-display text-[1.35rem] leading-tight">{s.title}</h3>
-            <p className="ledger mt-6 text-[0.6rem] text-stone-ink group-hover:text-ivory/50">→ {s.output}</p>
+            <p className="ledger mt-6 text-[0.6rem] text-stone-ink group-hover:text-ivory/75">→ {s.output}</p>
           </li>
         ))}
       </ol>

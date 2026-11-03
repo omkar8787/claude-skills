@@ -21,13 +21,14 @@ export const metadata: Metadata = {
   applicationName: site.name,
   openGraph: { siteName: site.name, type: "website", locale: "en_US" },
   formatDetection: { telephone: false },
+  alternates: { types: { "application/rss+xml": [{ url: "/insights/feed.xml", title: "NGB Ventures: Insights from India" }] } },
   verification: {
     ...(process.env.NEXT_PUBLIC_GSC_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION } : {}),
     ...(process.env.NEXT_PUBLIC_BING_VERIFICATION ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION } } : {}),
   },
 };
 
-export const viewport: Viewport = { themeColor: "#f3ecdf", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#1d2a45", width: "device-width", initialScale: 1 };
 
 const menus: MenuData = {
   capabilities: {
@@ -76,7 +77,7 @@ const menus: MenuData = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${manrope.variable} ${plex.variable}`}>
+    <html lang="en" data-theme="a" className={`${cormorant.variable} ${manrope.variable} ${plex.variable}`}>
       <body>
         {/* Runtime settings (GA4 ID, form endpoint): editable on the host without a rebuild. */}
         {/* eslint-disable-next-line @next/next/no-sync-scripts */}
