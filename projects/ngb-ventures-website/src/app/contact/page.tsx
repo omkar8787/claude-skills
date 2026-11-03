@@ -20,7 +20,7 @@ export default function ContactPage() {
       <section className="container-x grid gap-16 py-20 lg:grid-cols-12 lg:py-28">
         <div className="lg:col-span-4">
           <dl className="divide-y divide-line border-y border-charcoal">
-            {rows.map(({ Icon, k, v }) => <div key={k} id={k.toLowerCase()} className="flex gap-5 py-6"><Icon className="mt-1 h-5 w-5 shrink-0 text-bronze-ink" strokeWidth={1.4} /><div><dt className="ledger text-stone-ink">{k}</dt><dd className="mt-2 leading-relaxed">{v}</dd></div></div>)}
+            {rows.map(({ Icon, k, v }) => <div key={k} id={`contact-${k.toLowerCase()}`} className="flex gap-5 py-6"><Icon className="mt-1 h-5 w-5 shrink-0 text-bronze-ink" strokeWidth={1.4} /><div><dt className="ledger text-stone-ink">{k}</dt><dd className="mt-2 leading-relaxed">{v}</dd></div></div>)}
           </dl>
           <p className="mt-8 text-sm leading-relaxed text-stone-ink">We support buyers worldwide from Pune, India. We don’t operate overseas offices. Looking for a manufacturer directory? We don’t publish one, because we match suppliers to each brief instead. <Link href="/services/supplier-identification" className="underline underline-offset-2">How supplier identification works →</Link></p>
         </div>

@@ -31,6 +31,10 @@ npm start         # serve the production build
 
 Requires Node 20+ (tested on Node 22).
 
+### Static preview export
+
+`npm run build && npm start`, then in another terminal `npm run preview:export -- http://localhost:3000 preview-export`. This writes a relative-path copy of all pages to `preview-export/site/` that works under any sub-path (used for the private Claude Artifact preview). Forms show a "preview only" notice in this export.
+
 ## Deployment
 
 **Recommended: Vercel** (zero-config for Next.js).

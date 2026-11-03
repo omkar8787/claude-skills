@@ -44,7 +44,10 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
   const solid = scrolled || open !== null;
   const enter = (k?: string) => { if (closeTimer.current) clearTimeout(closeTimer.current); setOpen(k ?? null); };
   const leave = () => { closeTimer.current = setTimeout(() => setOpen(null), 160); };
-  const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
+  // Computed after mount so server and client markup always match (also on static/sub-path hosting).
+  const [activePath, setActivePath] = useState<string | null>(null);
+  useEffect(() => setActivePath(pathname), [pathname]);
+  const isActive = (href: string) => activePath !== null && (href === "/" ? activePath === "/" : activePath.startsWith(href));
 
   return (
     <>
