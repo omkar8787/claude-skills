@@ -3,7 +3,7 @@ import { ArrowRight } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <section className="on-dark flex min-h-[80svh] items-end bg-charcoal pb-20 pt-40 text-ivory">
+    <section className="on-dark tone-light flex min-h-[80svh] items-end bg-charcoal pb-20 pt-40 text-ivory">
       <div className="container-x">
         <p className="ledger text-bronze-soft">Error 404 · Page not found</p>
         <h1 className="display mt-6 text-[clamp(3rem,9vw,8rem)]">This route <em>doesn’t ship.</em></h1>

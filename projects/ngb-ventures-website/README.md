@@ -4,7 +4,7 @@ Production website for **NGB Ventures (Next Global Brand)**, an international so
 
 Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Motion · Lucide · Zod
 
-113 statically generated pages across five business divisions, an India Manufacturing Atlas, a GI Origin Collection (18 researched products), a Product Discovery Engine, a market-readiness checker and 3 other procurement tools, plus a pathway-aware quote form with reference-image upload.
+126 statically generated pages across five business divisions, an India Manufacturing Atlas, a GI Origin Collection (18 researched products), a Product Discovery Engine, a market-readiness checker and 3 other procurement tools, plus a pathway-aware quote form with reference-image upload.
 
 | Doc | Purpose |
 |---|---|
@@ -38,6 +38,19 @@ Requires Node 20+ (tested on Node 22).
 ### Static preview export
 
 `npm run build && npm start`, then in another terminal `npm run preview:export -- http://localhost:3000 preview-export`. This writes a relative-path copy of all pages to `preview-export/site/` that works under any sub-path (used for the private Claude Artifact preview). Forms show a "preview only" notice in this export.
+
+### Live site settings you can change without a rebuild
+
+Edit `site-config.js` at the root of the `gh-pages` branch (GitHub → branch `gh-pages` → `site-config.js` → pencil → Commit). Changes go live in about a minute.
+
+| Setting | What it does |
+|---|---|
+| `gaId` | Google Analytics 4 measurement ID (`G-…`). Loads GA4 with Consent Mode v2: analytics is denied by default for EEA/UK/CH visitors until they accept the banner, and ad storage is always off. Tracks page views, `generate_lead`, and email/WhatsApp/phone clicks |
+| `formEndpoint`, `formAccessKey` | Optional form backend (Formspree or Web3Forms). Without it, forms offer one-tap "Send by email" and "Send on WhatsApp" with the visitor's answers pre-filled |
+
+**Google Search Console:** add a *URL-prefix* property for `https://omkar8787.github.io/claude-skills/`, choose *HTML file* verification, and upload the `google….html` file to the root of `gh-pages`. Then submit `sitemap.xml`. The auto-deploy keeps that file.
+
+**Automatic deploys:** `.github/workflows/ngb-website-pages.yml` rebuilds and publishes the site whenever files under `projects/ngb-ventures-website/` change, or when you click *Run workflow* in the Actions tab. To add an article, add an entry to `src/content/stories.ts` in the GitHub editor and commit.
 
 ### Live static site (GitHub Pages)
 

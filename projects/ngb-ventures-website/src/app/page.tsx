@@ -1,3 +1,4 @@
+import { guides } from "@/content/guides";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { Plate } from "@/components/ui/Plate";
@@ -44,6 +45,21 @@ const pathways = [
 ];
 const brandSteps = ["Product idea", "Manufacturing", "Brand identity", "Packaging", "Advertising", "Marketplace", "Global customer"];
 
+const oneStop = [
+  { t: "Handicrafts & home décor", b: "Brass, wood, stone, glass, blue pottery and lighting.", href: "/industries/handicrafts" },
+  { t: "Textiles & apparel", b: "Block print, handloom, ikat, knitwear, rugs and home linen.", href: "/industries/home-textiles" },
+  { t: "Food, spices & nutrition", b: "Spices, millets, tea, coffee, makhana and superfood powders.", href: "/industries/food-nutrition" },
+  { t: "Corporate & festive gifting", b: "Curated hampers, welcome kits and festive collections.", href: "/corporate-gifting" },
+  { t: "Wellness & natural beauty", b: "Attars, essential oils, Ayurvedic botanicals and natural care.", href: "/industries/essential-oils" },
+  { t: "Furniture & woodcraft", b: "Mango wood, sheesham, cane and carved pieces.", href: "/industries/furniture-woodcraft" },
+  { t: "Leather, jewellery & accessories", b: "Bags, footwear, silver and fashion jewellery.", href: "/industries/jewelry-accessories" },
+  { t: "Eco-friendly products", b: "Jute, coir, bamboo, loofah and plastic-free packaging.", href: "/industries/eco-friendly" },
+  { t: "Kitchen & tableware", b: "Brass, copper, steel, stoneware and serveware.", href: "/industries/kitchenware-tableware" },
+  { t: "Packaging, print & publishing", b: "Books, stationery, cartons, labels and inserts.", href: "/publishers-printing" },
+  { t: "Engineering & components", b: "Machined, cast and forged parts built to print.", href: "/industries/engineering-industrial" },
+  { t: "GI & origin products", b: "Registered regional specialities, with sources.", href: "/origin" },
+];
+
 export default function Home() {
   const giMini = Object.fromEntries(giProducts.map((g) => [g.slug, { slug: g.slug, name: g.shortName, status: giStatusLabel[g.status], applicationNo: g.applicationNo }]));
   const colA = [spotlightItems[0], spotlightItems[1], spotlightItems[5], spotlightItems[7]];
@@ -51,15 +67,15 @@ export default function Home() {
   const Card = ({ it, tall }: { it: (typeof spotlightItems)[number]; tall?: boolean }) => (
     <figure className={`relative shrink-0 overflow-hidden ${tall ? "aspect-[3/4]" : "aspect-[4/4.2]"}`}>
       <Plate plate={it.plate} className="h-full w-full" sizes="30vw" />
-      <figcaption className="ledger absolute bottom-3 left-3 right-3 text-[0.6rem] text-ivory/85">{it.name} · {it.state}</figcaption>
+      <figcaption className="tone-reset ledger absolute bottom-3 left-3 right-3 text-[0.6rem] text-ivory/90">{it.name} · {it.state}</figcaption>
     </figure>
   );
 
   return (
     <>
       {/* ═════════ HERO ═════════ */}
-      <section className="on-dark relative isolate overflow-hidden bg-charcoal text-ivory" aria-labelledby="hero-h">
-        <div className="absolute inset-0 -z-10 opacity-60"><Plate plate={P("home-hero", "jali", "charcoal", "")} className="h-full w-full" intensity="quiet" /></div>
+      <section className="on-dark tone-light relative isolate overflow-hidden bg-charcoal text-ivory" aria-labelledby="hero-h">
+        <div className="absolute inset-0 -z-10 opacity-40"><Plate plate={P("home-hero", "jali", "sand", "")} className="h-full w-full" intensity="quiet" /></div>
         <div className="container-x grid min-h-[100svh] items-center gap-12 pb-12 pt-28 lg:grid-cols-12 lg:pb-16 lg:pt-32">
           <div className="lg:col-span-6">
             <p className="eyebrow fade-up mb-8">{site.positioning}</p>
@@ -110,7 +126,7 @@ export default function Home() {
       </section>
 
       {/* ═════════ PINNED JOURNEY ═════════ */}
-      <section className="on-dark bg-charcoal py-24 text-ivory lg:py-0" aria-labelledby="journey-h">
+      <section className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-0" aria-labelledby="journey-h">
         <div className="container-x">
           <div className="lg:pt-32"><SectionHead id="journey-h" dark eyebrow="From India's factory floor to the global marketplace" title={<>Source. Manufacture. Customise. <em>Brand. Advertise. Export.</em></>} /></div>
           <div className="mt-14 lg:mt-0">
@@ -124,13 +140,29 @@ export default function Home() {
       </section>
 
       {/* ═════════ HORIZONTAL SPOTLIGHT ═════════ */}
-      <section className="on-dark bg-ink pt-24 text-ivory lg:pt-32" aria-labelledby="spot-h">
-        <div className="container-x mb-12"><SectionHead id="spot-h" dark eyebrow="Product spotlight" title={<>Extraordinary things <em>India makes.</em></>} lede="A rotating edit of products with real sourcing potential. Each card leads to a guide or a pre-filled sourcing request. It's not a stock list." /></div>
+      <section className="on-dark tone-light bg-ink pt-24 text-ivory lg:pt-32" aria-labelledby="spot-h">
+        <div className="container-x mb-12"><SectionHead id="spot-h" dark eyebrow="Product spotlight" title={<>Extraordinary things <em>India makes.</em></>} lede="Handicrafts and textiles, yes. But also spices, millets, tea, superfoods, corporate gifts, leather, ceramics and precision parts. Each card leads to a guide or a pre-filled sourcing request. It's not a stock list." /></div>
         <HorizontalSpotlight
           cards={spotlightItems.map((s) => ({ slug: s.slug, name: s.name, meta: `${s.cluster} · ${s.state}`, story: s.story, href: s.href, cta: s.href.startsWith("/quote") ? "Source this" : "Explore" }))}
           plates={spotlightItems.map((s) => <Plate key={s.slug} plate={s.plate} className="h-full w-full" sizes="30vw" />)}
         />
         <div className="h-16 lg:h-24" />
+      </section>
+
+
+      {/* ═════════ ONE-STOP: CATEGORIES ═════════ */}
+      <section className="container-x py-24 lg:py-32" aria-labelledby="cat-h">
+        <SectionHead id="cat-h" eyebrow="One country. Every category." title={<>Your one-stop desk for <em>everything India makes.</em></>} lede="From the farm to the factory to the craft workshop: one partner to find it, check it, brand it and ship it." />
+        <ul className="mt-14 grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-4">
+          {oneStop.map((c, i) => (
+            <Reveal as="li" key={c.t} delay={(i % 4) * 0.04} className="bg-ivory">
+              <Link href={c.href} className="group flex h-full flex-col justify-between gap-6 p-7 transition-colors duration-500 hover:bg-paper">
+                <div><span className="ledger text-bronze-ink">{String(i + 1).padStart(2, "0")}</span><h3 className="mt-4 font-display text-[1.75rem] leading-tight">{c.t}</h3><p className="mt-2 text-[0.92rem] leading-relaxed text-stone-ink">{c.b}</p></div>
+                <span className="inline-flex items-center gap-2 text-sm font-semibold">Explore <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
+              </Link>
+            </Reveal>
+          ))}
+        </ul>
       </section>
 
       {/* ═════════ SOURCE ANYTHING ═════════ */}
@@ -162,7 +194,7 @@ export default function Home() {
       </section>
 
       {/* ═════════ ATLAS ═════════ */}
-      <section id="atlas" className="on-dark bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="atlas-h">
+      <section id="atlas" className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="atlas-h">
         <div className="container-x">
           <SectionHead id="atlas-h" dark eyebrow="India Manufacturing Atlas" title={<>Select a state. <em>Meet its makers.</em></>} lede="Clusters, crafts, GI products and industrial strengths, state by state. These are research starting points, not claims of existing supplier relationships." />
           <div className="mt-14"><AtlasLazy states={atlasStates} gi={giMini} clusterSlugs={clusters.map((c) => c.slug)} initial="up" /></div>
@@ -215,7 +247,7 @@ export default function Home() {
       </section>
 
       {/* ═════════ EXPORT ═════════ */}
-      <section className="on-dark bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="exp-h">
+      <section className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="exp-h">
         <div className="container-x">
           <SectionHead id="exp-h" dark eyebrow="Global export solutions" title={<>Made in India. <em>Ready for the world.</em></>} lede="Tariffs, product rules and import requirements depend on HS classification and destination. We help you ask the right questions early and coordinate licensed partners to move the goods." />
           <div className="mt-14"><WorldMarkets /></div>
@@ -238,6 +270,19 @@ export default function Home() {
               <Link href="/inclusive-procurement" className="btn btn-bronze mt-6 w-full">Looking to diversify your supplier base?</Link>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ═════════ JOURNAL ═════════ */}
+      <section className="bg-paper py-24 lg:py-32" aria-labelledby="journal-h">
+        <div className="container-x">
+          <SectionHead id="journal-h" eyebrow="Insights & stories" title={<>Know India <em>before you buy.</em></>} lede="Stories from India's craft and food regions, and practical buyer guides, written for international teams." />
+          <ul className="mt-14 grid gap-10 md:grid-cols-3">
+            {guides.slice(0, 3).map((g) => (
+              <li key={g.slug}><Link href={`/insights/${g.slug}`} className="group block"><div className="relative aspect-[16/10] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={g.plate} className="h-full w-full" sizes="33vw" /></div></div><p className="ledger mt-5 text-bronze-ink">{g.kind === "story" ? "Story" : "Guide"} · {g.category}</p><h3 className="mt-2 font-display text-[1.75rem] leading-tight"><span className="link-u">{g.title}</span></h3></Link></li>
+            ))}
+          </ul>
+          <div className="mt-12"><Link href="/insights" className="btn btn-primary">All stories & guides <ArrowRight className="arrow h-4 w-4" /></Link></div>
         </div>
       </section>
 

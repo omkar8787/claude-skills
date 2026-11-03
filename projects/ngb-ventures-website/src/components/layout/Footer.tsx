@@ -11,6 +11,8 @@ const discover = [
   { label: "Industries we serve", href: "/industries" },
   { label: "Manufacturing clusters", href: "/manufacturing" },
   { label: "Product guides", href: "/products" },
+  { label: "Food, spices & nutrition", href: "/industries/food-nutrition" },
+  { label: "Corporate gifting", href: "/corporate-gifting" },
   { label: "Publishers & Printing", href: "/publishers-printing" },
   { label: "Global markets", href: "/markets" },
 ];

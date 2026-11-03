@@ -57,7 +57,7 @@ export default async function GiPage({ params }: { params: Promise<{ slug: strin
         </div>
       </section>
 
-      <section className="on-dark bg-ink py-20 text-ivory lg:py-24">
+      <section className="on-dark tone-light bg-ink py-20 text-ivory lg:py-24">
         <div className="container-x grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4"><p className="eyebrow mb-6">Compliance considerations</p><p className="text-sm leading-relaxed text-ivory/60">Points to raise with your compliance advisor, lab or customs broker. This isn&apos;t legal advice.</p></div>
           <ul className="space-y-4 lg:col-span-7 lg:col-start-6">{g.compliance.map((c) => <li key={c} className="border-t border-ivory/15 pt-4 leading-relaxed text-ivory/80">{c}</li>)}

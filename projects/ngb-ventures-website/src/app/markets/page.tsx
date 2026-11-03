@@ -12,7 +12,7 @@ export default function MarketsPage() {
   return (
     <>
       <PageHero plate={{ slot: "page-markets", motif: "route", tone: "indigo", alt: "Container ship departing an Indian port", brief: "Container ship departing JNPT at dusk" }} crumbs={[{ name: "Markets", href: "/markets" }]} eyebrow={`${markets.length} market guides`} title="Global" italic="markets." lede="How NGB Ventures supports international buyers sourcing from India, market by market. We operate from Pune and work with buyers remotely. We have no overseas offices." ctas={[{ label: "Start a sourcing brief", href: "/quote" }]} />
-      <section className="on-dark bg-charcoal py-24 text-ivory lg:py-32"><div className="container-x"><WorldMarkets /></div></section>
+      <section className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32"><div className="container-x"><WorldMarkets /></div></section>
       <section className="container-x py-24 lg:py-32">
         <ul className="grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-4">
           {markets.map((m) => (

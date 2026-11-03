@@ -20,14 +20,14 @@ type Props = {
   compact?: boolean;
 };
 
-/** Dark editorial hero shared by all inner pages. */
+/** Light editorial hero shared by all inner pages. */
 export function PageHero({ plate, eyebrow, title, italic, lede, crumbs, ctas = [], meta, compact }: Props) {
   return (
-    <section className="on-dark relative isolate overflow-hidden bg-charcoal text-ivory">
+    <section className="on-dark tone-light relative isolate overflow-hidden bg-charcoal text-ivory">
       <div className="absolute inset-0 -z-10 lg:left-[46%]">
         <Plate plate={plate} priority className="h-full w-full" sizes="(min-width:1024px) 54vw, 100vw" intensity="full" />
         <div className="absolute inset-0 bg-gradient-to-r from-charcoal via-charcoal/70 to-transparent lg:via-charcoal/10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-transparent to-charcoal/50 lg:hidden" />
+        <div className="absolute inset-0 bg-charcoal/80 lg:hidden" />
       </div>
       <div className={`container-x flex flex-col justify-end pb-14 pt-32 lg:pb-20 ${compact ? "min-h-[52svh] lg:min-h-[60svh]" : "min-h-[78svh] lg:min-h-[86svh]"}`}>
         <Breadcrumbs items={crumbs} />

@@ -1,10 +1,24 @@
 import type { Plate } from "./types";
+import { stories } from "./stories";
 
-export type Guide = { slug: string; title: string; description: string; readTime: string; updated: string; plate: Plate; sections: { h: string; p: string[]; list?: string[] }[] };
+export type Guide = {
+  slug: string; title: string; description: string; readTime: string; updated: string; plate: Plate;
+  sections: { h: string; p: string[]; list?: string[] }[];
+  /** "story" = editorial feature; "guide" = practical how-to. */
+  kind?: "story" | "guide";
+  category?: string;
+  /** ISO publish date. */
+  date?: string;
+  keywords?: string[];
+  related?: { label: string; href: string }[];
+};
 
-export const guides: Guide[] = [
+const coreGuides: Guide[] = [
   {
     slug: "how-to-source-from-india",
+    kind: "guide",
+    category: "Sourcing basics",
+    date: "2026-10-20",
     title: "How to source from India: a practical guide for international buyers",
     description: "A step-by-step framework for sourcing products from Indian manufacturers: briefs, clusters, supplier verification, sampling, quality control, Incoterms and documentation.",
     readTime: "9 min read",
@@ -23,6 +37,9 @@ export const guides: Guide[] = [
   },
   {
     slug: "incoterms-for-india-imports",
+    kind: "guide",
+    category: "Shipping & trade",
+    date: "2026-10-22",
     title: "Incoterms for India imports: EXW, FOB, CIF, DAP and DDP explained",
     description: "Which Incoterms 2020 rules buyers commonly use when importing from India, who pays what, where risk transfers, and practical pitfalls.",
     readTime: "6 min read",
@@ -39,5 +56,8 @@ export const guides: Guide[] = [
     ],
   },
 ];
+
+/** All articles, newest first. */
+export const guides: Guide[] = [...stories, ...coreGuides].sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
 
 export const getGuide = (slug: string) => guides.find((g) => g.slug === slug);

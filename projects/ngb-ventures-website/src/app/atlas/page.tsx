@@ -13,7 +13,7 @@ export default function AtlasPage() {
   return (
     <>
       <PageHero compact plate={{ slot: "page-atlas", motif: "route", tone: "forest", alt: "India Manufacturing Atlas", brief: "" }} crumbs={[{ name: "India Manufacturing Atlas", href: "/atlas" }]} eyebrow="Signature feature" title="India Manufacturing" italic="Atlas." lede="Select a state to explore its clusters, crafts, GI products and industrial capabilities, then ask us to source from the region." />
-      <section className="on-dark bg-charcoal py-20 text-ivory lg:py-28"><div className="container-x"><AtlasExplorer states={atlasStates} gi={gi} clusterSlugs={clusters.map((c) => c.slug)} initial="up" /></div></section>
+      <section className="on-dark tone-light bg-charcoal py-20 text-ivory lg:py-28"><div className="container-x"><AtlasExplorer states={atlasStates} gi={gi} clusterSlugs={clusters.map((c) => c.slug)} initial="up" /></div></section>
       <section className="container-x py-20">
         <div className="grid gap-10 lg:grid-cols-12">
           <div className="lg:col-span-4"><p className="eyebrow mb-6">Method</p><h2 className="display text-[clamp(2rem,3.6vw,3.2rem)]">How to read <em>the Atlas.</em></h2></div>

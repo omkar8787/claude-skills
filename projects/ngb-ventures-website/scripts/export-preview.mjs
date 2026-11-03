@@ -33,10 +33,9 @@ const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => { const p 
 const routeSet = new Set(routes);
 
 const LIVE = process.env.LIVE_BASE || "";
-const CONTACT = process.env.CONTACT_EMAIL || "";
 const formMsg = LIVE
-  ? (CONTACT ? `Online submission is being connected. Please email your request to ${CONTACT}. We read every message.` : "Our online enquiry inbox is being connected. Please check back shortly or reach us through the Contact page.")
-  : "Preview only: form submissions are disabled here. On the live site this sends your enquiry to the NGB team.";
+  ? "Online form delivery isn't switched on for this site yet. Send your brief in one tap below. Your answers are already filled in."
+  : "Preview only: forms are disabled in this preview copy.";
 const fileFor = (route) => (route === "/" ? "index.html" : route.replace(/^\//, "") + ".html");
 
 const badge = (prefix) => `<div style="position:fixed;right:12px;bottom:12px;z-index:9999;font:500 11px/1.2 ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;background:#151515;color:#C9AD85;border:1px solid rgba(201,173,133,.4);border-radius:999px;padding:8px 12px;display:flex;gap:10px;align-items:center"><span>Preview</span><a href="${prefix}all-pages.html" style="color:#F6F3ED;text-decoration:underline">All pages</a></div>`;
@@ -92,7 +91,7 @@ for (const route of routes) {
 
 // Static assets
 fs.cpSync(".next/static", path.join(site, "_next/static"), { recursive: true });
-for (const f of ["maps", "media", "icon.svg"]) if (fs.existsSync(path.join("public", f))) fs.cpSync(path.join("public", f), path.join(site, f), { recursive: true });
+for (const f of ["maps", "media", "icon.svg", "site-config.js"]) if (fs.existsSync(path.join("public", f))) fs.cpSync(path.join("public", f), path.join(site, f), { recursive: true });
 
 // CSS: font URLs are root-relative → relative to css dir
 for (const f of fs.readdirSync(path.join(site, "_next/static/css"))) {

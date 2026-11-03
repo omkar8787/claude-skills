@@ -1,0 +1,69 @@
+name: NGB website → GitHub Pages
+
+# Rebuilds the NGB Ventures static site and publishes it to the gh-pages branch.
+# Runs when the website source changes, or manually from the Actions tab ("Run workflow").
+# Site settings edited directly on gh-pages (site-config.js, Google/Bing verification files) are preserved.
+
+on:
+  push:
+    branches: [main, ccr-802081cc-gqu5tf]
+    paths: ["projects/ngb-ventures-website/**", ".github/workflows/ngb-website-pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ngb-pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: projects/ngb-ventures-website
+    env:
+      # Override any of these under Settings → Secrets and variables → Actions → Variables.
+      NEXT_PUBLIC_SITE_URL: ${{ vars.NGB_SITE_URL || 'https://omkar8787.github.io/claude-skills' }}
+      LIVE_BASE: ${{ vars.NGB_BASE_PATH || '/claude-skills/' }}
+      NEXT_PUBLIC_CONTACT_EMAIL: ${{ vars.NGB_CONTACT_EMAIL || 'obarkade@gmail.com' }}
+      NEXT_PUBLIC_CONTACT_PHONE: ${{ vars.NGB_CONTACT_PHONE || '+91 87881 87907' }}
+      NEXT_PUBLIC_WHATSAPP_NUMBER: ${{ vars.NGB_WHATSAPP_NUMBER || '918788187907' }}
+      NEXT_PUBLIC_GA_ID: ${{ vars.NGB_GA_ID }}
+      NEXT_PUBLIC_GSC_VERIFICATION: ${{ vars.NGB_GSC_VERIFICATION }}
+      NEXT_TELEMETRY_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: projects/ngb-ventures-website/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - name: Export static site
+        run: |
+          npx next start -p 3000 &
+          for i in $(seq 1 30); do curl -sf http://localhost:3000/ >/dev/null && break; sleep 1; done
+          node scripts/export-preview.mjs http://localhost:3000 out-live
+      - name: Publish to gh-pages (keeps site-config.js and verification files)
+        working-directory: .
+        run: |
+          set -e
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git ls-remote --exit-code origin gh-pages >/dev/null; then
+            git fetch origin gh-pages --depth 1
+            git worktree add pages origin/gh-pages
+          else
+            git worktree add --detach pages && (cd pages && git checkout --orphan gh-pages && git rm -rfq .)
+          fi
+          SRC=projects/ngb-ventures-website/out-live/site
+          rsync -a --delete --exclude .git --exclude site-config.js --exclude 'google*.html' --exclude 'BingSiteAuth.xml' "$SRC/" pages/
+          [ -f pages/site-config.js ] || cp "$SRC/site-config.js" pages/
+          cd pages
+          git add -A
+          git diff --cached --quiet && { echo "No changes"; exit 0; }
+          git commit -m "deploy: NGB Ventures site from ${GITHUB_SHA::7}"
+          git push origin HEAD:gh-pages

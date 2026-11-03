@@ -1,4 +1,5 @@
 "use client";
+import { postEnquiry, summarise, track } from "@/lib/runtime-config";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowRight, ImagePlus, X } from "lucide-react";
@@ -15,7 +16,7 @@ export const PATHWAY_META = {
 } as const;
 type Pathway = keyof typeof PATHWAY_META;
 
-const CATEGORIES = ["Not sure yet", "Home décor & handicrafts", "Textiles & apparel", "Furniture & woodcraft", "Kitchen & tableware", "Beauty, essential oils & natural products", "Eco-friendly products", "Jewellery & accessories", "Footwear & leather", "Toys & educational", "Packaging, printing & publishing", "Engineering & components", "Food & agriculture", "GI / origin products", "Other"];
+const CATEGORIES = ["Not sure yet", "Home décor & handicrafts", "Textiles & apparel", "Furniture & woodcraft", "Kitchen & tableware", "Beauty, essential oils & natural products", "Eco-friendly products", "Jewellery & accessories", "Footwear & leather", "Toys & educational", "Packaging, printing & publishing", "Engineering & components", "Food, spices & nutrition", "Corporate & festive gifting", "GI / origin products", "Other"];
 const DEST = [...COUNTRY_OPTIONS.slice(0, 8), "Singapore", "Southeast Asia (other)", "Other EU country", "Other"];
 
 const init = { details: "", category: CATEGORIES[0], destination: "", quantity: "", budget: "", customization: "", timeline: "", region: "", name: "", email: "", company: "", phone: "", country: "", role: "" as string, consent: false };
@@ -50,7 +51,7 @@ export function LeadForm({ defaultPathway = "sourcing" }: { defaultPathway?: Pat
       if (region) n.region = region;
       if (cluster) n.region = cluster;
       const ind = p.get("industry");
-      const indMap: Record<string, string> = { apparel: "Textiles & apparel", "home-textiles": "Textiles & apparel", handicrafts: "Home décor & handicrafts", "furniture-woodcraft": "Furniture & woodcraft", "jewelry-accessories": "Jewellery & accessories", "essential-oils": "Beauty, essential oils & natural products", "beauty-personal-care": "Beauty, essential oils & natural products", packaging: "Packaging, printing & publishing", "eco-friendly": "Eco-friendly products", lighting: "Home décor & handicrafts", "kitchenware-tableware": "Kitchen & tableware", "footwear-leather": "Footwear & leather", "sports-fitness": "Other", "toys-educational": "Toys & educational", "stationery-paper": "Packaging, printing & publishing", "engineering-industrial": "Engineering & components" };
+      const indMap: Record<string, string> = { "food-nutrition": "Food, spices & nutrition", gifting: "Corporate & festive gifting", apparel: "Textiles & apparel", "home-textiles": "Textiles & apparel", handicrafts: "Home décor & handicrafts", "furniture-woodcraft": "Furniture & woodcraft", "jewelry-accessories": "Jewellery & accessories", "essential-oils": "Beauty, essential oils & natural products", "beauty-personal-care": "Beauty, essential oils & natural products", packaging: "Packaging, printing & publishing", "eco-friendly": "Eco-friendly products", lighting: "Home décor & handicrafts", "kitchenware-tableware": "Kitchen & tableware", "footwear-leather": "Footwear & leather", "sports-fitness": "Other", "toys-educational": "Toys & educational", "stationery-paper": "Packaging, printing & publishing", "engineering-industrial": "Engineering & components" };
       if (ind && indMap[ind]) n.category = indMap[ind];
       const prodSlug = p.get("product");
       if (prodSlug && /^[a-z0-9-]+$/.test(prodSlug)) n.details = `${prodSlug.replace(/-/g, " ")}: `;
@@ -88,14 +89,14 @@ export function LeadForm({ defaultPathway = "sourcing" }: { defaultPathway?: Pat
     const ts = (formRef.current?.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value;
     if (ts) fd.append("turnstileToken", ts);
     if (file) fd.append("file", file);
+    const summary = summarise({ pathway, ...v, attachment: file ? `${file.name} (please attach it to this message)` : "" });
     try {
-      const res = await fetch("/api/enquiry", { method: "POST", body: fd });
-      const data = await res.json().catch(() => ({}));
-      if (res.ok && data.ok) { router.push(`/thank-you?ref=${encodeURIComponent(data.id)}&type=${pathway}`); return; }
+      const data = await postEnquiry(fd);
+      if (data.ok) { track("generate_lead", { form: "quote", pathway }); router.push(`/thank-you?ref=${encodeURIComponent(data.id ?? "")}&type=${pathway}`); return; }
       if (data.fieldErrors) setErrors(data.fieldErrors);
-      setStatus({ state: "error", message: data.message ?? "Something went wrong.", code: data.code });
+      setStatus({ state: "error", message: data.message ?? "Something went wrong.", code: data.code, summary });
     } catch {
-      setStatus({ state: "error", message: "Network error. Please check your connection and try again.", code: "network" });
+      setStatus({ state: "error", message: "Network error. Please check your connection and try again.", code: "network", summary });
     }
   };
   const inv = (k: string) => ({ "aria-invalid": !!errors[k], "aria-describedby": errors[k] ? `${k}-error` : undefined });

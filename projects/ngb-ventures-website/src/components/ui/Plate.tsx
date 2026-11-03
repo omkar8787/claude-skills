@@ -166,7 +166,7 @@ export function Plate({ plate, className = "", label, number, priority, sizes = 
   const id = `p-${plate.slot}`;
   const glyph = intensity === "full" ? GLYPHS[GLYPH_BY_SLOT[plate.slot] ?? ""] : undefined;
   return (
-    <div className={`relative isolate overflow-hidden ${className}`} style={{ background: t.a }}>
+    <div className={`tone-reset relative isolate overflow-hidden ${className}`} style={{ background: t.a }}>
       {photo ? (
         <Image src={photo} alt={plate.alt} fill priority={priority} sizes={sizes} className="object-cover" />
       ) : (

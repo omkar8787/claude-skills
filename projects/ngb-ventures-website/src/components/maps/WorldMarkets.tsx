@@ -16,7 +16,7 @@ export function WorldMarkets() {
       regions={regions}
       base={
         // eslint-disable-next-line @next/next/no-img-element
-        <img src="/maps/world-dots.svg" alt="" aria-hidden className="h-full w-full" width={WORLD_W} height={WORLD_H} loading="lazy" decoding="async" />
+        <img src="/maps/world-dots.svg" alt="" aria-hidden className="map-art h-full w-full" width={WORLD_W} height={WORLD_H} loading="lazy" decoding="async" />
       }
     />
   );

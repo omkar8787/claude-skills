@@ -55,7 +55,7 @@ export function NumberedList({ eyebrow, title, items, links }: { eyebrow: string
 
 export function CapabilityGrid({ eyebrow, title, items, dark }: { eyebrow: string; title: ReactNode; items: Titled[]; dark?: boolean }) {
   return (
-    <section className={dark ? "on-dark bg-charcoal text-ivory" : ""}>
+    <section className={dark ? "on-dark tone-light bg-charcoal text-ivory" : ""}>
       <div className="container-x py-24 lg:py-32">
         <div className="max-w-3xl"><p className="eyebrow mb-6">{eyebrow}</p><h2 className="display text-[clamp(2.2rem,4.4vw,4rem)]">{title}</h2></div>
         <div className={`mt-14 grid gap-px overflow-hidden sm:grid-cols-2 ${items.length >= 4 ? "lg:grid-cols-4" : "lg:grid-cols-3"} ${dark ? "bg-ivory/12" : "bg-line"}`}>
@@ -92,7 +92,7 @@ export function TwoLists({ a, b }: { a: { eyebrow: string; title: string; items:
 
 export function ComplianceGrid({ items, title = "Compliance considerations" }: { items: Titled[]; title?: string }) {
   return (
-    <section className="on-dark bg-ink text-ivory">
+    <section className="on-dark tone-light bg-ink text-ivory">
       <div className="container-x py-24 lg:py-32">
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">

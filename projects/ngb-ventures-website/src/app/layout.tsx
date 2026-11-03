@@ -8,6 +8,7 @@ import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { site, mainNav, primaryCta } from "@/content/site";
 import { industries } from "@/content/industries";
 import { JsonLd, organizationLd, websiteLd } from "@/lib/seo";
+import { Analytics } from "@/components/analytics/Analytics";
 
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["400", "500"], style: ["normal", "italic"], variable: "--font-cormorant", display: "swap" });
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
@@ -20,9 +21,13 @@ export const metadata: Metadata = {
   applicationName: site.name,
   openGraph: { siteName: site.name, type: "website", locale: "en_US" },
   formatDetection: { telephone: false },
+  verification: {
+    ...(process.env.NEXT_PUBLIC_GSC_VERIFICATION ? { google: process.env.NEXT_PUBLIC_GSC_VERIFICATION } : {}),
+    ...(process.env.NEXT_PUBLIC_BING_VERIFICATION ? { other: { "msvalidate.01": process.env.NEXT_PUBLIC_BING_VERIFICATION } } : {}),
+  },
 };
 
-export const viewport: Viewport = { themeColor: "#151515", width: "device-width", initialScale: 1 };
+export const viewport: Viewport = { themeColor: "#f3ecdf", width: "device-width", initialScale: 1 };
 
 const menus: MenuData = {
   capabilities: {
@@ -36,6 +41,7 @@ const menus: MenuData = {
       { label: "Advertising & Marketing", href: "/advertising", meta: "04" },
       { label: "Inclusive Procurement / DOBE", href: "/inclusive-procurement", meta: "05" },
       { label: "Industries we serve", href: "/industries", meta: "→" },
+      { label: "Corporate Gifting", href: "/corporate-gifting", meta: "→" },
       { label: "Publishers & Printing", href: "/publishers-printing", meta: "→" },
       { label: "All services", href: "/services", meta: "→" },
     ],
@@ -47,7 +53,7 @@ const menus: MenuData = {
       { label: "Product Discovery", href: "/discover", meta: "→" },
       { label: "India Manufacturing Atlas", href: "/atlas", meta: "→" },
       { label: "GI & Origin Collection", href: "/origin", meta: "→" },
-      ...industries.slice(0, 6).map((i) => ({ label: i.name, href: `/industries/${i.slug}`, meta: i.index })),
+      ...industries.filter((i) => ["food-nutrition", "gifting", "apparel", "home-textiles", "handicrafts", "engineering-industrial"].includes(i.slug)).map((i) => ({ label: i.name, href: `/industries/${i.slug}`, meta: i.index })),
       { label: "Manufacturing clusters", href: "/manufacturing", meta: "→" },
       { label: "Product guides", href: "/products", meta: "→" },
       { label: "Global markets", href: "/markets", meta: "→" },
@@ -72,11 +78,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${cormorant.variable} ${manrope.variable} ${plex.variable}`}>
       <body>
+        {/* Runtime settings (GA4 ID, form endpoint): editable on the host without a rebuild. */}
+        {/* eslint-disable-next-line @next/next/no-sync-scripts */}
+        <script src="/site-config.js" />
         <Header nav={mainNav} menus={menus} cta={primaryCta} />
         <main id="main">{children}</main>
         <Footer />
         <WhatsAppButton />
         <MobileCtaBar />
+        <Analytics />
         <JsonLd data={[organizationLd(), websiteLd()]} />
       </body>
     </html>

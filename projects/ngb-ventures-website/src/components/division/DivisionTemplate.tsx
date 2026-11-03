@@ -63,7 +63,7 @@ export function NextDivisions({ current }: { current: string }) {
 
 export function SplitBlock({ eyebrow, title, children, dark }: { eyebrow: string; title: ReactNode; children: ReactNode; dark?: boolean }) {
   return (
-    <section className={dark ? "on-dark bg-charcoal text-ivory" : ""}>
+    <section className={dark ? "on-dark tone-light bg-charcoal text-ivory" : ""}>
       <div className="container-x grid gap-12 py-24 lg:grid-cols-12 lg:py-32">
         <div className="lg:col-span-4"><p className="eyebrow mb-6">{eyebrow}</p><h2 className="display text-[clamp(2.2rem,4vw,3.6rem)]">{title}</h2></div>
         <div className="lg:col-span-7 lg:col-start-6">{children}</div>

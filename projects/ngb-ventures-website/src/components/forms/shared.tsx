@@ -3,8 +3,9 @@ import Link from "next/link";
 import Script from "next/script";
 import { useCallback, useRef, useState, type ReactNode } from "react";
 import { Check, Mail, MessageCircle } from "lucide-react";
+import { postEnquiry, summarise, track } from "@/lib/runtime-config";
 
-export type Status = { state: "idle" | "submitting" | "success" | "error"; message?: string; code?: string; id?: string };
+export type Status = { state: "idle" | "submitting" | "success" | "error"; message?: string; code?: string; id?: string; summary?: string };
 
 const TURNSTILE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL;
@@ -20,21 +21,18 @@ export function useEnquiry() {
     setStatus({ state: "submitting" });
     setErrors({});
     const turnstileToken = (formRef.current?.querySelector('[name="cf-turnstile-response"]') as HTMLInputElement | null)?.value || undefined;
+    const body = { ...payload, startedAt: startedAt.current, turnstileToken, sourcePage: typeof window !== "undefined" ? window.location.pathname + window.location.search : "" };
     try {
-      const res = await fetch("/api/enquiry", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, startedAt: startedAt.current, turnstileToken, sourcePage: typeof window !== "undefined" ? window.location.pathname + window.location.search : "" }),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (res.ok && data.ok) {
+      const data = await postEnquiry(body);
+      if (data.ok) {
+        track("generate_lead", { form: String(payload.type ?? "contact") });
         setStatus({ state: "success", id: data.id });
         return true;
       }
       if (data.fieldErrors) setErrors(data.fieldErrors);
-      setStatus({ state: "error", message: data.message ?? "Something went wrong.", code: data.code });
+      setStatus({ state: "error", message: data.message ?? "Something went wrong.", code: data.code, summary: summarise(payload) });
     } catch {
-      setStatus({ state: "error", message: "Network error. Please check your connection and try again.", code: "network" });
+      setStatus({ state: "error", message: "Network error. Please check your connection and try again.", code: "network", summary: summarise(payload) });
     }
     return false;
   }, []);
@@ -99,13 +97,14 @@ export function StatusPanel({ status, onReset }: { status: Status; onReset?: () 
     return (
       <div className="rounded-sm border border-[#a2412f]/30 bg-[#a2412f]/5 p-5 text-sm" role="alert">
         <p className="font-semibold text-[#7d2f22]">{status.message}</p>
-        {(status.code === "not_configured" || status.code === "delivery_failed") && (
-          <div className="mt-3 flex flex-wrap gap-4 text-charcoal">
-            {CONTACT_EMAIL && <a className="inline-flex items-center gap-2 underline underline-offset-2" href={`mailto:${CONTACT_EMAIL}`}><Mail className="h-4 w-4" /> {CONTACT_EMAIL}</a>}
-            {WA && <a className="inline-flex items-center gap-2 underline underline-offset-2" href={`https://wa.me/${WA.replace(/\D/g, "")}`} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-4 w-4" /> WhatsApp</a>}
+        {(status.code === "not_configured" || status.code === "delivery_failed" || status.code === "network") && (
+          <div className="mt-4 flex flex-wrap gap-3 text-charcoal">
+            {CONTACT_EMAIL && <a className="btn btn-primary min-h-11 px-5" href={`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Sourcing enquiry via NGB Ventures website")}&body=${encodeURIComponent((status.summary ? status.summary + "\n\n" : "") + "Sent from the NGB Ventures website")}`}><Mail className="h-4 w-4" /> Send by email</a>}
+            {WA && <a className="btn btn-ghost min-h-11 px-5" href={`https://wa.me/${WA.replace(/\D/g, "")}?text=${encodeURIComponent("Hello NGB Ventures, here is my enquiry:\n\n" + (status.summary ?? ""))}`} target="_blank" rel="noopener noreferrer"><MessageCircle className="h-4 w-4" /> Send on WhatsApp</a>}
             {!CONTACT_EMAIL && !WA && <span className="text-stone-ink">Site owner: configure an enquiry channel (see README → Enquiry delivery).</span>}
           </div>
         )}
+        {status.summary && (status.code === "not_configured" || status.code === "network") && <p className="mt-3 text-xs text-stone-ink">Your answers are copied into the message, so nothing is lost. Attach any reference image in your email or chat.</p>}
       </div>
     );
   }

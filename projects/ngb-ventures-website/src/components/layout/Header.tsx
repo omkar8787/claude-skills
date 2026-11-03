@@ -54,7 +54,7 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ivory focus:px-4 focus:py-2 focus:text-charcoal">Skip to content</a>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,color,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${hidden && !open ? "-translate-y-full" : "translate-y-0"} ${solid ? "bg-ivory/92 text-charcoal shadow-[0_1px_0_rgba(21,21,21,.08)] backdrop-blur-xl" : "bg-transparent text-ivory"}`}
+        className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,color,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${hidden && !open ? "-translate-y-full" : "translate-y-0"} ${solid ? "bg-ivory/92 text-charcoal shadow-[0_1px_0_rgba(21,21,21,.08)] backdrop-blur-xl" : "bg-transparent text-charcoal"}`}
         onMouseLeave={leave}
       >
         <ScrollProgress />
@@ -80,7 +80,7 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
           </nav>
 
           <div className="flex items-center gap-3">
-            <Link href={cta.href} className={`btn hidden h-11 min-h-0 px-5 text-[0.8125rem] sm:inline-flex ${solid ? "btn-primary" : "btn-bronze"}`}>
+            <Link href={cta.href} className={`btn hidden h-11 min-h-0 px-5 text-[0.8125rem] sm:inline-flex btn-primary`}>
               {cta.label} <ArrowRight className="arrow h-4 w-4" />
             </Link>
             <button type="button" onClick={() => setMobile(true)} className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-current/25 xl:hidden" aria-label="Open menu" aria-expanded={mobile} aria-controls="mobile-menu">

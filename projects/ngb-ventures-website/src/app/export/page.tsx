@@ -14,7 +14,7 @@ export default function ExportPage() {
   return (
     <>
       <DivisionHero d={d} />
-      <section className="on-dark bg-charcoal py-24 text-ivory lg:py-32"><div className="container-x"><p className="eyebrow mb-6">Routes from India</p><h2 className="display mb-14 text-[clamp(2.2rem,4.4vw,4rem)]">One origin. <em>Many destinations.</em></h2><WorldMarkets /></div></section>
+      <section className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32"><div className="container-x"><p className="eyebrow mb-6">Routes from India</p><h2 className="display mb-14 text-[clamp(2.2rem,4.4vw,4rem)]">One origin. <em>Many destinations.</em></h2><WorldMarkets /></div></section>
       <SplitBlock eyebrow="Before you ship" title={<>The questions that <em>decide your landed cost.</em></>}>
         <ol className="space-y-6">
           {[["Classification", "Which HS code applies? It drives duty rates, product rules and paperwork. We research indicative codes. Final classification is the importer's and customs broker's decision."], ["Origin & preference", "Does a trade agreement apply (e.g. India–UAE CEPA, India–Australia ECTA)? What proof of origin is needed? Preferences only apply when rules of origin are met."], ["Product rules", "Safety, chemical, labelling and food-contact requirements in the destination market."], ["Documents", "Commercial invoice, packing list, certificate of origin and product-specific certificates."], ["Logistics", "Incoterm, mode (FCL, LCL or air), packing and insurance, coordinated with licensed forwarders."]].map(([t, b], i) => (

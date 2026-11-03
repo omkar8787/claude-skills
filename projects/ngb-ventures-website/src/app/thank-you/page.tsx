@@ -7,7 +7,7 @@ export const metadata = buildMetadata({ title: "Thank You | Request Received", d
 
 export default function ThankYou() {
   return (
-    <section className="on-dark flex min-h-[85svh] items-end bg-forest pb-20 pt-40 text-ivory">
+    <section className="on-dark tone-light flex min-h-[85svh] items-end bg-forest pb-20 pt-40 text-ivory">
       <div className="container-x">
         <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-bronze text-charcoal"><Check className="h-6 w-6" /></span>
         <h1 className="display mt-8 text-[clamp(3rem,8vw,7rem)]">Thank you. <em>Your request is with us.</em></h1>

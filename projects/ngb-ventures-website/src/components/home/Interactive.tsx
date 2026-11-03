@@ -53,7 +53,7 @@ function Tile({ children, progress, speed, className, delay, caption }: { childr
       <motion.div className="absolute inset-0" initial={{ clipPath: "inset(100% 0 0 0)" }} animate={{ clipPath: "inset(0% 0 0 0)" }} transition={{ duration: 1.3, delay, ease: EASE }}>
         <div className="absolute inset-0 transition-transform duration-[1.6s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-[1.06]">{children}</div>
       </motion.div>
-      {caption && <figcaption className="ledger pointer-events-none absolute bottom-2 left-2.5 text-[0.55rem] text-ivory/80 opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:opacity-100">{caption}</figcaption>}
+      {caption && <figcaption className="tone-reset ledger pointer-events-none absolute bottom-2 left-2.5 text-[0.55rem] text-ivory/80 opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:opacity-100">{caption}</figcaption>}
     </motion.figure>
   );
 }
@@ -132,7 +132,7 @@ export function PinnedJourney({ stages, plates, mobilePlates }: { stages: Stage[
               {plates.map((p, i) => (
                 <motion.div key={i} className="absolute inset-0" animate={{ opacity: i === active ? 1 : 0, scale: i === active ? 1 : 1.08 }} transition={{ duration: 0.9, ease: EASE }} aria-hidden={i !== active}>{p}</motion.div>
               ))}
-              <p className="ledger absolute right-4 top-4 z-10 text-ivory/80">{stages[active].label}</p>
+              <p className="tone-reset ledger absolute right-4 top-4 z-10 text-ivory/80">{stages[active].label}</p>
             </div>
           </div>
         </div>
@@ -164,7 +164,7 @@ export function HorizontalSpotlight({ cards, plates }: { cards: SpotCard[]; plat
       {cards.map((c, i) => (
         <Link key={c.slug} href={c.href} className="group relative w-[78vw] shrink-0 snap-start sm:w-[46vw] lg:w-[30vw] xl:w-[26vw]">
           <div className="relative aspect-[4/5] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-105">{plates[i]}</div>
-            <span className="ledger absolute left-4 top-4 text-ivory/80">{String(i + 1).padStart(2, "0")} / {String(cards.length).padStart(2, "0")}</span></div>
+            <span className="tone-reset ledger absolute left-4 top-4 text-ivory/80">{String(i + 1).padStart(2, "0")} / {String(cards.length).padStart(2, "0")}</span></div>
           <p className="ledger mt-5 text-bronze-soft">{c.meta}</p>
           <h3 className="mt-2 font-display text-[1.9rem] leading-tight text-ivory">{c.name}</h3>
           <p className="mt-2 text-[0.95rem] leading-relaxed text-ivory/65">{c.story}</p>

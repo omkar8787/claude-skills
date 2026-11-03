@@ -6,7 +6,7 @@ import { Plate } from "@/components/ui/Plate";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata = buildMetadata({ title: "Insights & Research | Sourcing from India: Tools & Guides", description: "Research, guides and free tools for sourcing from India: market readiness check, landed-cost estimator, CBM calculator, supplier checklist, Incoterms and GI research.", path: "/insights" });
+export const metadata = buildMetadata({ title: "Insights: Stories, Buyer Guides & Tools for Sourcing from India", description: "Stories from India's craft and food regions, buyer guides on spices, millets, superfoods, tea, gifting and private label, plus free sourcing tools for international buyers.", path: "/insights" });
 
 const tools = [
   { href: "/tools/landed-cost-calculator", title: "Landed-cost estimator", body: "Model product cost, freight, insurance, duty and import taxes with a transparent valuation basis.", Icon: Calculator },
@@ -29,10 +29,18 @@ export default function InsightsPage() {
         </ul>
       </section>
       <section className="border-t border-line bg-paper py-24 lg:py-32"><div className="container-x">
-        <p className="eyebrow mb-6">Guides</p><h2 className="display mb-14 text-[clamp(2.2rem,4.4vw,4rem)]">Sourcing <em>knowledge</em></h2>
-        <ul className="grid gap-10 md:grid-cols-2">
-          {guides.map((g) => (
-            <li key={g.slug}><Link href={`/insights/${g.slug}`} className="group block"><div className="relative aspect-[16/9] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={g.plate} className="h-full w-full" sizes="50vw" /></div></div><p className="ledger mt-5 text-bronze-ink">{g.readTime} · Updated {g.updated}</p><h3 className="mt-2 font-display text-3xl leading-tight"><span className="link-u">{g.title}</span></h3><p className="mt-3 leading-relaxed text-stone-ink">{g.description}</p></Link></li>
+        <p className="eyebrow mb-6">Stories from India</p><h2 className="display mb-14 text-[clamp(2.2rem,4.4vw,4rem)]">The places <em>behind the products</em></h2>
+        <ul className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+          {guides.filter((g) => g.kind === "story").map((g) => (
+            <li key={g.slug}><Link href={`/insights/${g.slug}`} className="group block"><div className="relative aspect-[16/9] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={g.plate} className="h-full w-full" sizes="50vw" /></div></div><p className="ledger mt-5 text-bronze-ink">{g.category} · {g.readTime}</p><h3 className="mt-2 font-display text-3xl leading-tight"><span className="link-u">{g.title}</span></h3><p className="mt-3 leading-relaxed text-stone-ink">{g.description}</p></Link></li>
+          ))}
+        </ul>
+      </div></section>
+      <section className="py-24 lg:py-32"><div className="container-x">
+        <p className="eyebrow mb-6">Buyer guides</p><h2 className="display mb-14 text-[clamp(2.2rem,4.4vw,4rem)]">Sourcing <em>knowledge</em></h2>
+        <ul className="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+          {guides.filter((g) => g.kind !== "story").map((g) => (
+            <li key={g.slug}><Link href={`/insights/${g.slug}`} className="group block"><div className="relative aspect-[16/9] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={g.plate} className="h-full w-full" sizes="50vw" /></div></div><p className="ledger mt-5 text-bronze-ink">{g.category} · {g.readTime}</p><h3 className="mt-2 font-display text-3xl leading-tight"><span className="link-u">{g.title}</span></h3><p className="mt-3 leading-relaxed text-stone-ink">{g.description}</p></Link></li>
           ))}
         </ul>
       </div></section>

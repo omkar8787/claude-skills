@@ -37,7 +37,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         eyebrow={`Industry ${it.index} · Sourcing from India`}
         title={it.name}
         lede={it.heroLine}
-        ctas={[{ label: `Source ${it.name.split(" ")[0]} from India`, href: enquire }, { label: "Our process", href: "#workflow", variant: "ghost" }]}
+        ctas={[{ label: it.slug === "gifting" ? "Plan a gift programme" : `Source ${it.name.split(/[ ,]/)[0]} from India`, href: it.slug === "gifting" ? "/corporate-gifting" : enquire }, { label: "Our process", href: "#workflow", variant: "ghost" }]}
         meta={[{ k: "Product types", v: `${it.products.length} covered` }, { k: "Key clusters", v: cls.map((c) => c.name).join(", ") || "Multiple regions" }, { k: "Services", v: "Sourcing · QC · Export" }, { k: "Markets", v: "US · UK · EU · AU · CA · UAE" }]}
       />
       <IntroBlock eyebrow="Overview" title={<>{it.short}</>} paragraphs={it.intro} aside={[{ k: "Category", v: it.name }, { k: "Clusters", v: cls.map((c) => c.name).join(" · ") || "—" }, { k: "Customise", v: it.customization.slice(0, 2).join("; ") }, { k: "Start", v: <a href={enquire} className="link-u font-medium">Send a sourcing brief →</a> }]} />

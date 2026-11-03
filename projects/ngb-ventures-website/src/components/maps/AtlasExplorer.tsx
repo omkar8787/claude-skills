@@ -48,8 +48,12 @@ export function AtlasExplorer({ states, gi, clusterSlugs, initial = "up" }: Prop
                   onMouseEnter={() => setHover(s.id)}
                   onMouseLeave={() => setHover(null)}
                   className="cursor-pointer outline-none transition-[fill] duration-300 focus-visible:stroke-bronze"
-                  fill={on ? "#A98758" : has ? (hover === s.id ? "rgba(201,173,133,.55)" : "rgba(201,173,133,.24)") : hover === s.id ? "rgba(246,243,237,.12)" : "rgba(246,243,237,.05)"}
-                  stroke="rgba(246,243,237,.35)"
+                  style={{
+                    fill: on ? "var(--color-bronze)" : has
+                      ? `color-mix(in oklab, var(--color-bronze) ${hover === s.id ? 70 : 38}%, transparent)`
+                      : `color-mix(in oklab, var(--color-ivory) ${hover === s.id ? 14 : 6}%, transparent)`,
+                    stroke: "color-mix(in oklab, var(--color-ivory) 35%, transparent)",
+                  }}
                   strokeWidth={on ? 1.2 : 0.6}
                   strokeLinejoin="round"
                 />
@@ -60,8 +64,8 @@ export function AtlasExplorer({ states, gi, clusterSlugs, initial = "up" }: Prop
         </div>
         <div className="mx-auto max-w-[620px]">
           <div className="ledger mt-3 flex flex-wrap gap-4 text-[0.6rem] text-ivory/60">
-            <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 bg-[rgba(201,173,133,.5)]" /> Profiled</span>
-            <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 bg-[rgba(246,243,237,.12)]" /> Ask us</span>
+            <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 bg-bronze/40" /> Profiled</span>
+            <span className="flex items-center gap-2"><span className="h-2.5 w-2.5 bg-ivory/10" /> Ask us</span>
             <span>Map: @svg-maps/india (CC BY 4.0) · indicative</span>
           </div>
         </div>
