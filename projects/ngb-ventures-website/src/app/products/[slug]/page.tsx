@@ -23,7 +23,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   const ind = getIndustry(p.industry)!;
   const cls = clusters.filter((c) => p.clusterSlugs.includes(c.slug));
   const rel = products.filter((x) => p.related.includes(x.slug));
-  const enquire = `/enquire?product=${p.slug}`;
+  const enquire = `/quote?type=sourcing&product=${p.slug}`;
   return (
     <>
       <PageHero plate={p.plate} plateLabel={p.name} crumbs={[{ name: "Products", href: "/products" }, { name: p.name, href: `/products/${p.slug}` }]} eyebrow={`Product guide · ${ind.name}`} title={p.name} lede={p.heroLine}

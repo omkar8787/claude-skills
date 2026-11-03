@@ -14,6 +14,7 @@ const TONES: Record<Tone, { a: string; b: string; m: string; light: string }> = 
   madder: { a: "#2f1614", b: "#6e2f2a", m: "#ecd0b0", light: "rgba(255,210,170,.25)" },
   sand: { a: "#a8936f", b: "#e2d5bd", m: "#6b4f2b", light: "rgba(255,250,240,.55)" },
   stone: { a: "#4d4b46", b: "#8f8b84", m: "#f1ece3", light: "rgba(255,255,255,.28)" },
+  forest: { a: "#13261d", b: "#2b4b3a", m: "#c9ad85", light: "rgba(201,173,133,.22)" },
 };
 
 const EXT = [".webp", ".jpg", ".jpeg", ".png", ".avif"];

@@ -7,8 +7,6 @@ import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { site, mainNav, primaryCta } from "@/content/site";
 import { industries } from "@/content/industries";
-import { clusters } from "@/content/clusters";
-import { services } from "@/content/services";
 import { JsonLd, organizationLd, websiteLd } from "@/lib/seo";
 
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["400", "500"], style: ["normal", "italic"], variable: "--font-cormorant", display: "swap" });
@@ -17,7 +15,7 @@ const plex = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variabl
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: "NGB Ventures | Sourcing Agent & Manufacturing Partner in India", template: "%s | NGB Ventures" },
+  title: { default: "NGB Ventures | Your Global Sourcing Desk in India", template: "%s | NGB Ventures" },
   description: site.description,
   applicationName: site.name,
   openGraph: { siteName: site.name, type: "website", locale: "en_US" },
@@ -27,33 +25,46 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: "#151515", width: "device-width", initialScale: 1 };
 
 const menus: MenuData = {
-  industries: {
-    intro: "Sixteen manufacturing categories, each with products, clusters, compliance and sourcing workflow.",
-    links: industries.map((i) => ({ label: i.name, href: `/industries/${i.slug}`, meta: i.index })),
-    feature: { title: "Not sure where your product fits?", body: "Describe it, and we'll map it to the right clusters and manufacturer types.", href: "/enquire", cta: "Start an enquiry" },
-  },
-  manufacturing: {
-    intro: "Specialised towns, each concentrating decades of know-how in a few product families.",
-    links: [{ label: "Interactive cluster map", href: "/manufacturing", meta: "→" }, ...clusters.filter((c) => c.featured).map((c) => ({ label: `${c.name}`, href: `/manufacturing/${c.slug}` }))],
-    feature: { title: "Explore the network map", body: "Click a cluster to see its specialisation and related products.", href: "/manufacturing#map", cta: "Open the map" },
-  },
-  services: {
-    intro: "Twelve services covering the sourcing lifecycle, from first brief to shipped container.",
-    links: services.map((s) => ({ label: s.name, href: `/services/${s.slug}`, meta: s.index })),
-    feature: { title: "Have a product idea?", body: "Our product development request is built for first-time manufacturers.", href: "/product-development", cta: "Describe your product" },
-  },
-  resources: {
-    intro: "Practical tools and guides for buyers planning to source from India.",
+  capabilities: {
+    intro: "Five divisions, one partner, from finding a product in India to selling it worldwide.",
     links: [
-      { label: "Resources hub", href: "/resources" },
-      { label: "Landed-cost estimator", href: "/tools/landed-cost-calculator" },
-      { label: "CBM & container calculator", href: "/tools/cbm-calculator" },
-      { label: "Supplier evaluation checklist", href: "/tools/supplier-evaluation-checklist" },
-      { label: "How to source from India", href: "/resources/how-to-source-from-india" },
-      { label: "Incoterms for India imports", href: "/resources/incoterms-for-india-imports" },
-      { label: "Global markets", href: "/markets" },
+      { label: "All capabilities", href: "/capabilities", meta: "→" },
+      { label: "India Sourcing", href: "/india-sourcing", meta: "01" },
+      { label: "Manufacturing & Private Label", href: "/manufacturing-private-label", meta: "02" },
+      { label: "Global Export Solutions", href: "/export", meta: "03" },
+      { label: "Brand Development", href: "/brand-development", meta: "04" },
+      { label: "Advertising & Marketing", href: "/advertising", meta: "04" },
+      { label: "Inclusive Procurement / DOBE", href: "/inclusive-procurement", meta: "05" },
+      { label: "Industries we serve", href: "/industries", meta: "→" },
+      { label: "Publishers & Printing", href: "/publishers-printing", meta: "→" },
+      { label: "All services", href: "/services", meta: "→" },
     ],
-    feature: { title: "Estimate your landed cost", body: "Model duty, freight, insurance and taxes with transparent formulas.", href: "/tools/landed-cost-calculator", cta: "Open estimator" },
+    feature: { title: "Can't find it? We'll help you source it.", body: "You don't need to know where India makes it. Discovering that is our job.", href: "/quote", cta: "Source a product" },
+  },
+  discover: {
+    intro: "Explore India by product, by region and by origin.",
+    links: [
+      { label: "Product Discovery", href: "/discover", meta: "→" },
+      { label: "India Manufacturing Atlas", href: "/atlas", meta: "→" },
+      { label: "GI & Origin Collection", href: "/origin", meta: "→" },
+      ...industries.slice(0, 6).map((i) => ({ label: i.name, href: `/industries/${i.slug}`, meta: i.index })),
+      { label: "Manufacturing clusters", href: "/manufacturing", meta: "→" },
+      { label: "Product guides", href: "/products", meta: "→" },
+      { label: "Global markets", href: "/markets", meta: "→" },
+    ],
+    feature: { title: "The India Manufacturing Atlas", body: "Select a state to see its clusters, crafts, GI products and sourcing ideas.", href: "/atlas", cta: "Open the Atlas" },
+  },
+  about: {
+    intro: "A disability-owned business from Pune, building a modern gateway to India's manufacturing ecosystem.",
+    links: [
+      { label: "About NGB Ventures", href: "/about" },
+      { label: "Inclusive Procurement / DOBE", href: "/inclusive-procurement" },
+      { label: "Insights & Research", href: "/insights" },
+      { label: "Market readiness check", href: "/tools/market-readiness" },
+      { label: "Contact", href: "/contact" },
+      { label: "Request a quote", href: "/quote" },
+    ],
+    feature: { title: "Business with purpose.", body: "Our Disability:IN DOBE® certification application is underway.", href: "/inclusive-procurement", cta: "Inclusive procurement" },
   },
 };
 

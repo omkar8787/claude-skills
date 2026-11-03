@@ -18,7 +18,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   const s = getService((await params).slug);
   if (!s) notFound();
   const rel = services.filter((x) => s.related.includes(x.slug));
-  const enquire = s.slug === "product-development" ? "/product-development" : `/enquire?service=${s.slug}`;
+  const enquire = s.slug === "product-development" ? "/quote?type=manufacturing" : `/quote?type=sourcing&service=${s.slug}`;
   return (
     <>
       <PageHero plate={s.plate} plateNumber={s.index} plateLabel={s.name} crumbs={[{ name: "Services", href: "/services" }, { name: s.name, href: `/services/${s.slug}` }]} eyebrow={`Service ${s.index}`} title={s.name} lede={s.heroLine}

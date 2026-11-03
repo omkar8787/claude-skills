@@ -25,7 +25,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
   const cls = clusters.filter((c) => it.clusterSlugs.includes(c.slug));
   const prods = products.filter((p) => it.productSlugs.includes(p.slug));
   const related = industries.filter((i) => it.related.includes(i.slug));
-  const enquire = `/enquire?industry=${it.slug}`;
+  const enquire = `/quote?type=sourcing&industry=${it.slug}`;
 
   return (
     <>

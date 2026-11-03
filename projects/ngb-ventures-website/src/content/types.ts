@@ -12,7 +12,7 @@ export type Motif =
   | "fold"
   | "dots";
 
-export type Tone = "charcoal" | "bronze" | "indigo" | "clay" | "olive" | "madder" | "sand" | "stone";
+export type Tone = "charcoal" | "bronze" | "indigo" | "clay" | "olive" | "madder" | "sand" | "stone" | "forest";
 
 export type Plate = {
   /** File slot: drop a licensed photo at /public/media/<slot>.jpg (or .webp) to replace the art plate. */

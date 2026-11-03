@@ -1,6 +1,8 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { enquirySchema } from "@/lib/enquiry-schema";
 import { deliver, verifyTurnstile } from "@/lib/enquiry-delivery";
+import { readAttachment, MAX_UPLOAD } from "@/lib/upload";
+import type { Attachment } from "@/lib/upload";
 
 export const runtime = "nodejs";
 
@@ -21,8 +23,13 @@ function limited(ip: string) {
 export async function POST(req: NextRequest) {
   const ip = (req.headers.get("x-forwarded-for") ?? "").split(",")[0].trim() || req.headers.get("x-real-ip") || "unknown";
 
-  if (!(req.headers.get("content-type") ?? "").includes("application/json")) {
-    return NextResponse.json({ ok: false, code: "bad_request", message: "Expected JSON." }, { status: 415 });
+  const ctype = req.headers.get("content-type") ?? "";
+  const isMultipart = ctype.includes("multipart/form-data");
+  if (!ctype.includes("application/json") && !isMultipart) {
+    return NextResponse.json({ ok: false, code: "bad_request", message: "Expected JSON or multipart form data." }, { status: 415 });
+  }
+  if (Number(req.headers.get("content-length") ?? 0) > MAX_UPLOAD + 200_000) {
+    return NextResponse.json({ ok: false, code: "too_large", message: "The upload is too large. The limit is 4 MB." }, { status: 413 });
   }
   const origin = req.headers.get("origin");
   if (origin && new URL(origin).host !== req.headers.get("host")) {
@@ -33,10 +40,24 @@ export async function POST(req: NextRequest) {
   }
 
   let body: unknown;
+  let attachment: Attachment | null = null;
   try {
-    const raw = await req.text();
-    if (raw.length > 50_000) throw new Error("too large");
-    body = JSON.parse(raw);
+    if (isMultipart) {
+      const form = await req.formData();
+      const obj: Record<string, unknown> = {};
+      for (const [k, v] of form.entries()) if (typeof v === "string" && k !== "file") obj[k] = v.slice(0, 5000);
+      obj.startedAt = Number(obj.startedAt);
+      obj.consent = obj.consent === "true";
+      body = obj;
+      const file = form.get("file");
+      const read = await readAttachment(file instanceof File ? file : null);
+      if (!read.ok) return NextResponse.json({ ok: false, code: "validation", message: read.message, fieldErrors: { file: read.message } }, { status: 422 });
+      attachment = read.attachment;
+    } else {
+      const raw = await req.text();
+      if (raw.length > 50_000) throw new Error("too large");
+      body = JSON.parse(raw);
+    }
   } catch {
     return NextResponse.json({ ok: false, code: "bad_request", message: "Invalid request body." }, { status: 400 });
   }
@@ -58,7 +79,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, code: "captcha", message: "Verification failed. Please retry." }, { status: 400 });
   }
 
-  const result = await deliver(data);
+  const result = await deliver(data, attachment);
   if (!result.configured) {
     return NextResponse.json(
       { ok: false, code: "not_configured", message: "Our enquiry inbox is not connected yet. Please email or WhatsApp us directly." },

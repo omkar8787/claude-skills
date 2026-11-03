@@ -117,7 +117,7 @@ export const industries: Industry[] = [
       "Source Indian handicrafts and home décor: brassware, wood carving, marble, glass and textile décor from Moradabad, Saharanpur, Jaipur and Khambhat. Product development, QC and export.",
     heroLine: "Centuries of craft, developed for today's shelves.",
     intro: [
-      "Indian handicrafts are built on skills concentrated in particular towns: metalwork in Moradabad, wood carving in Saharanpur, gemstones and block printing in Jaipur, agate work in Khambhat, glass in Firozabad. Several of these crafts carry Geographical Indication (GI) registrations in India.",
+      "Indian handicrafts are built on skills concentrated in particular towns: metalwork in Moradabad, wood carving in Saharanpur, gemstones and block printing in Jaipur, agate work in Khambhat, glass in Firozabad. Several of these crafts, including Moradabad Metal Craft and Saharanpur Wood Craft, are registered Geographical Indications (GIs).",
       "The opportunity for international décor buyers is product development. Many workshops will adapt traditional techniques to your designs, finishes and price points. The challenge is consistency at volume. That's where clear specifications, approved samples and inspections matter.",
     ],
     products: ["Brass and metal décor", "Carved wooden décor", "Marble and stone accessories", "Glass and votive holders", "Textile wall décor and macramé", "Decorative bowls and trays", "Candle holders and lanterns", "Seasonal and festive décor"],
@@ -540,7 +540,7 @@ export const industries: Industry[] = [
       "Source wooden and educational toys from India, including GI-tagged Channapatna lacquerware toys. EN 71, ASTM F963 and CPSIA testing coordination, QC and export.",
     heroLine: "Play, made safe and made beautifully.",
     intro: [
-      "Channapatna, in Karnataka, is known for lacquered wooden toys and holds a Geographical Indication registration. India's broader manufacturing base also produces soft toys, puzzles, board games and educational materials.",
+      "Channapatna, in Karnataka, is known for lacquered wooden toys, and “Channapatna Toys & Dolls” is reported as a registered Geographical Indication. India's broader manufacturing base also produces soft toys, puzzles, board games and educational materials.",
       "Toys are among the most tightly regulated consumer products. Third-party testing to the destination standard, plus traceability and warnings, is the baseline before shipment."
     ],
     products: ["Wooden and lacquered toys", "Soft and plush toys", "Puzzles and board games", "Montessori-style learning materials", "Craft and activity kits", "Musical toys", "Educational charts and cards", "Wooden baby toys"],

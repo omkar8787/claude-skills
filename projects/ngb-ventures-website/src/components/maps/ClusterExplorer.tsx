@@ -111,7 +111,7 @@ export function ClusterExplorer({ points, map, initial = "tirupur", filterable =
               </div>
               <div className="mt-10 flex flex-wrap gap-3">
                 <Link href={`/manufacturing/${current.slug}`} className="btn btn-bronze">Explore {current.name} <ArrowUpRight className="h-4 w-4" /></Link>
-                <Link href={`/enquire?cluster=${current.slug}`} className="btn btn-ghost">Source from here</Link>
+                <Link href={`/quote?type=sourcing&cluster=${current.slug}`} className="btn btn-ghost">Source from here</Link>
               </div>
             </motion.div>
           </AnimatePresence>

@@ -21,7 +21,7 @@ export default async function ClusterPage({ params }: { params: Promise<{ slug: 
   if (!c) notFound();
   const inds = industries.filter((i) => c.industrySlugs.includes(i.slug));
   const nearby = clusters.filter((x) => x.slug !== c.slug && x.industrySlugs.some((s) => c.industrySlugs.includes(s))).slice(0, 3);
-  const enquire = `/enquire?cluster=${c.slug}`;
+  const enquire = `/quote?type=sourcing&cluster=${c.slug}`;
   return (
     <>
       <PageHero plate={c.plate} plateLabel={formatCoord(c.lat, c.lon)} crumbs={[{ name: "Manufacturing network", href: "/manufacturing" }, { name: c.name, href: `/manufacturing/${c.slug}` }]} eyebrow={`Manufacturing cluster · ${c.state}`} title={c.name} italic={c.specialization + "."} lede={c.summary}

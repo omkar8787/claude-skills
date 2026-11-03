@@ -193,7 +193,8 @@ export const getMarket = (slug: string) => markets.find((m) => m.slug === slug);
 export const marketRegions = [
   { id: "na", label: "North America", markets: ["usa", "canada"], lat: 40, lon: -98 },
   { id: "uk", label: "United Kingdom", markets: ["uk"], lat: 53, lon: -2 },
-  { id: "eu", label: "Europe", markets: ["germany", "france", "netherlands"], lat: 49.5, lon: 8 },
+  { id: "eu", label: "Europe", markets: ["germany", "france", "netherlands"], lat: 47, lon: 13 },
   { id: "me", label: "Middle East", markets: ["uae"], lat: 24.4, lon: 54.4 },
+  { id: "sea", label: "Southeast Asia", markets: [], lat: 1.35, lon: 103.8 },
   { id: "au", label: "Australia", markets: ["australia"], lat: -27, lon: 140 },
 ];

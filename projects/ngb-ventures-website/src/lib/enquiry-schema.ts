@@ -63,7 +63,27 @@ export const productDevSchema = z.object({
   ...antiSpam,
 });
 
-export const enquirySchema = z.discriminatedUnion("type", [sourcingSchema, contactSchema, productDevSchema]);
+export const PATHWAYS = ["sourcing", "manufacturing", "brand", "procurement", "supplier", "general"] as const;
+export const ROLES = ["Importer", "Distributor / wholesaler", "Retailer", "Private-label entrepreneur", "Amazon / e-commerce seller", "Brand owner", "Corporate procurement", "Publisher", "Manufacturer / producer", "Other"] as const;
+
+export const leadSchema = z.object({
+  type: z.literal("lead"),
+  ...contactBlock,
+  pathway: z.enum(PATHWAYS),
+  role: z.enum(ROLES),
+  details: req(4000, "Description").refine((v) => v.length >= 10, "Tell us a little more (10+ characters)"),
+  category: str(80).optional().default(""),
+  destination: str(80).optional().default(""),
+  quantity: str(60).optional().default(""),
+  budget: str(80).optional().default(""),
+  customization: str(2000).optional().default(""),
+  timeline: str(60).optional().default(""),
+  region: str(80).optional().default(""),
+  ...antiSpam,
+});
+export type Lead = z.infer<typeof leadSchema>;
+
+export const enquirySchema = z.discriminatedUnion("type", [sourcingSchema, contactSchema, productDevSchema, leadSchema]);
 export type Enquiry = z.infer<typeof enquirySchema>;
 
 export const CATEGORY_OPTIONS = [

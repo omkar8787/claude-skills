@@ -19,7 +19,7 @@ export const whyIndia = [
 ];
 
 export const audiences = [
-  { title: "Amazon FBA sellers", body: "Private-label products with FBA-ready labelling and cartons.", href: "/enquire?type=private-label&market=usa", cta: "Plan a private-label launch" },
+  { title: "Amazon FBA sellers", body: "Private-label products with FBA-ready labelling and cartons.", href: "/quote?type=private-label&market=usa", cta: "Plan a private-label launch" },
   { title: "Sustainable brands (EU)", body: "Natural-fibre and certified products, with claim-ready documentation.", href: "/industries/eco-friendly", cta: "Explore eco products" },
   { title: "Home-décor importers (UK)", body: "Brass, wood, textiles and lighting from India's craft clusters.", href: "/industries/handicrafts", cta: "Explore home décor" },
   { title: "Wholesalers (Australia)", body: "Handicrafts and homewares, with ECTA and biosecurity planning.", href: "/markets/australia", cta: "Sourcing for Australia" },

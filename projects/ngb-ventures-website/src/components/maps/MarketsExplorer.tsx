@@ -29,7 +29,7 @@ export function MarketsExplorer({ w, h, origin, regions, base }: { w: number; h:
         </svg>
         <span className="ledger pointer-events-none absolute text-[0.6rem] text-bronze-soft" style={{ left: `${(origin.x / w) * 100}%`, top: `${(origin.y / h) * 100}%`, transform: "translate(10px, 6px)" }}>India · JNPT</span>
         {regions.map((g) => (
-          <button key={g.id} type="button" onClick={() => setActive(g.id)} aria-pressed={g.id === active} className="group absolute -translate-x-1/2 -translate-y-1/2 p-2" style={{ left: `${(g.x / w) * 100}%`, top: `${(g.y / h) * 100}%` }}>
+          <button key={g.id} type="button" onClick={() => setActive(g.id)} aria-pressed={g.id === active} className="group absolute -translate-x-1/2 -translate-y-1/2 p-3" style={{ left: `${(g.x / w) * 100}%`, top: `${(g.y / h) * 100}%` }}>
             <span className={`block rounded-full transition-all duration-500 ${g.id === active ? "h-3.5 w-3.5 bg-bronze ring-4 ring-bronze/25" : "h-2.5 w-2.5 bg-ivory group-hover:bg-bronze-soft"}`} />
             <span className={`ledger absolute hidden whitespace-nowrap text-[0.6rem] sm:block ${g.id === "uk" ? "bottom-full right-1/2 mb-0.5" : g.id === "eu" ? "left-full top-1/2 ml-1 -translate-y-1/2" : "left-1/2 top-full -translate-x-1/2"} ${g.id === active ? "text-bronze-soft" : "text-ivory/60"}`}>{g.label}</span>
             <span className="sr-only">{g.label}</span>
@@ -42,13 +42,19 @@ export function MarketsExplorer({ w, h, origin, regions, base }: { w: number; h:
           {regions.map((g) => (
             <button key={g.id} role="tab" aria-selected={g.id === active} onClick={() => setActive(g.id)} className={`flex shrink-0 items-baseline justify-between gap-6 border-b py-3 text-left transition-colors lg:w-full ${g.id === active ? "border-bronze text-ivory" : "border-ivory/10 text-ivory/50 hover:text-ivory"}`}>
               <span className="font-display text-2xl">{g.label}</span>
-              <span className="ledger hidden text-ivory/60 lg:inline">{g.markets.length} {g.markets.length > 1 ? "markets" : "market"}</span>
+              <span className="ledger hidden text-ivory/60 lg:inline">{g.markets.length ? `${g.markets.length} ${g.markets.length > 1 ? "guides" : "guide"}` : "on request"}</span>
             </button>
           ))}
         </div>
         <div className="lg:col-span-8" role="tabpanel">
           <AnimatePresence mode="wait">
             <motion.div key={r.id} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} transition={{ duration: 0.4 }} className="grid gap-px overflow-hidden rounded-sm bg-ivory/10 sm:grid-cols-2">
+              {r.markets.length === 0 && (
+                <Link href="/quote?type=sourcing&country=Singapore" className="group flex flex-col justify-between bg-charcoal p-6 transition-colors hover:bg-ink-2 sm:col-span-2 md:p-8">
+                  <div><p className="font-display text-3xl">{r.label}</p><p className="mt-3 text-[0.95rem] leading-relaxed text-ivory/65">Singapore, Malaysia, Vietnam, Thailand, Indonesia and the Philippines. We support buyers across the region on request. A dedicated market guide is in preparation.</p></div>
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-bronze-soft">Discuss a Southeast Asia shipment <ArrowUpRight className="h-4 w-4" /></span>
+                </Link>
+              )}
               {r.markets.map((m) => (
                 <Link key={m.slug} href={`/markets/${m.slug}`} className="group flex flex-col justify-between bg-charcoal p-6 transition-colors hover:bg-ink-2 md:p-8">
                   <div>

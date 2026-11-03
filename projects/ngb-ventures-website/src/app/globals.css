@@ -11,6 +11,9 @@
   --color-bronze: #a98758;
   --color-bronze-soft: #c9ad85;
   --color-bronze-ink: #7a5c33;
+  --color-forest: #1c3329;
+  --color-forest-2: #24402f;
+  --color-forest-soft: #a9c1b0;
   --color-stone: #77746f;
   --color-stone-ink: #5f5c57;
   --color-line: rgb(21 21 21 / 0.12);
@@ -115,6 +118,7 @@
 @keyframes drift { from { transform: translate3d(0,0,0) scale(1.04); } to { transform: translate3d(-2%, -1.5%, 0) scale(1.1); } }
 @keyframes dash { to { stroke-dashoffset: 0; } }
 @keyframes pulse-ring { 0% { r: 4; opacity: .7; } 100% { r: 16; opacity: 0; } }
+@keyframes sheen { from { background-position: 200% 0; } to { background-position: -200% 0; } }
 @keyframes marquee { to { transform: translateX(-50%); } }
 
 @media (prefers-reduced-motion: reduce) {

@@ -4,7 +4,7 @@ Production website for **NGB Ventures (Next Global Brand)**, an international so
 
 Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Motion · Lucide · Zod
 
-84 statically generated pages, 3 interactive procurement tools, a 5-step enquiry builder, and interactive India cluster and world market maps.
+113 statically generated pages across five business divisions, an India Manufacturing Atlas, a GI Origin Collection (18 researched products), a Product Discovery Engine, a market-readiness checker and 3 other procurement tools, plus a pathway-aware quote form with reference-image upload.
 
 | Doc | Purpose |
 |---|---|
@@ -12,7 +12,11 @@ Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Motion �
 | [docs/02-sitemap-and-architecture.md](docs/02-sitemap-and-architecture.md) | Sitemap, how to add pages, component library, conversion journeys |
 | [docs/03-seo-keyword-map.md](docs/03-seo-keyword-map.md) | Keyword → page map, technical SEO, growth roadmap |
 | [docs/04-image-brief.md](docs/04-image-brief.md) | 81 photography slots with shot briefs, and how to swap in photos |
-| [docs/05-qa-report.md](docs/05-qa-report.md) | QA results, Lighthouse scores, design review, known limitations |
+| [docs/05-qa-report.md](docs/05-qa-report.md) | QA results for the first build |
+| [docs/06-competitor-research-plan.md](docs/06-competitor-research-plan.md) | 25-site audit set (not live-inspected) and first-principles design decisions |
+| [docs/07-gi-research.md](docs/07-gi-research.md) | GI research log: application/certificate numbers, status, confidence |
+| [docs/08-transformation-report.md](docs/08-transformation-report.md) | Transformation audit, IA, signature features, quality iterations, weighted scorecard |
+| [research/README.md](research/README.md) | Internal supplier/publisher lead database (unverified, never published) |
 
 ## Quick start
 
@@ -61,6 +65,9 @@ Requires Node 20+ (tested on Node 22).
 | `NEXT_PUBLIC_SHOW_PLACEHOLDERS` | Optional | — | `true` shows factual-gap placeholders in production (hidden by default) |
 
 **No fake submissions.** If no delivery channel is configured, `/api/enquiry` returns `503 not_configured`, and the form tells the visitor to use email or WhatsApp instead. It never reports a false success.
+
+### Enquiry API: lead pathways and uploads
+`/quote` posts multipart form data (`type=lead`) with a `pathway` (sourcing, manufacturing, brand, procurement, supplier or general) and a `role` (importer, retailer, publisher and so on). The server derives a routing **category** such as `sourcing / Retailer / United States`. An optional reference file (JPG, PNG, WebP or PDF, ≤ 4 MB) is validated by magic bytes. It's sent as a Resend email attachment, or base64 in the webhook payload if ≤ 2 MB. Files aren't stored on the server.
 
 ### Enquiry API security
 - Zod validation on the server, with field-level errors returned to the UI.

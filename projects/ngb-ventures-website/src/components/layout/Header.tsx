@@ -5,10 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, Menu, Plus, X } from "lucide-react";
 import { Logo } from "./Logo";
+import { ScrollProgress } from "./ScrollProgress";
 import type { NavItem } from "@/content/site";
 
 export type MenuLink = { label: string; href: string; meta?: string };
-export type MenuData = Record<"industries" | "manufacturing" | "services" | "resources", { intro: string; links: MenuLink[]; feature: { title: string; body: string; href: string; cta: string } }>;
+export type MenuData = Record<string, { intro: string; links: MenuLink[]; feature: { title: string; body: string; href: string; cta: string } }>;
 
 export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; cta: { label: string; href: string } }) {
   const pathname = usePathname();
@@ -56,12 +57,13 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
         className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,color,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${hidden && !open ? "-translate-y-full" : "translate-y-0"} ${solid ? "bg-ivory/92 text-charcoal shadow-[0_1px_0_rgba(21,21,21,.08)] backdrop-blur-xl" : "bg-transparent text-ivory"}`}
         onMouseLeave={leave}
       >
+        <ScrollProgress />
         <div className="container-x flex h-[72px] items-center justify-between gap-6 lg:h-20">
           <Link href="/" className="relative z-10 shrink-0"><Logo /><span className="sr-only">, home</span></Link>
 
           <nav aria-label="Primary" className="hidden xl:block">
             <ul className="flex items-center gap-1">
-              {nav.map((item) => (
+              {nav.filter((i) => !i.mobileOnly).map((item) => (
                 <li key={item.href} onMouseEnter={() => enter(item.menu)} className="relative">
                   <Link
                     href={item.href}
@@ -88,7 +90,7 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
         </div>
 
         <AnimatePresence>
-          {open && menus[open as keyof MenuData] && (
+          {open && menus[open] && (
             <motion.div
               key={open}
               initial={{ opacity: 0, y: -8 }}
@@ -98,7 +100,7 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
               className="absolute inset-x-0 top-full hidden border-t border-line bg-ivory text-charcoal shadow-[0_30px_60px_-30px_rgba(21,21,21,.35)] xl:block"
               onMouseEnter={() => enter(open)}
             >
-              <MegaPanel data={menus[open as keyof MenuData]} />
+              <MegaPanel data={menus[open]} />
             </motion.div>
           )}
         </AnimatePresence>
@@ -162,7 +164,7 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
   );
 }
 
-function MegaPanel({ data }: { data: MenuData[keyof MenuData] }) {
+function MegaPanel({ data }: { data: MenuData[string] }) {
   const cols = data.links.length > 10 ? "grid-cols-3" : "grid-cols-2";
   return (
     <div className="container-x grid grid-cols-12 gap-10 py-10">

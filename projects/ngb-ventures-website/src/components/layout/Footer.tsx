@@ -1,58 +1,74 @@
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "./Logo";
-import { industries } from "@/content/industries";
-import { services } from "@/content/services";
-import { markets } from "@/content/markets";
-import { site, contactEmail, whatsappHref } from "@/content/site";
+import { divisions } from "@/content/divisions";
+import { site, contactEmail, whatsappHref, messaging } from "@/content/site";
 
-const resources = [
-  { label: "Resources hub", href: "/resources" },
-  { label: "How to source from India", href: "/resources/how-to-source-from-india" },
-  { label: "Incoterms for India imports", href: "/resources/incoterms-for-india-imports" },
+const discover = [
+  { label: "Product Discovery", href: "/discover" },
+  { label: "India Manufacturing Atlas", href: "/atlas" },
+  { label: "GI & Origin Collection", href: "/origin" },
+  { label: "Industries we serve", href: "/industries" },
+  { label: "Manufacturing clusters", href: "/manufacturing" },
+  { label: "Product guides", href: "/products" },
+  { label: "Publishers & Printing", href: "/publishers-printing" },
+  { label: "Global markets", href: "/markets" },
+];
+const insights = [
+  { label: "Insights & Research", href: "/insights" },
+  { label: "Market readiness check", href: "/tools/market-readiness" },
   { label: "Landed-cost estimator", href: "/tools/landed-cost-calculator" },
-  { label: "CBM & container calculator", href: "/tools/cbm-calculator" },
-  { label: "Supplier evaluation checklist", href: "/tools/supplier-evaluation-checklist" },
-  { label: "Product development request", href: "/product-development" },
+  { label: "CBM calculator", href: "/tools/cbm-calculator" },
+  { label: "Supplier checklist", href: "/tools/supplier-evaluation-checklist" },
+  { label: "How to source from India", href: "/insights/how-to-source-from-india" },
+];
+const company = [
+  { label: "About NGB Ventures", href: "/about" },
+  { label: "Capabilities", href: "/capabilities" },
+  { label: "All services", href: "/services" },
+  { label: "Advertising & Marketing", href: "/advertising" },
+  { label: "Contact", href: "/contact" },
+  { label: "Request a quote", href: "/quote" },
 ];
 
 export function Footer() {
   const year = new Date().getFullYear();
   return (
     <footer className="on-dark relative overflow-hidden bg-charcoal text-ivory">
-      <div className="container-x pt-24 pb-10">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <div className="lg:col-span-4">
+      <div className="container-x pb-10 pt-24">
+        <div className="grid gap-12 border-b border-ivory/10 pb-16 lg:grid-cols-12 lg:items-end">
+          <p className="display text-[clamp(2.4rem,5vw,4.6rem)] lg:col-span-8">{messaging.promise.split(". ")[0]}. <em>{messaging.promise.split(". ")[1]}</em></p>
+          <div className="lg:col-span-4 lg:text-right"><Link href="/quote" className="btn btn-bronze">Source a product <ArrowUpRight className="h-4 w-4" /></Link></div>
+        </div>
+        <div className="mt-16 grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-3">
             <Logo />
-            <p className="mt-8 max-w-sm text-[0.95rem] leading-relaxed text-ivory/65">
-              {site.fullName}: a Pune-based sourcing and manufacturing coordination partner connecting international buyers with Indian manufacturing capabilities.
-            </p>
+            <p className="mt-8 max-w-sm text-[0.95rem] leading-relaxed text-ivory/65">{site.positioning} A disability-owned sourcing, manufacturing, export and brand-development partner based in Pune, India.</p>
+            <p className="ledger mt-5 text-bronze-soft">{site.dobeStatus}</p>
             <div className="mt-8 space-y-2 text-[0.95rem]">
               {contactEmail ? <a className="link-u block w-fit" href={`mailto:${contactEmail}`}>{contactEmail}</a> : <Link className="link-u block w-fit" href="/contact">Send us an enquiry</Link>}
               {site.contact.phone && <a className="link-u block w-fit" href={`tel:${site.contact.phone.replace(/\s/g, "")}`}>{site.contact.phone}</a>}
               {whatsappHref && <a className="link-u block w-fit" href={whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>}
-              <p className="ledger pt-3 text-ivory/60">{site.city}, {site.region}, {site.country} · {site.contact.hours}</p>
+              <p className="ledger pt-3 text-ivory/60">{site.city}, {site.region}, {site.country}</p>
             </div>
           </div>
-          <FooterCol title="Industries" className="lg:col-span-3" links={industries.map((i) => ({ label: i.name, href: `/industries/${i.slug}` }))} twoCol />
-          <FooterCol title="Services" className="lg:col-span-2" links={services.map((s) => ({ label: s.name, href: `/services/${s.slug}` }))} />
-          <div className="space-y-12 lg:col-span-3">
-            <FooterCol title="Resources" links={resources} />
-            <FooterCol title="Markets" links={markets.map((m) => ({ label: m.name, href: `/markets/${m.slug}` }))} twoCol />
-          </div>
+          <FooterCol title="Capabilities" className="lg:col-span-2" links={divisions.map((d) => ({ label: d.name, href: d.route }))} />
+          <FooterCol title="Discover India" className="lg:col-span-3" links={discover} />
+          <FooterCol title="Insights & tools" className="lg:col-span-2" links={insights} />
+          <FooterCol title="Company" className="lg:col-span-2" links={company} />
         </div>
 
         <svg className="mt-24 block w-full select-none" viewBox="0 0 1000 120" aria-hidden focusable="false">
-          <text x="0" y="100" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="rgba(246,243,237,0.06)" style={{ fontFamily: "var(--font-display)", fontSize: 128 }}>Next Global Brand</text>
+          <text x="0" y="100" textLength="1000" lengthAdjust="spacingAndGlyphs" fill="rgba(246,243,237,0.06)" style={{ fontFamily: "var(--font-display)", fontSize: 128 }}>India to the World</text>
         </svg>
 
         <div className="rule mt-8" />
-        <div className="mt-8 flex flex-col gap-6 text-sm text-ivory/55 md:flex-row md:items-center md:justify-between">
-          <p>© {year} {site.legalName}. All rights reserved.</p>
+        <div className="mt-8 flex flex-col gap-6 text-sm text-ivory/60 md:flex-row md:items-center md:justify-between">
+          <p>© {year} {site.legalName}. {site.signoff}</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {(["linkedin", "instagram", "youtube"] as const).map((k) =>
               site.social[k] ? (
-                <li key={k}><a href={site.social[k]} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 capitalize hover:text-ivory">{k === "linkedin" ? "LinkedIn" : k === "youtube" ? "YouTube" : "Instagram"} <ArrowUpRight className="h-3.5 w-3.5" /></a></li>
+                <li key={k}><a href={site.social[k]} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-ivory">{k === "linkedin" ? "LinkedIn" : k === "youtube" ? "YouTube" : "Instagram"} <ArrowUpRight className="h-3.5 w-3.5" /></a></li>
               ) : null,
             )}
             <li><Link href="/privacy" className="hover:text-ivory">Privacy policy</Link></li>
@@ -65,14 +81,12 @@ export function Footer() {
   );
 }
 
-function FooterCol({ title, links, className = "", twoCol }: { title: string; links: { label: string; href: string }[]; className?: string; twoCol?: boolean }) {
+function FooterCol({ title, links, className = "" }: { title: string; links: { label: string; href: string }[]; className?: string }) {
   return (
     <div className={className}>
       <p className="ledger mb-5 text-bronze-soft">{title}</p>
-      <ul className={`grid gap-x-6 gap-y-2.5 text-[0.9rem] text-ivory/70 ${twoCol ? "grid-cols-2 lg:grid-cols-1 xl:grid-cols-2" : ""}`}>
-        {links.map((l) => (
-          <li key={l.href}><Link href={l.href} className="transition-colors hover:text-ivory">{l.label}</Link></li>
-        ))}
+      <ul className="grid gap-y-2.5 text-[0.9rem] text-ivory/70">
+        {links.map((l) => <li key={l.href}><Link href={l.href} className="transition-colors hover:text-ivory">{l.label}</Link></li>)}
       </ul>
     </div>
   );

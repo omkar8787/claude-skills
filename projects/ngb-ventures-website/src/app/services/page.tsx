@@ -11,7 +11,7 @@ export const metadata = buildMetadata({ title: "Services | Sourcing, Private Lab
 export default function ServicesPage() {
   return (
     <>
-      <PageHero plate={{ slot: "page-services", motif: "jali", tone: "bronze", alt: "Sourcing consultation", brief: "Sourcing team reviewing samples" }} crumbs={[{ name: "Services", href: "/services" }]} eyebrow="12 services" title="Services" italic="end to end." lede="Use a single service, such as a pre-shipment inspection, or combine them into a fully coordinated sourcing programme." ctas={[{ label: "Discuss your project", href: "/enquire" }]} />
+      <PageHero plate={{ slot: "page-services", motif: "jali", tone: "bronze", alt: "Sourcing consultation", brief: "Sourcing team reviewing samples" }} crumbs={[{ name: "Services", href: "/services" }]} eyebrow="12 services" title="Services" italic="end to end." lede="Use a single service, such as a pre-shipment inspection, or combine them into a fully coordinated sourcing programme." ctas={[{ label: "Discuss your project", href: "/quote" }]} />
       <section className="container-x py-24 lg:py-32"><ServicesLedger items={services} /></section>
       <section className="border-t border-line bg-paper py-24 lg:py-32"><div className="container-x grid gap-16 lg:grid-cols-12"><div className="lg:col-span-4"><p className="eyebrow mb-6">How services fit together</p><h2 className="display text-[clamp(2.2rem,4vw,3.75rem)]">The sourcing <em>lifecycle</em></h2></div><div className="lg:col-span-8"><ProcessTimeline steps={processSteps} /></div></div></section>
       <CtaBand />

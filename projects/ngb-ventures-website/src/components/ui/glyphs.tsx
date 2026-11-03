@@ -44,6 +44,7 @@ export const GLYPHS: Record<string, ReactNode> = {
   ship: <><path d="M24 128 H176 L160 160 H40 Z" /><path d="M44 128 V104 H70 V128 M70 128 V96 H96 V128 M96 128 V104 H122 V128 M122 128 V88 H140 V128" opacity=".75" /><path d="M140 88 V60 H156 V128" /><path d="M10 176 c10 -6 20 -6 30 0 s20 6 30 0 s20 -6 30 0 s20 6 30 0 s20 -6 30 0 s20 6 30 0" opacity=".55" /></>,
   camera: <><path d="M30 64 H70 L80 48 H120 L130 64 H170 V160 H30 Z" /><circle cx="100" cy="110" r="34" /><circle cx="100" cy="110" r="22" opacity=".6" /><path d="M146 80 h10" /></>,
   compass: <><circle cx="100" cy="100" r="68" /><circle cx="100" cy="100" r="58" opacity=".5" /><path d="M100 46 L114 100 L100 154 L86 100 Z M86 100 H114" /><path d="M100 26 V36 M100 164 V174 M26 100 H36 M164 100 H174" /></>,
+  cup: <><path d="M62 52 L70 168 C70 174 76 178 84 178 H116 C124 178 130 174 130 168 L138 52 Z" /><path d="M62 52 C62 46 80 42 100 42 C120 42 138 46 138 52 C138 58 120 62 100 62 C80 62 62 58 62 52 Z" /><path d="M68 92 H132 M70 120 H130" opacity=".55" /><path d="M78 74 h1 M92 78 h1 M106 78 h1 M120 74 h1 M80 104 h1 M96 108 h1 M112 106 h1 M84 140 h1 M100 144 h1 M116 140 h1" strokeWidth="3" strokeLinecap="round" opacity=".6" /></>,
   stamp: <><path d="M60 40 H140 V70 H60 Z M84 70 V96 H116 V70" /><path d="M40 96 H160 V120 H40 Z" /><path d="M56 150 C66 138 82 138 92 150 C82 162 66 162 56 150 Z M108 150 C118 138 134 138 144 150 C134 162 118 162 108 150 Z M100 132 C108 142 108 158 100 168 C92 158 92 142 100 132 Z" opacity=".7" /></>,
 };
 
@@ -62,5 +63,14 @@ export const GLYPH_BY_SLOT: Record<string, string> = {
   "service-quality-inspection": "magnifier", "service-factory-audits": "clipboard", "service-packaging": "box", "service-export": "document", "service-logistics": "ship",
   "service-photography": "camera", "service-consultancy": "compass",
   "market-usa": "globe", "market-uk": "globe", "market-germany": "globe", "market-france": "globe", "market-netherlands": "ship", "market-australia": "globe", "market-canada": "globe", "market-uae": "ship",
+  "gi-darjeeling-tea": "leaf", "gi-kancheepuram-silk": "spool", "gi-kannauj-perfume": "bottle", "gi-paithani": "spool", "gi-kolhapuri-chappal": "shoe", "gi-kashmir-pashmina": "spool",
+  "gi-channapatna": "top", "gi-bikaneri-bhujia": "bowl", "gi-moradabad-metal-craft": "vase", "gi-saharanpur-wood-craft": "chair", "gi-agates-of-cambay": "gem", "gi-firozabad-glass": "vase",
+  "gi-alleppey-coir": "leaf", "gi-blue-pottery": "vase", "gi-kutch-embroidery": "stamp", "gi-mysore-silk": "spool", "gi-gulabi-meenakari": "ring", "gi-nagpur-orange": "leaf",
+  "spot-brass-barware": "cup", "spot-block-print": "stamp", "spot-attars": "bottle", "spot-loofah": "loofah", "spot-coir": "leaf", "spot-mango-wood": "chair", "spot-activity-books": "notebook",
+  "spot-machined": "gear", "spot-ikat": "spool", "spot-jute": "bag",
+  "stage-source": "magnifier", "stage-manufacture": "gear", "stage-customize": "compass", "stage-brand": "tag", "stage-advertise": "camera", "stage-export": "ship",
+  "div-india-sourcing": "magnifier", "div-manufacturing-private-label": "gear", "div-export": "ship", "div-brand-development": "tag", "div-inclusive-procurement": "seal",
+  "page-capabilities": "compass", "page-discover": "magnifier", "page-atlas": "compass", "page-origin": "seal", "page-advertising": "camera", "page-publishers": "notebook", "page-quote": "document", "page-insights": "document",
+  "hero-1": "vase", "hero-2": "spool", "hero-3": "bottle", "hero-4": "box", "hero-5": "ship", "hero-6": "tag",
   "home-why-india": "stamp", "about-hero": "compass", "page-industries": "spool", "page-products": "box", "page-manufacturing": "gear", "page-services": "compass", "page-markets": "globe", "page-resources": "document", "page-contact": "seal", "page-enquire": "document", "page-tools": "compass",
 };

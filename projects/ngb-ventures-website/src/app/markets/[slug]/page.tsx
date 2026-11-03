@@ -20,7 +20,7 @@ export default async function MarketPage({ params }: { params: Promise<{ slug: s
   const m = getMarket((await params).slug);
   if (!m) notFound();
   const inds = industries.filter((i) => m.popularIndustries.includes(i.slug));
-  const enquire = `/enquire?market=${m.slug}`;
+  const enquire = `/quote?type=sourcing&market=${m.slug}`;
   return (
     <>
       <PageHero plate={m.plate} plateLabel={`India → ${m.name}`} crumbs={[{ name: "Markets", href: "/markets" }, { name: m.name, href: `/markets/${m.slug}` }]} eyebrow={`Market guide · ${m.region}`} title={`Sourcing from India for ${m.name}`} lede={m.heroLine}
