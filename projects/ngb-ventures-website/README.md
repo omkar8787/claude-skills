@@ -16,6 +16,8 @@ Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Motion �
 | [docs/06-competitor-research-plan.md](docs/06-competitor-research-plan.md) | 25-site audit set (not live-inspected) and first-principles design decisions |
 | [docs/07-gi-research.md](docs/07-gi-research.md) | GI research log: application/certificate numbers, status, confidence |
 | [docs/08-transformation-report.md](docs/08-transformation-report.md) | Transformation audit, IA, signature features, quality iterations, weighted scorecard |
+| [docs/09-header-and-parallax-brief.md](docs/09-header-and-parallax-brief.md) | Header visibility and parallax brief with before/after measurements |
+| [docs/10-content-and-seo-playbook.md](docs/10-content-and-seo-playbook.md) | **Publish articles via Markdown**, IndexNow, Search Console setup, writing to rank |
 | [research/README.md](research/README.md) | Internal supplier/publisher lead database (unverified, never published) |
 
 ## Quick start

@@ -22,7 +22,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...clusters.map((c) => e(`/manufacturing/${c.slug}`, 0.7)),
     ...markets.map((m) => e(`/markets/${m.slug}`, 0.8)),
     ...services.map((s) => e(`/services/${s.slug}`, 0.8)),
-    ...guides.map((g) => ({ ...e(`/insights/${g.slug}`, g.kind === "story" ? 0.75 : 0.7, "monthly"), lastModified: new Date(g.date ?? "2026-11-03") })),
+    ...guides.map((g) => ({ ...e(`/insights/${g.slug}`, g.kind === "story" ? 0.75 : 0.7, "monthly"), lastModified: new Date(g.modified ?? g.date ?? "2026-11-03") })),
     ...["market-readiness", "landed-cost-calculator", "cbm-calculator", "supplier-evaluation-checklist"].map((t) => e(`/tools/${t}`, 0.7)),
     e("/privacy", 0.2, "yearly"),
     e("/terms", 0.2, "yearly"),

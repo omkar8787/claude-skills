@@ -16,9 +16,13 @@ export function AtlasLazy(props: ComponentProps<typeof AtlasT>) {
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    const io = new IntersectionObserver((e) => { if (e[0].isIntersecting) { setShow(true); io.disconnect(); } }, { rootMargin: "600px 0px" });
+    // Load at once when a link targets the Atlas; otherwise when it nears the viewport;
+    // and in any case once the browser is idle, so the map can never stay stuck on its placeholder.
+    if (window.location.hash === "#atlas") { setShow(true); return; }
+    const io = new IntersectionObserver((e) => { if (e[0].isIntersecting) { setShow(true); io.disconnect(); } }, { rootMargin: "800px 0px" });
     io.observe(el);
-    return () => io.disconnect();
+    const idle = window.setTimeout(() => setShow(true), 4000);
+    return () => { io.disconnect(); window.clearTimeout(idle); };
   }, []);
   return <div ref={ref}>{show ? <Atlas {...props} /> : <AtlasSkeleton />}</div>;
 }

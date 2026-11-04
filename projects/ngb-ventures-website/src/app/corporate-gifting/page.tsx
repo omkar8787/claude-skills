@@ -81,7 +81,7 @@ export default function CorporateGifting() {
           {collections.map((c, i) => (
             <Reveal as="li" key={c.t} delay={i * 0.05}>
               <Link href={quote(c.q)} className="group block">
-                <div className="relative aspect-[4/5] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={c.p} className="h-full w-full" sizes="25vw" /></div></div>
+                <div className="shine relative aspect-[4/5] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={c.p} className="h-full w-full" sizes="25vw" /></div></div>
                 <h3 className="mt-5 font-display text-3xl"><span className="link-u">{c.t}</span></h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-stone-ink">{c.b}</p>
                 <span className="mt-4 inline-flex items-center gap-2 text-sm font-semibold">Request this <ArrowUpRight className="h-4 w-4" /></span>

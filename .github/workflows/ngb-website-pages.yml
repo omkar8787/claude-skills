@@ -60,6 +60,7 @@ jobs:
             git worktree add --detach pages && (cd pages && git checkout --orphan gh-pages && git rm -rfq .)
           fi
           SRC=projects/ngb-ventures-website/out-live/site
+          cp pages/sitemap.xml /tmp/old-sitemap.xml 2>/dev/null || true
           rsync -a --delete --exclude .git --exclude site-config.js --exclude 'google*.html' --exclude 'BingSiteAuth.xml' "$SRC/" pages/
           [ -f pages/site-config.js ] || cp "$SRC/site-config.js" pages/
           cd pages
@@ -67,3 +68,8 @@ jobs:
           git diff --cached --quiet && { echo "No changes"; exit 0; }
           git commit -m "deploy: NGB Ventures site from ${GITHUB_SHA::7}"
           git push origin HEAD:gh-pages
+      - name: Notify search engines (IndexNow) of new or changed pages
+        if: success()
+        run: |
+          sleep 20  # give GitHub Pages a moment to serve the new files
+          node scripts/indexnow.mjs /tmp/old-sitemap.xml out-live/site/sitemap.xml out-live/site

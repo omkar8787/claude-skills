@@ -1,3 +1,4 @@
+import { inlineMd } from "@/lib/inline-md";
 import { ShareBar } from "@/components/social/ShareBar";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -29,8 +30,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
           {g.sections.map((s, i) => (
             <section key={s.h} id={`s${i}`} className="scroll-mt-28 border-t border-line pt-10 [&:not(:first-child)]:mt-14">
               <h2 className="font-display text-[2.1rem] leading-tight">{s.h}</h2>
-              <div className="prose-ngb mt-5 text-[1.0625rem]">{s.p.map((p) => <p key={p.slice(0, 20)}>{p}</p>)}</div>
-              {s.list && <ul className="mt-6 space-y-2.5">{s.list.map((l) => <li key={l} className="flex gap-3 leading-relaxed text-stone-ink"><span className="mt-2.5 h-1 w-3 shrink-0 bg-bronze" />{l}</li>)}</ul>}
+              <div className="prose-ngb mt-5 text-[1.0625rem]">{s.p.map((p) => <p key={p.slice(0, 20)}>{inlineMd(p)}</p>)}</div>
+              {s.list && <ul className="mt-6 space-y-2.5">{s.list.map((l) => <li key={l} className="flex gap-3 leading-relaxed text-stone-ink"><span className="mt-2.5 h-1 w-3 shrink-0 bg-bronze" /><span>{inlineMd(l)}</span></li>)}</ul>}
             </section>
           ))}
           <ShareBar title={g.title} className="mt-14" />
@@ -50,7 +51,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
         </section>
       )}
       <InlineCta title="Want help applying this to your product?" body="Send us a brief and we’ll outline a practical sourcing route." href="/quote" label="Start a sourcing brief" />
-      <JsonLd data={{ "@context": "https://schema.org", "@type": "Article", headline: g.title, description: g.description, datePublished: g.date, dateModified: g.date, articleSection: g.category, keywords: g.keywords?.join(", "), inLanguage: "en", author: { "@type": "Organization", name: site.name }, publisher: { "@id": absUrl("/#organization") }, mainEntityOfPage: absUrl(`/insights/${g.slug}`) }} />
+      <JsonLd data={[{ "@context": "https://schema.org", "@type": "Article", headline: g.title, description: g.description, datePublished: g.date, dateModified: g.modified ?? g.date, articleSection: g.category, keywords: g.keywords?.join(", "), inLanguage: "en", author: { "@type": "Organization", name: site.name }, publisher: { "@id": absUrl("/#organization") }, mainEntityOfPage: absUrl(`/insights/${g.slug}`) }]} />
     </>
   );
 }

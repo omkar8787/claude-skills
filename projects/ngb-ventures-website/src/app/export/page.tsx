@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DobeAdvantage, dobeFaqs } from "@/components/sections/DobeAdvantage";
 import { getDivision } from "@/content/divisions";
 import { markets } from "@/content/markets";
 import { DivisionHero, DeliveredCoordinated, NextDivisions, SplitBlock } from "@/components/division/DivisionTemplate";
@@ -25,8 +26,10 @@ export default function ExportPage() {
         <div className="mt-8 flex flex-wrap gap-3"><Link href="/tools/market-readiness" className="btn btn-primary">Run a market-readiness check</Link><Link href="/tools/landed-cost-calculator" className="btn btn-ghost">Landed-cost estimator</Link><Link href="/tools/cbm-calculator" className="btn btn-ghost">CBM calculator</Link></div>
       </SplitBlock>
       <section className="border-t border-line bg-paper py-20"><div className="container-x"><p className="eyebrow mb-8">Market guides</p><ul className="grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-4">{markets.map((m) => <li key={m.slug} className="bg-paper"><Link href={`/markets/${m.slug}`} className="block p-6 hover:bg-ivory"><p className="ledger text-bronze-ink">{m.code}</p><p className="mt-3 font-display text-2xl">{m.name}</p></Link></li>)}</ul></div></section>
+      <DobeAdvantage />
       <DeliveredCoordinated d={d} />
       <Faq faqs={[
+        ...dobeFaqs,
         { q: "Are you a freight forwarder or customs broker?", a: "No. We coordinate with licensed forwarders and customs brokers, who carry out carriage and clearance." },
         { q: "Can you tell me my exact import duty?", a: "We can research indicative HS codes and point you to the official tariff tools. Exact duty is set by customs on the declared classification, origin and value. Confirm it with a licensed broker." },
         { q: "Do you handle Amazon FBA shipments?", a: "We coordinate FBA-compliant labelling and cartons with the manufacturer, and hand over to forwarders that deliver to FBA warehouses." },

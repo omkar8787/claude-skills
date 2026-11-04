@@ -1,8 +1,13 @@
 import { clusters, formatCoord } from "@/content/clusters";
+import { facts } from "@/content/facts";
 
-/** Slow typographic ticker of cluster coordinates: a "ledger" interlude between sections. */
+/** Slow typographic ticker of cluster coordinates, with "Did you know?" trade facts between them. */
 export function LedgerTicker() {
-  const items = clusters.map((c) => `${c.name.toUpperCase()} · ${formatCoord(c.lat, c.lon)} · ${c.specialization}`);
+  const trivia = facts.filter((f) => f.answer).map((f) => `Did you know? ${f.statement}`);
+  const items = clusters.flatMap((c, i) => {
+    const line = `${c.name.toUpperCase()} · ${formatCoord(c.lat, c.lon)} · ${c.specialization}`;
+    return i % 3 === 2 && trivia[Math.floor(i / 3) % trivia.length] ? [line, trivia[Math.floor(i / 3) % trivia.length]] : [line];
+  });
   const row = (
     <ul className="flex shrink-0 items-center gap-10 pr-10">
       {items.map((t) => <li key={t} className="flex items-center gap-10 whitespace-nowrap"><span>{t}</span><span className="h-1 w-1 rounded-full bg-bronze" aria-hidden /></li>)}

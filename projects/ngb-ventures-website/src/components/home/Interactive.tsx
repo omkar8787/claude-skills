@@ -163,13 +163,12 @@ export function HorizontalSpotlight({ cards, plates }: { cards: SpotCard[]; plat
   }, [desktop]);
   const { scrollYProgress } = useScroll({ target: wrap, offset: ["start start", "end end"] });
   const x = useTransform(scrollYProgress, [0, 1], [0, -dist]);
-  const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
 
   const list = (
     <div ref={track} className={`flex gap-5 md:gap-7 ${desktop && !reduce ? "pl-[max(1.25rem,calc((100vw-1520px)/2+4rem))] pr-16" : "snap-x snap-mandatory overflow-x-auto px-5 pb-6 scrollbar-none md:px-10"}`}>
       {cards.map((c, i) => (
         <Link key={c.slug} href={c.href} className="group relative w-[78vw] shrink-0 snap-start sm:w-[46vw] lg:w-[30vw] xl:w-[26vw]">
-          <div className="relative aspect-[4/5] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-105">{plates[i]}</div>
+          <div className="shine relative aspect-[4/5] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] ease-[cubic-bezier(.22,1,.36,1)] group-hover:scale-105">{plates[i]}</div>
             <span className="tone-reset ledger absolute left-4 top-4 text-ivory/80">{String(i + 1).padStart(2, "0")} / {String(cards.length).padStart(2, "0")}</span></div>
           <p className="ledger mt-5 text-bronze-soft">{c.meta}</p>
           <h3 className="mt-2 font-display text-[1.9rem] leading-tight text-ivory">{c.name}</h3>
@@ -184,13 +183,8 @@ export function HorizontalSpotlight({ cards, plates }: { cards: SpotCard[]; plat
   return (
     <div ref={wrap} style={pinned ? { height: `calc(100vh + ${dist}px)` } : undefined} className="relative">
       {!pinned && <p className="ledger mb-4 flex items-center gap-2 px-5 text-ivory/75 md:px-10"><MoveHorizontal className="h-4 w-4" /> Swipe to explore</p>}
-      <div className={pinned ? "sticky top-0 flex h-screen flex-col justify-center overflow-hidden" : ""} onMouseMove={pinned ? (e) => setCursor({ x: e.clientX, y: e.clientY }) : undefined} onMouseLeave={() => setCursor(null)}>
+      <div className={pinned ? "sticky top-0 flex h-screen flex-col justify-center overflow-hidden" : ""}>
         <motion.div style={pinned ? { x } : undefined}>{list}</motion.div>
-        {pinned && cursor && (
-          <motion.div aria-hidden className="pointer-events-none fixed left-0 top-0 z-30 flex h-20 w-20 items-center justify-center rounded-full bg-bronze text-[0.65rem] font-semibold uppercase tracking-[0.14em] text-charcoal" animate={{ x: cursor.x - 40, y: cursor.y - 40 }} transition={{ type: "spring", stiffness: 400, damping: 35, mass: 0.4 }}>
-            Source
-          </motion.div>
-        )}
       </div>
     </div>
   );

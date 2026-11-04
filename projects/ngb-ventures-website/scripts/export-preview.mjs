@@ -94,6 +94,8 @@ for (const route of routes) {
 // Static assets
 fs.cpSync(".next/static", path.join(site, "_next/static"), { recursive: true });
 for (const f of ["maps", "media", "icon.svg", "site-config.js"]) if (fs.existsSync(path.join("public", f))) fs.cpSync(path.join("public", f), path.join(site, f), { recursive: true });
+// IndexNow key file (public/<32-hex>.txt)
+for (const f of fs.readdirSync("public")) if (/^[a-f0-9]{32}\.txt$/.test(f)) fs.copyFileSync(path.join("public", f), path.join(site, f));
 
 // CSS: font URLs are root-relative → relative to css dir
 for (const f of fs.readdirSync(path.join(site, "_next/static/css"))) {
@@ -113,6 +115,12 @@ for (const f of fs.readdirSync(path.join(site, "_next/static/chunks")).filter((x
 if (LIVE) {
   const nf = await fetch(base + "/__ngb_missing_page__");
   fs.writeFileSync(path.join(site, "404.html"), rewrite(await nf.text(), 0));
+  // Static hosts can't send HTTP redirects: write tiny forwarding pages for retired URLs (canonical + meta refresh).
+  const SITE_ORIGIN = new URL([...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)][0][1]).origin;
+  for (const [from, to] of [["/inclusive-procurement", "/export#dobe"], ["/resources", "/insights"], ["/enquire", "/quote"], ["/request-a-quote", "/quote"], ["/gi", "/origin"]]) {
+    const target = LIVE.replace(/\/$/, "") + to;
+    fs.writeFileSync(path.join(site, from.slice(1) + ".html"), `<!doctype html><html lang="en"><head><meta charset="utf-8"><title>Moved</title><link rel="canonical" href="${SITE_ORIGIN}${target}"><meta name="robots" content="noindex,follow"><meta http-equiv="refresh" content="0; url=${target}"></head><body><p>This page has moved to <a href="${target}">${target}</a>.</p></body></html>`);
+  }
   for (const [src, dst] of [["/sitemap.xml", "sitemap.xml"], ["/robots.txt", "robots.txt"], ["/insights/feed.xml", "insights/feed.xml"]]) fs.writeFileSync(path.join(site, dst), await (await fetch(base + src)).text());
   fs.writeFileSync(path.join(site, "opengraph-image.png"), Buffer.from(await (await fetch(base + "/opengraph-image")).arrayBuffer()));
   fs.writeFileSync(path.join(site, ".nojekyll"), "");

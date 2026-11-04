@@ -139,13 +139,28 @@
   .site-header[data-hidden="true"] { transform: translate3d(0, -100%, 0); transition-duration: .35s, .3s, .3s, .3s; }
   .site-header:focus-within { transform: translate3d(0, 0, 0); }
   @media (prefers-reduced-motion: reduce) { .site-header { transition: background-color .2s ease, color .2s ease; } }
+  /* Pointer shine: a soft light that follows the cursor across cards (position fed by PointerShine). */
+  .shine { position: relative; isolation: isolate; }
+  .shine::after { content: ""; position: absolute; inset: 0; z-index: 2; pointer-events: none; opacity: 0; transition: opacity .5s ease;
+    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgb(255 236 200 / .16), transparent 55%); mix-blend-mode: soft-light; }
+  @media (hover: hover) and (pointer: fine) { .shine:hover::after { opacity: 1; } }
+
+  /* Premium depth: soft light pools in feature sections, gilded italics, a slow sheen on saffron buttons. */
+  .tone-light, .on-dark.bg-forest {
+    background-image: radial-gradient(1100px 620px at 88% -12%, rgb(219 163 90 / .11), transparent 62%),
+                      radial-gradient(900px 520px at -8% 112%, rgb(140 160 230 / .07), transparent 60%);
+  }
+  .tone-light .display em, .on-dark.bg-forest .display em {
+    background: linear-gradient(100deg, #f0c27f 0%, #dba35a 45%, #f3d29e 70%, #c98a40 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .btn-bronze { background-image: linear-gradient(110deg, transparent 35%, rgb(255 255 255 / .28) 50%, transparent 65%); background-size: 250% 100%; background-position: 120% 0; }
+  .btn-bronze:hover { background-position: -20% 0; transition: background-position .9s cubic-bezier(.2,.8,.2,1), background-color .4s, color .4s; }
   .btn-hero { background: var(--hero-cta-bg); color: var(--hero-cta-fg); }
   .btn-hero:hover { background: var(--color-bronze-ink); color: #fbf8f2; }
 }
 
 @layer utilities {
-  /* Skip rendering off-screen sections until they approach the viewport. */
-  .cv-auto { content-visibility: auto; contain-intrinsic-size: auto 900px; }
   .text-balance { text-wrap: balance; }
   .text-pretty { text-wrap: pretty; }
   .scrollbar-none { scrollbar-width: none; }

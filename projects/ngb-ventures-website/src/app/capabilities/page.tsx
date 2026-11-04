@@ -7,12 +7,12 @@ import { Reveal } from "@/components/ui/Reveal";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { buildMetadata, JsonLd, itemListLd } from "@/lib/seo";
 
-export const metadata = buildMetadata({ title: "Capabilities | India Sourcing, Manufacturing, Export & Brand Development", description: "Five NGB Ventures divisions: India sourcing, manufacturing & private label, global export solutions, brand development & advertising, and inclusive procurement.", path: "/capabilities" });
+export const metadata = buildMetadata({ title: "Capabilities | India Sourcing, Manufacturing, Export & Brand Development", description: "Four NGB Ventures divisions: India sourcing, manufacturing & private label, global export solutions (from a disability-owned exporter), and brand development & advertising.", path: "/capabilities" });
 
 export default function Capabilities() {
   return (
     <>
-      <PageHero plate={{ slot: "page-capabilities", motif: "jali", tone: "bronze", alt: "Capabilities", brief: "" }} crumbs={[{ name: "Capabilities", href: "/capabilities" }]} eyebrow="Our capabilities" title="Your global sourcing desk" italic="in India." lede="Five divisions that work alone or together, so you can go from an idea to a product in your customers' hands." ctas={[{ label: "Source a product", href: "/quote" }]} />
+      <PageHero plate={{ slot: "page-capabilities", motif: "jali", tone: "bronze", alt: "Capabilities", brief: "" }} crumbs={[{ name: "Capabilities", href: "/capabilities" }]} eyebrow="Our capabilities" title="Your global sourcing desk" italic="in India." lede="Four divisions that work alone or together, so you can go from an idea to a product in your customers' hands." ctas={[{ label: "Source a product", href: "/quote" }]} />
       <section className="container-x py-24 lg:py-32">
         <ul className="space-y-24">
           {divisions.map((d, i) => (

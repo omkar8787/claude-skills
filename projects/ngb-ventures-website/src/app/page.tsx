@@ -1,7 +1,10 @@
 import { guides } from "@/content/guides";
 import Link from "next/link";
 import { Confidentiality } from "@/components/sections/Confidentiality";
-import { ArrowRight, ArrowUpRight, ShieldCheck } from "lucide-react";
+import { DobeAdvantage } from "@/components/sections/DobeAdvantage";
+import { ExportQuiz } from "@/components/fun/ExportQuiz";
+import { facts } from "@/content/facts";
+import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { Plate } from "@/components/ui/Plate";
 import { Reveal } from "@/components/ui/Reveal";
 import { MaskLines } from "@/components/ui/MaskLines";
@@ -42,7 +45,7 @@ const pathways = [
   { who: "Retailers & distributors", title: "Build a range from India", body: "Explore categories, regions and origin products, then ask us to source a collection.", href: "/discover", cta: "Explore products" },
   { who: "Private-label & Amazon sellers", title: "Launch your own label", body: "Private-label development with FBA-ready labelling, packaging and inspection.", href: "/quote?type=private-label", cta: "Start private label" },
   { who: "Brand-launch clients", title: "Turn a product into a brand", body: "Positioning, packaging, Amazon, Meta and Google: launch and grow internationally.", href: "/quote?type=brand", cta: "Launch your brand" },
-  { who: "Corporate procurement teams", title: "Diversify your supplier base", body: "A disability-owned sourcing partner with a DOBE® application underway.", href: "/inclusive-procurement", cta: "Inclusive procurement" },
+  { who: "Corporate procurement teams", title: "Import from a disability-owned exporter", body: "We export under our own IEC, and our DOBE® certification application is underway.", href: "/export#dobe", cta: "How it helps your diversity goals" },
   { who: "Manufacturers & publishers", title: "Work with NGB Ventures", body: "Indian producers, printers and publishers: tell us what you make and where you export.", href: "/quote?type=supplier", cta: "Introduce your business" },
 ];
 const brandSteps = ["Product idea", "Manufacturing", "Brand identity", "Packaging", "Advertising", "Marketplace", "Global customer"];
@@ -99,7 +102,7 @@ export default function Home() {
             </HeroMosaic>
           </div>
           <dl className="col-span-full grid grid-cols-2 gap-6 border-t border-ivory/15 pt-6 md:grid-cols-4">
-            {[["Philosophy", site.philosophy], ["Base", "Pune, Maharashtra, India"], ["Divisions", "Sourcing · Manufacturing · Export · Brand · Inclusive procurement"], ["Supplier diversity", site.dobeStatus]].map(([k, v]) => (
+            {[["Philosophy", site.philosophy], ["Base", "Pune, Maharashtra, India"], ["Divisions", "Sourcing · Manufacturing · Export · Brand"], ["Supplier diversity", site.dobeStatus]].map(([k, v]) => (
               <div key={k}><dt className="ledger text-ivory/75">{k}</dt><dd className="mt-2 text-sm text-ivory/85">{v}</dd></div>
             ))}
           </dl>
@@ -120,7 +123,7 @@ export default function Home() {
       {/* ═════════ DIVISIONS ═════════ */}
       <section className="bg-paper py-24 lg:py-32" aria-labelledby="div-h">
         <div className="container-x">
-          <SectionHead id="div-h" eyebrow="Five divisions. One partner." title={<>Anything from India. <em>Everything from concept to commerce.</em></>} lede="Use one division, or let them work together: from finding the maker to selling the finished brand abroad." />
+          <SectionHead id="div-h" eyebrow="Four divisions. One partner." title={<>Anything from India. <em>Everything from concept to commerce.</em></>} lede="Use one division, or let them work together: from finding the maker to selling the finished brand abroad." />
           <div className="mt-16">
             <DivisionList items={divisions} previews={divisions.map((d) => <Plate key={d.slug} plate={P(`div-${d.slug}`, "jali", d.tone, d.name)} className="h-full w-full" sizes="180px" />)} />
           </div>
@@ -153,12 +156,12 @@ export default function Home() {
 
 
       {/* ═════════ ONE-STOP: CATEGORIES ═════════ */}
-      <section className="cv-auto container-x py-24 lg:py-32" aria-labelledby="cat-h">
+      <section className="container-x py-24 lg:py-32" aria-labelledby="cat-h">
         <SectionHead id="cat-h" eyebrow="One country. Every category." title={<>Your one-stop desk for <em>everything India makes.</em></>} lede="From the farm to the factory to the craft workshop: one partner to find it, check it, brand it and ship it." />
         <ul className="mt-14 grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-4">
           {oneStop.map((c, i) => (
             <Reveal as="li" key={c.t} delay={(i % 4) * 0.04} className="bg-ivory">
-              <Link href={c.href} className="group flex h-full flex-col justify-between gap-6 p-7 transition-colors duration-500 hover:bg-paper">
+              <Link href={c.href} className="shine group flex h-full flex-col justify-between gap-6 p-7 transition-colors duration-500 hover:bg-paper">
                 <div><span className="ledger text-bronze-ink">{String(i + 1).padStart(2, "0")}</span><h3 className="mt-4 font-display text-[1.75rem] leading-tight">{c.t}</h3><p className="mt-2 text-[0.92rem] leading-relaxed text-stone-ink">{c.b}</p></div>
                 <span className="inline-flex items-center gap-2 text-sm font-semibold">Explore <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
               </Link>
@@ -181,12 +184,12 @@ export default function Home() {
       </section>
 
       {/* ═════════ LEAD PATHWAYS ═════════ */}
-      <section className="cv-auto container-x py-24 lg:py-32" aria-labelledby="path-h">
+      <section className="container-x py-24 lg:py-32" aria-labelledby="path-h">
         <SectionHead id="path-h" eyebrow="Choose your path" title={<>However you buy, <em>start here.</em></>} lede="Each path leads to a short form that asks only what matters for your kind of request." />
         <ul className="mt-14 grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-3">
           {pathways.map((pw, i) => (
             <Reveal as="li" key={pw.title} delay={(i % 3) * 0.05} className="bg-ivory">
-              <Link href={pw.href} className="group flex h-full flex-col justify-between p-7 transition-colors duration-500 hover:bg-charcoal hover:text-ivory lg:p-9">
+              <Link href={pw.href} className="shine group flex h-full flex-col justify-between p-7 transition-colors duration-500 hover:bg-charcoal hover:text-ivory lg:p-9">
                 <div><span className="ledger text-bronze-ink group-hover:text-bronze-soft">{pw.who}</span><h3 className="mt-6 font-display text-[1.9rem] leading-tight">{pw.title}</h3><p className="mt-3 text-[0.95rem] leading-relaxed text-stone-ink group-hover:text-ivory/65">{pw.body}</p></div>
                 <span className="mt-8 inline-flex items-center gap-2 text-sm font-semibold">{pw.cta} <ArrowUpRight className="h-4 w-4 transition-transform duration-500 group-hover:-translate-y-0.5 group-hover:translate-x-0.5" /></span>
               </Link>
@@ -207,13 +210,13 @@ export default function Home() {
       </section>
 
       {/* ═════════ ORIGIN COLLECTION ═════════ */}
-      <section className="cv-auto container-x py-24 lg:py-32" aria-labelledby="origin-h">
+      <section className="container-x py-24 lg:py-32" aria-labelledby="origin-h">
         <SectionHead id="origin-h" eyebrow="India's Origin Collection" title={<>Shaped by geography. <em>Protected by law.</em></>} lede="Products whose character comes from where they're made, with their Geographical Indication registration details, sources and verification dates on every page." />
         <ul className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {featuredGi.map((g) => (
             <Reveal as="li" key={g.slug}>
               <Link href={`/origin/${g.slug}`} className="group block">
-                <div className="relative aspect-[4/3] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={g.plate} className="h-full w-full" sizes="33vw" /></div>
+                <div className="shine relative aspect-[4/3] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={g.plate} className="h-full w-full" sizes="33vw" /></div>
                   <span className="ledger absolute left-3 top-3 rounded-full bg-ivory/90 px-2.5 py-1 text-[0.6rem] text-charcoal">{giStatusLabel[g.status]}</span></div>
                 <div className="mt-4 border-t border-line pt-3">
                   <p className="ledger text-bronze-ink">{g.state} · GI application {g.applicationNo}</p>
@@ -230,8 +233,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ═════════ EXPORT IQ ═════════ */}
+      <section id="export-iq" className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="quiz-h">
+        <div className="container-x grid gap-14 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-5">
+            <p className="eyebrow mb-6">Export IQ</p>
+            <h2 id="quiz-h" className="display text-[clamp(2.4rem,5vw,4.4rem)]">How well do you <em>know India?</em></h2>
+            <p className="lede mt-8 max-w-md">Six quick true-or-false questions about what India makes and how the world trades it. Every answer comes with its source.</p>
+          </div>
+          <div className="lg:col-span-6 lg:col-start-7"><ExportQuiz facts={facts} /></div>
+        </div>
+      </section>
+
       {/* ═════════ BRAND ═════════ */}
-      <section className="cv-auto bg-paper py-24 lg:py-32" aria-labelledby="brand-h">
+      <section className="bg-paper py-24 lg:py-32" aria-labelledby="brand-h">
         <div className="container-x">
           <SectionHead id="brand-h" eyebrow="Brand development & advertising" title={<>We don&apos;t just source products. <em>We help build brands that sell.</em></>} lede="Positioning, identity, packaging, Amazon, Meta and Google advertising, and D2C growth, for products made in India and sold anywhere." />
           <ol className="mt-14 flex snap-x gap-px overflow-x-auto bg-line scrollbar-none" aria-label="From factory floor to global customer">
@@ -249,7 +264,7 @@ export default function Home() {
       </section>
 
       {/* ═════════ EXPORT ═════════ */}
-      <section className="cv-auto on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="exp-h">
+      <section className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="exp-h">
         <div className="container-x">
           <SectionHead id="exp-h" dark eyebrow="Global export solutions" title={<>Made in India. <em>Ready for the world.</em></>} lede="Tariffs, product rules and import requirements depend on HS classification and destination. We help you ask the right questions early and coordinate licensed partners to move the goods." />
           <div className="mt-14"><WorldMarkets /></div>
@@ -257,31 +272,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ═════════ DOBE / INCLUSIVE ═════════ */}
-      <section className="cv-auto on-dark bg-forest py-24 text-ivory lg:py-32" aria-labelledby="dobe-h">
-        <div className="container-x grid gap-12 lg:grid-cols-12 lg:items-end">
-          <div className="lg:col-span-7">
-            <p className="eyebrow mb-6">Inclusive procurement</p>
-            <h2 id="dobe-h" className="display text-[clamp(2.6rem,5vw,4.8rem)]">Business with purpose. <em>Procurement with impact.</em></h2>
-            <p className="lede mt-8 max-w-xl">NGB Ventures is a disability-owned business. We&apos;re building a supplier-diversity option for global procurement teams, and opening export markets to smaller Indian producers.</p>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9">
-            <div className="rounded-sm border border-ivory/20 p-6">
-              <p className="flex items-center gap-2 font-semibold"><ShieldCheck className="h-5 w-5 text-bronze-soft" /> DOBE® certification</p>
-              <p className="mt-2 text-sm text-ivory/70">Application / process underway with Disability:IN. We don&apos;t display a certification badge until approval is granted.</p>
-              <Link href="/inclusive-procurement#benefits" className="btn btn-bronze mt-6 w-full">What certification will mean for buyers</Link>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* ═════════ DOBE: import from a disability-owned exporter ═════════ */}
+      <DobeAdvantage />
 
       {/* ═════════ JOURNAL ═════════ */}
-      <section className="cv-auto bg-paper py-24 lg:py-32" aria-labelledby="journal-h">
+      <section className="bg-paper py-24 lg:py-32" aria-labelledby="journal-h">
         <div className="container-x">
           <SectionHead id="journal-h" eyebrow="Insights & stories" title={<>Know India <em>before you buy.</em></>} lede="Stories from India's craft and food regions, and practical buyer guides, written for international teams." />
           <ul className="mt-14 grid gap-10 md:grid-cols-3">
             {guides.slice(0, 3).map((g) => (
-              <li key={g.slug}><Link href={`/insights/${g.slug}`} className="group block"><div className="relative aspect-[16/10] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={g.plate} className="h-full w-full" sizes="33vw" /></div></div><p className="ledger mt-5 text-bronze-ink">{g.kind === "story" ? "Story" : "Guide"} · {g.category}</p><h3 className="mt-2 font-display text-[1.75rem] leading-tight"><span className="link-u">{g.title}</span></h3></Link></li>
+              <li key={g.slug}><Link href={`/insights/${g.slug}`} className="group block"><div className="shine relative aspect-[16/10] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={g.plate} className="h-full w-full" sizes="33vw" /></div></div><p className="ledger mt-5 text-bronze-ink">{g.kind === "story" ? "Story" : "Guide"} · {g.category}</p><h3 className="mt-2 font-display text-[1.75rem] leading-tight"><span className="link-u">{g.title}</span></h3></Link></li>
             ))}
           </ul>
           <div className="mt-12"><Link href="/insights" className="btn btn-primary">All stories & guides <ArrowRight className="arrow h-4 w-4" /></Link></div>

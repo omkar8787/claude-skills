@@ -9,6 +9,8 @@ import { site, mainNav, primaryCta } from "@/content/site";
 import { industries } from "@/content/industries";
 import { JsonLd, organizationLd, websiteLd } from "@/lib/seo";
 import { Analytics } from "@/components/analytics/Analytics";
+import { PointerShine } from "@/components/ui/PointerShine";
+import { HashScroll } from "@/components/ui/HashScroll";
 
 const cormorant = Cormorant_Garamond({ subsets: ["latin"], weight: ["400", "500"], style: ["normal", "italic"], variable: "--font-cormorant", display: "swap" });
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", display: "swap" });
@@ -32,7 +34,7 @@ export const viewport: Viewport = { themeColor: "#1d2a45", width: "device-width"
 
 const menus: MenuData = {
   capabilities: {
-    intro: "Five divisions, one partner, from finding a product in India to selling it worldwide.",
+    intro: "Four divisions, one partner, from finding a product in India to selling it worldwide.",
     links: [
       { label: "All capabilities", href: "/capabilities", meta: "→" },
       { label: "India Sourcing", href: "/india-sourcing", meta: "01" },
@@ -40,7 +42,6 @@ const menus: MenuData = {
       { label: "Global Export Solutions", href: "/export", meta: "03" },
       { label: "Brand Development", href: "/brand-development", meta: "04" },
       { label: "Advertising & Marketing", href: "/advertising", meta: "04" },
-      { label: "Inclusive Procurement / DOBE", href: "/inclusive-procurement", meta: "05" },
       { label: "Industries we serve", href: "/industries", meta: "→" },
       { label: "Corporate Gifting", href: "/corporate-gifting", meta: "→" },
       { label: "Publishers & Printing", href: "/publishers-printing", meta: "→" },
@@ -65,13 +66,13 @@ const menus: MenuData = {
     intro: "A disability-owned business from Pune, building a modern gateway to India's manufacturing ecosystem.",
     links: [
       { label: "About NGB Ventures", href: "/about" },
-      { label: "Inclusive Procurement / DOBE", href: "/inclusive-procurement" },
+      { label: "Importing from a disability-owned exporter", href: "/export#dobe" },
       { label: "Insights & Research", href: "/insights" },
       { label: "Market readiness check", href: "/tools/market-readiness" },
       { label: "Contact", href: "/contact" },
       { label: "Request a quote", href: "/quote" },
     ],
-    feature: { title: "Business with purpose.", body: "Our Disability:IN DOBE® certification application is underway.", href: "/inclusive-procurement", cta: "Inclusive procurement" },
+    feature: { title: "Business with purpose.", body: "Our Disability:IN DOBE® certification application is underway.", href: "/export#dobe", cta: "Import from us" },
   },
 };
 
@@ -88,6 +89,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <WhatsAppButton />
         <MobileCtaBar />
         <Analytics />
+        <PointerShine />
+        <HashScroll />
         <JsonLd data={[organizationLd(), websiteLd()]} />
       </body>
     </html>

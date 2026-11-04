@@ -1,5 +1,6 @@
 import type { Plate } from "./types";
 import { stories } from "./stories";
+import { loadMarkdownArticles } from "@/lib/markdown-articles";
 
 export type Guide = {
   slug: string; title: string; description: string; readTime: string; updated: string; plate: Plate;
@@ -9,6 +10,8 @@ export type Guide = {
   category?: string;
   /** ISO publish date. */
   date?: string;
+  /** ISO last-modified date (drives sitemap lastmod and dateModified). Defaults to `date`. */
+  modified?: string;
   keywords?: string[];
   related?: { label: string; href: string }[];
 };
@@ -58,6 +61,6 @@ const coreGuides: Guide[] = [
 ];
 
 /** All articles, newest first. */
-export const guides: Guide[] = [...stories, ...coreGuides].sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
+export const guides: Guide[] = [...loadMarkdownArticles(), ...stories, ...coreGuides].sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));
 
 export const getGuide = (slug: string) => guides.find((g) => g.slug === slug);

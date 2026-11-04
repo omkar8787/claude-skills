@@ -17,7 +17,7 @@ export default function LinksPage() {
     { label: "Explore what India makes", sub: "23 product spotlights, filters and GI origins", href: "/discover" },
     { label: `Read: ${latest.title}`, sub: `${latest.kind === "story" ? "Story" : "Guide"} · ${latest.readTime}`, href: `/insights/${latest.slug}` },
     { label: "India Manufacturing Atlas", sub: "Select a state, meet its makers", href: "/atlas" },
-    { label: "Inclusive procurement & DOBE®", sub: "A disability-owned business. Certification application underway", href: "/inclusive-procurement" },
+    { label: "Import from a disability-owned exporter", sub: "DOBE® certification application underway", href: "/export#dobe" },
   ];
   return (
     <>

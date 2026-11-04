@@ -15,8 +15,14 @@ export function AtlasExplorer({ states, gi, clusterSlugs, initial = "up" }: Prop
   const [hover, setHover] = useState<string | null>(null);
 
   useEffect(() => {
-    const h = window.location.hash.replace("#", "");
-    if (h && geo.states.some((s) => s.id === h)) setActive(h);
+    // Follow the URL hash on load and whenever it changes (e.g. a link to /atlas#tn from this same page).
+    const sync = () => {
+      const h = window.location.hash.replace("#", "");
+      if (h && geo.states.some((s) => s.id === h)) setActive(h);
+    };
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
   }, []);
   const select = (id: string) => {
     setActive(id);

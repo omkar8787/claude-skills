@@ -61,16 +61,7 @@ export const divisions: Division[] = [
     cta: { label: "Launch your brand with NGB", href: "/quote?type=brand" },
     glyph: "tag", tone: "clay",
   },
-  {
-    slug: "inclusive-procurement", route: "/inclusive-procurement", index: "05", name: "Inclusive Procurement", kicker: "Procure with purpose",
-    headline: "Business with purpose. Procurement with impact.",
-    lede: "NGB Ventures is a disability-owned business. Our Disability:IN DOBE® certification application is underway, and we work to open supply chains to smaller Indian producers.",
-    delivered: ["Supplier-diversity engagement with corporate procurement teams", "Sourcing that includes small producers and artisan enterprises", "Transparent supplier documentation"],
-    coordinated: ["Third-party social-compliance audits", "Artisan-enterprise onboarding with producer organisations"],
-    outcomes: ["A diverse-supplier option for qualifying programmes, once certification is granted", "Access to India's small-producer ecosystem"],
-    cta: { label: "Connect with our inclusive procurement team", href: "/quote?type=procurement" },
-    glyph: "seal", tone: "olive",
-  },
+
 ];
 
 export const getDivision = (slug: string) => divisions.find((d) => d.slug === slug);

@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
       { source: "/product-development", destination: "/quote?type=manufacturing", permanent: true },
       { source: "/request-a-quote", destination: "/quote", permanent: true },
       { source: "/gi", destination: "/origin", permanent: true },
+      { source: "/inclusive-procurement", destination: "/export#dobe", permanent: true },
     ];
   },
 };

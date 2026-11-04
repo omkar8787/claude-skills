@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "./Logo";
 import { divisions } from "@/content/divisions";
+import { guides } from "@/content/guides";
 import { site, contactEmail, whatsappHref, messaging } from "@/content/site";
 
 const discover = [
@@ -16,6 +17,7 @@ const discover = [
   { label: "Corporate gifting", href: "/corporate-gifting" },
   { label: "Publishers & Printing", href: "/publishers-printing" },
   { label: "Global markets", href: "/markets" },
+  { label: "Import from a disability-owned exporter", href: "/export#dobe" },
 ];
 const insights = [
   { label: "Insights & Research", href: "/insights" },
@@ -23,7 +25,8 @@ const insights = [
   { label: "Landed-cost estimator", href: "/tools/landed-cost-calculator" },
   { label: "CBM calculator", href: "/tools/cbm-calculator" },
   { label: "Supplier checklist", href: "/tools/supplier-evaluation-checklist" },
-  { label: "How to source from India", href: "/insights/how-to-source-from-india" },
+  // Newest articles, linked site-wide so search engines discover new content from every page.
+  ...guides.slice(0, 3).map((g) => ({ label: g.title.split(":")[0], href: `/insights/${g.slug}` })),
 ];
 const company = [
   { label: "About NGB Ventures", href: "/about" },
