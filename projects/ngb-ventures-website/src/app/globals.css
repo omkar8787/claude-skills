@@ -130,6 +130,15 @@
   .tone-light .display em, .tone-light .display i { color: var(--f-em); }
   /* Restores the original palette for text laid over artwork. */
   .tone-reset { --color-ivory: #f6f3ed; --color-charcoal: #151515; --color-bronze: #a98758; --color-bronze-soft: #c9ad85; }
+  /* Header: one transform, GPU-composited, never animated by layout. Hidden state is set by useHeaderVisibility. */
+  .site-header {
+    transform: translate3d(0, 0, 0);
+    transition: transform .45s cubic-bezier(.2, .8, .2, 1), background-color .3s ease, color .3s ease, box-shadow .3s ease;
+    will-change: transform;
+  }
+  .site-header[data-hidden="true"] { transform: translate3d(0, -100%, 0); transition-duration: .35s, .3s, .3s, .3s; }
+  .site-header:focus-within { transform: translate3d(0, 0, 0); }
+  @media (prefers-reduced-motion: reduce) { .site-header { transition: background-color .2s ease, color .2s ease; } }
   .btn-hero { background: var(--hero-cta-bg); color: var(--hero-cta-fg); }
   .btn-hero:hover { background: var(--color-bronze-ink); color: #fbf8f2; }
 }

@@ -28,17 +28,20 @@ const TILE_POS = [
   "col-start-1 col-span-1 row-start-5 row-span-1",
   "col-start-6 col-span-1 row-start-1 row-span-1",
 ];
-const SPEEDS = [-60, -120, -30, -90, -150, -40];
+/** Parallax depth per hero tile (px over the hero's scroll). Kept small and desktop-only for a calm, premium feel. */
+const SPEEDS = [-24, -48, -12, -36, -56, -18];
 
 export function HeroMosaic({ children, captions }: { children: ReactNode; captions: string[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
+  const desktop = useIsDesktop();
+  const still = reduce || !desktop;
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const items = Children.toArray(children);
   return (
     <div ref={ref} className="relative grid aspect-[6/6.4] w-full grid-cols-6 grid-rows-6 gap-2.5 md:gap-3.5">
       {items.map((child, i) => (
-        <Tile key={i} progress={scrollYProgress} speed={reduce ? 0 : SPEEDS[i]} className={TILE_POS[i]} delay={0.15 + i * 0.08} caption={captions[i]}>
+        <Tile key={i} progress={scrollYProgress} speed={still ? 0 : SPEEDS[i]} className={TILE_POS[i]} delay={0.15 + i * 0.08} caption={captions[i]}>
           {child}
         </Tile>
       ))}
@@ -63,8 +66,11 @@ export function ParallelManifesto({ lines, left, right }: { lines: string[]; lef
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
-  const yA = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [80, -260]);
-  const yB = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [-220, 120]);
+  const desktop = useIsDesktop();
+  const still = reduce || !desktop;
+  // Two columns drift gently in opposite directions (±~100px over the whole section), desktop only.
+  const yA = useTransform(scrollYProgress, [0, 1], still ? [0, 0] : [40, -110]);
+  const yB = useTransform(scrollYProgress, [0, 1], still ? [0, 0] : [-90, 50]);
   const [active, setActive] = useState(0);
   useMotionValueEvent(scrollYProgress, "change", (v) => setActive(Math.max(0, Math.min(lines.length - 1, Math.floor((v - 0.2) * lines.length * 1.6)))));
   return (

@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { ArrowRight, ArrowUpRight, Menu, Plus, X, Search } from "lucide-react";
 import { Logo } from "./Logo";
 import { ScrollProgress } from "./ScrollProgress";
+import { useHeaderVisibility } from "@/lib/use-header-visibility";
 import type { NavItem } from "@/content/site";
 
 export type MenuLink = { label: string; href: string; meta?: string };
@@ -13,26 +14,11 @@ export type MenuData = Record<string, { intro: string; links: MenuLink[]; featur
 
 export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; cta: { label: string; href: string } }) {
   const pathname = usePathname();
-  const [scrolled, setScrolled] = useState(false);
-  const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState<string | null>(null);
   const [mobile, setMobile] = useState(false);
   const [mobileSection, setMobileSection] = useState<string | null>(null);
-  const lastY = useRef(0);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setScrolled(y > 24);
-      setHidden(y > 480 && y > lastY.current + 4 && !mobile);
-      if (y < lastY.current - 4) setHidden(false);
-      lastY.current = y;
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, [mobile]);
 
   useEffect(() => { setOpen(null); setMobile(false); }, [pathname]);
   useEffect(() => {
@@ -42,7 +28,8 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
     return () => window.removeEventListener("keydown", onKey);
   }, [mobile]);
 
-  const solid = scrolled || open !== null;
+  const { solid: scrolledSolid, hidden } = useHeaderVisibility(open !== null || mobile);
+  const solid = scrolledSolid || open !== null;
   const enter = (k?: string) => { if (closeTimer.current) clearTimeout(closeTimer.current); setOpen(k ?? null); };
   const leave = () => { closeTimer.current = setTimeout(() => setOpen(null), 160); };
   // Computed after mount so server and client markup always match (also on static/sub-path hosting).
@@ -54,7 +41,8 @@ export function Header({ nav, menus, cta }: { nav: NavItem[]; menus: MenuData; c
     <>
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-full focus:bg-ivory focus:px-4 focus:py-2 focus:text-charcoal">Skip to content</a>
       <header
-        className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,color,box-shadow] duration-500 ease-[cubic-bezier(.22,1,.36,1)] ${hidden && !open ? "-translate-y-full" : "translate-y-0"} ${solid ? "bg-ivory/92 text-charcoal shadow-[0_1px_0_rgba(21,21,21,.08)] backdrop-blur-xl" : "bg-transparent text-[color:var(--hero-fg)]"}`}
+        data-hidden={hidden && !open ? "true" : "false"}
+        className={`site-header fixed inset-x-0 top-0 z-50 ${solid ? "bg-ivory/92 text-charcoal shadow-[0_1px_0_rgba(21,21,21,.08)] backdrop-blur-xl" : "bg-transparent text-[color:var(--hero-fg)]"}`}
         onMouseLeave={leave}
       >
         <ScrollProgress />

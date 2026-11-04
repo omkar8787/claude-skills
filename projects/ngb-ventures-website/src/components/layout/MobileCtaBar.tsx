@@ -13,13 +13,23 @@ export function MobileCtaBar() {
   const [hidden, setHidden] = useState(false); // decided after mount → identical server/client markup
   useEffect(() => { const path = pathname.replace(/\.html$/, ""); setHidden(HIDE_ON.some((p) => path.endsWith(p))); }, [pathname]);
   useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY; const max = document.documentElement.scrollHeight - window.innerHeight;
-      setShow(y > window.innerHeight * 0.9 && y < max - 900);
+    // Visible after the first screen and until the footer appears. Uses hysteresis plus an
+    // IntersectionObserver on the footer, so changing page height (lazy sections) can't make it flicker.
+    let past = false, footer = false, frame = 0;
+    const apply = () => setShow(past && !footer);
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY, h = window.innerHeight;
+      const next = past ? y > h * 0.6 : y > h * 0.9;
+      if (next !== past) { past = next; apply(); }
     };
-    onScroll();
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    const el = document.querySelector("footer");
+    const io = el ? new IntersectionObserver(([e]) => { footer = e.isIntersecting; apply(); }, { rootMargin: "0px 0px 120px 0px" }) : null;
+    if (el && io) io.observe(el);
+    update();
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => { window.removeEventListener("scroll", onScroll); io?.disconnect(); if (frame) cancelAnimationFrame(frame); };
   }, [pathname]);
   if (hidden) return null;
   return (

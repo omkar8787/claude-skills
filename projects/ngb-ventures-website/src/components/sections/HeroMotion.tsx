@@ -6,8 +6,8 @@ import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } fr
 export function HeroParallax({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.02, 1.12]);
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "8%"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.02, 1.06]);
   const reduce = useReducedMotion();
   return (
     <div ref={ref} className="absolute inset-0 -z-10 overflow-hidden">
