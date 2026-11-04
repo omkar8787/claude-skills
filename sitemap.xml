@@ -127,12 +127,6 @@
 <priority>0.9</priority>
 </url>
 <url>
-<loc>https://omkar8787.github.io/claude-skills/inclusive-procurement</loc>
-<lastmod>2026-11-03T00:00:00.000Z</lastmod>
-<changefreq>monthly</changefreq>
-<priority>0.9</priority>
-</url>
-<url>
 <loc>https://omkar8787.github.io/claude-skills/origin/darjeeling-tea</loc>
 <lastmod>2026-11-03T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
@@ -647,6 +641,12 @@
 <lastmod>2026-11-03T00:00:00.000Z</lastmod>
 <changefreq>monthly</changefreq>
 <priority>0.8</priority>
+</url>
+<url>
+<loc>https://omkar8787.github.io/claude-skills/insights/importing-from-a-disability-owned-exporter-india</loc>
+<lastmod>2026-11-04T00:00:00.000Z</lastmod>
+<changefreq>monthly</changefreq>
+<priority>0.7</priority>
 </url>
 <url>
 <loc>https://omkar8787.github.io/claude-skills/insights/indian-millets-international-buyers</loc>
