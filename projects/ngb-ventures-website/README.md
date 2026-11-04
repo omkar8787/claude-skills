@@ -46,7 +46,10 @@ Edit `site-config.js` at the root of the `gh-pages` branch (GitHub → branch `g
 | Setting | What it does |
 |---|---|
 | `gaId` | Google Analytics 4 measurement ID (`G-…`). Loads GA4 with Consent Mode v2: analytics is denied by default for EEA/UK/CH visitors until they accept the banner, and ad storage is always off. Tracks page views, `generate_lead`, and email/WhatsApp/phone clicks |
+| `social` | Full `https://` links to Instagram, LinkedIn, Facebook, YouTube, X or Pinterest. Icons appear in the footer, on Contact and on `/links` as soon as a link is filled in |
 | `formEndpoint`, `formAccessKey` | Optional form backend (Formspree or Web3Forms). Without it, forms offer one-tap "Send by email" and "Send on WhatsApp" with the visitor's answers pre-filled |
+
+**Social media and Instagram bio:** use `https://omkar8787.github.io/claude-skills/links?utm_source=instagram&utm_medium=social&utm_campaign=bio` as your bio link. Put UTM tags on the link you post, never on internal links, so Google Analytics attributes visits to the right channel (`utm_source=linkedin`, `facebook` and so on). Articles and the gifting page have share buttons (WhatsApp, LinkedIn, Facebook, X, copy link, plus the native share sheet on phones), and shares are tracked as GA4 `share` events.
 
 **Google Search Console:** add a *URL-prefix* property for `https://omkar8787.github.io/claude-skills/`, choose *HTML file* verification, and upload the `google….html` file to the root of `gh-pages`. Then submit `sitemap.xml`. The auto-deploy keeps that file.
 

@@ -1,16 +1,26 @@
 /** Settings read in the browser from /site-config.js (editable on the host without a rebuild), with build-time env fallbacks. */
-export type NgbConfig = { gaId?: string; formEndpoint?: string; formAccessKey?: string };
+export const SOCIAL_KEYS = ["instagram", "linkedin", "facebook", "youtube", "x", "pinterest"] as const;
+export type SocialKey = (typeof SOCIAL_KEYS)[number];
+export type NgbConfig = { gaId?: string; formEndpoint?: string; formAccessKey?: string; social?: Partial<Record<SocialKey, string>> };
 
 declare global {
   interface Window { NGB_CONFIG?: NgbConfig; dataLayer?: unknown[]; gtag?: (...args: unknown[]) => void }
 }
 
 export function runtimeConfig(): NgbConfig {
-  const w = typeof window !== "undefined" ? window.NGB_CONFIG ?? {} : {};
+  const w: NgbConfig = typeof window !== "undefined" ? window.NGB_CONFIG ?? {} : {};
   return {
     gaId: (w.gaId || process.env.NEXT_PUBLIC_GA_ID || "").trim(),
     formEndpoint: (w.formEndpoint || process.env.NEXT_PUBLIC_FORM_ENDPOINT || "").trim(),
     formAccessKey: (w.formAccessKey || process.env.NEXT_PUBLIC_FORM_ACCESS_KEY || "").trim(),
+    social: {
+      instagram: w.social?.instagram || process.env.NEXT_PUBLIC_INSTAGRAM_URL || "",
+      linkedin: w.social?.linkedin || process.env.NEXT_PUBLIC_LINKEDIN_URL || "",
+      facebook: w.social?.facebook || process.env.NEXT_PUBLIC_FACEBOOK_URL || "",
+      youtube: w.social?.youtube || process.env.NEXT_PUBLIC_YOUTUBE_URL || "",
+      x: w.social?.x || process.env.NEXT_PUBLIC_X_URL || "",
+      pinterest: w.social?.pinterest || process.env.NEXT_PUBLIC_PINTEREST_URL || "",
+    },
   };
 }
 

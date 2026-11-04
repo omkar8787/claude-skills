@@ -4,7 +4,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 
 /**
  * Brand Studio: one product, four stages, from factory sample to a sell-ready listing.
- * "Ember & Loom" is a fictional concept brand; nothing here represents client work, prices or reviews.
+ * "Your Brand" is a placeholder: we work under NDA and never display client brands, prices or reviews.
  */
 const STAGES = [
   { key: "sample", n: "01", label: "Factory sample", title: "It starts as a good product.", body: "A hand-hammered brass tumbler from Moradabad. Beautiful craft, but in a brown carton with a SKU number, it's invisible to a buyer scrolling a marketplace." },
@@ -32,7 +32,7 @@ function Cup({ size = 1, engraved = false }: { size?: number; engraved?: boolean
       {Array.from({ length: 34 }).map((_, i) => (
         <circle key={i} cx={30 + ((i * 37) % 60)} cy={34 + ((i * 53) % 108)} r={2.2 + (i % 3) * 0.6} fill="#fff4dc" opacity={0.18 + (i % 4) * 0.05} />
       ))}
-      {engraved && <g><circle cx="60" cy="86" r="15" fill="none" stroke="#5e4219" strokeWidth="1.1" /><text x="60" y="90" textAnchor="middle" fontFamily="Georgia, serif" fontStyle="italic" fontSize="11" fill="#5e4219">E&amp;L</text></g>}
+      {engraved && <g><circle cx="60" cy="86" r="15" fill="none" stroke="#5e4219" strokeWidth="1.1" /><text x="60" y="90" textAnchor="middle" fontFamily="Georgia, serif" fontStyle="italic" fontSize="11" fill="#5e4219">YB</text></g>}
     </svg>
   );
 }
@@ -75,14 +75,14 @@ function Scene({ stage }: { stage: number }) {
         <div className="relative grid h-full grid-cols-1 items-center gap-6 p-6 sm:grid-cols-2 sm:p-10">
           <div className="text-[#f3eadb]">
             <p className="font-mono text-[0.58rem] uppercase tracking-[0.2em] text-[#c9a063]">Wordmark</p>
-            <p className="mt-2 font-display text-[clamp(2.2rem,5vw,3.4rem)] italic leading-none">Ember &amp; Loom</p>
+            <p className="mt-2 font-display text-[clamp(2.2rem,5vw,3.4rem)] italic leading-none">Your Brand</p>
             <p className="mt-3 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-[#f3eadb]/70">Hand-hammered brass · Moradabad</p>
             <div className="mt-6 flex gap-2" aria-label="Brand palette">{[INK, BRASS, "#f3eadb", "#8a3b2a"].map((c) => <span key={c} className="h-7 w-7 rounded-full ring-1 ring-white/20" style={{ background: c }} />)}</div>
           </div>
           <div className="flex items-end justify-center gap-4">
             <div className="relative flex h-40 w-32 flex-col items-center justify-center rounded-[3px] bg-[#f3eadb] shadow-[0_30px_50px_-20px_rgba(0,0,0,.6)] sm:h-48 sm:w-36">
-              <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#16262b]/40 font-display text-lg italic text-[#16262b]">E&amp;L</span>
-              <span className="mt-3 font-display text-base italic text-[#16262b]">Ember &amp; Loom</span>
+              <span className="flex h-12 w-12 items-center justify-center rounded-full border border-[#16262b]/40 font-display text-lg italic text-[#16262b]">YB</span>
+              <span className="mt-3 font-display text-base italic text-[#16262b]">Your Brand</span>
               <span className="absolute bottom-3 font-mono text-[0.5rem] uppercase tracking-[0.2em] text-[#7a5c33]">Set of two</span>
             </div>
             <Cup size={0.85} engraved />
@@ -96,7 +96,7 @@ function Scene({ stage }: { stage: number }) {
       <div className="grid w-full max-w-[34rem] grid-cols-[38%_1fr] gap-4 rounded-md bg-white p-4 shadow-[0_30px_60px_-30px_rgba(22,38,43,.45)] sm:gap-5 sm:p-5">
         <div className="flex aspect-square items-center justify-center rounded-sm bg-[#f4f1ec]"><Cup size={0.7} engraved /></div>
         <div className="min-w-0">
-          <p className="font-mono text-[0.55rem] uppercase tracking-[0.16em] text-[#7a5c33]">Ember &amp; Loom</p>
+          <p className="font-mono text-[0.55rem] uppercase tracking-[0.16em] text-[#7a5c33]">Your Brand</p>
           <p className="mt-1 text-[0.86rem] font-semibold leading-snug text-[#16262b]">Hand-Hammered Brass Tumblers, Set of 2. Food-Safe Lined, Gift Boxed</p>
           <ul className="mt-2 space-y-1 text-[0.72rem] leading-snug text-[#3d4b4f]">
             <li>• Hammered by hand in Moradabad, India</li><li>• Lined for everyday drinks</li><li>• Arrives in a keepsake box</li>
@@ -172,7 +172,7 @@ export function BrandStudio() {
           </div>
         </div>
       </div>
-      <figcaption className="border-t border-line px-6 py-4 text-[0.8rem] leading-relaxed text-stone-ink sm:px-8"><strong className="font-semibold text-charcoal">Concept demonstration.</strong> &ldquo;Ember &amp; Loom&rdquo; is a fictional brand created to show our process. It isn&apos;t client work, and no prices or reviews are implied.</figcaption>
+      <figcaption className="border-t border-line px-6 py-4 text-[0.8rem] leading-relaxed text-stone-ink sm:px-8"><strong className="font-semibold text-charcoal">Illustration only.</strong> &ldquo;Your Brand&rdquo; stands in for your own name. We work under NDA, so we never show client brands, and no prices or reviews are implied.</figcaption>
     </figure>
   );
 }

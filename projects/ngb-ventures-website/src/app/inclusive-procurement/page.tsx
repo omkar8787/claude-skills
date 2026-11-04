@@ -9,6 +9,16 @@ import { buildMetadata, JsonLd, serviceLd } from "@/lib/seo";
 const d = getDivision("inclusive-procurement")!;
 export const metadata = buildMetadata({ title: "Inclusive Procurement & Supplier Diversity | Disability-Owned Business", description: "NGB Ventures is a disability-owned business with a Disability:IN DOBE certification application underway, offering an inclusive sourcing partner for corporate supplier-diversity programmes.", path: d.route });
 
+/** Benefits as designed by the certification programme; framed as future, conditional on Disability:IN granting certification. */
+const benefits: [string, string][] = [
+  ["Verified, not self-declared", "Disability:IN independently verifies that the business is at least 51% owned, managed and controlled by people with disabilities. Your team doesn't have to check ownership itself."],
+  ["Easier to find", "Certified businesses are listed in Disability:IN's supplier directory, which corporate procurement teams use to find disability-owned vendors."],
+  ["Counts towards your diversity goals", "Where your programme recognises DOBE® suppliers, spend with us can be reported as disability-owned spend, either directly (Tier 1) or through your prime suppliers (Tier 2)."],
+  ["Supports ESG and impact reporting", "Documented, certified diverse spend gives your social-impact and ESG disclosures something concrete to report."],
+  ["Wider access to India", "Through us, your supply chain reaches small manufacturers and artisan enterprises across India that rarely sell to global buyers directly."],
+  ["The same rigour, under NDA", "Certification adds purpose, not shortcuts. Written briefs, verified suppliers, independent inspections and NDAs stay standard."],
+];
+
 export default function Inclusive() {
   return (
     <>
@@ -26,6 +36,29 @@ export default function Inclusive() {
           <p>Certification and supplier-diversity programmes may support procurement engagement. They don&apos;t guarantee contracts, funding or preferred purchasing, and we never suggest otherwise.</p>
         </div>
       </SplitBlock>
+      <section id="benefits" className="scroll-mt-24 py-24 lg:py-32" aria-labelledby="ben-h">
+        <div className="container-x">
+          <div className="grid gap-6 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7"><p className="eyebrow mb-6">Once certification is granted</p><h2 id="ben-h" className="display text-[clamp(2.2rem,4.4vw,4rem)]">What DOBE® certification <em>will mean for buyers.</em></h2></div>
+            <p className="lede lg:col-span-4 lg:col-start-9">Our application is underway. This is what certification is designed to make possible for your organisation once Disability:IN grants it.</p>
+          </div>
+          <ol className="mt-14 grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-3">
+            {benefits.map(([t, b], i) => (
+              <li key={t} className="bg-ivory p-7 lg:p-8"><span className="ledger text-bronze-ink">{String(i + 1).padStart(2, "0")}</span><p className="mt-5 font-display text-[1.7rem] leading-tight">{t}</p><p className="mt-3 text-[0.95rem] leading-relaxed text-stone-ink">{b}</p></li>
+            ))}
+          </ol>
+          <div className="mt-10 grid gap-6 lg:grid-cols-12">
+            <div className="rounded-sm border border-line bg-paper p-6 text-sm leading-relaxed text-stone-ink lg:col-span-7">
+              <p className="font-semibold text-charcoal">What certification doesn&apos;t do</p>
+              <p className="mt-2">It doesn&apos;t guarantee contracts, preferred status or pricing. Programme rules differ by company: some count only certain supplier locations or certifying bodies, so please check with your supplier-diversity team how spend with an India-based, disability-owned supplier is recognised.</p>
+            </div>
+            <div className="flex flex-col justify-center gap-3 lg:col-span-4 lg:col-start-9">
+              <Link href="/quote?type=procurement" className="btn btn-primary">Register your interest</Link>
+              <p className="text-xs leading-relaxed text-stone-ink">We&apos;ll let you know when certification is granted. Until then we never display a certified badge.</p>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="border-t border-line bg-paper py-24 lg:py-32">
         <div className="container-x">
           <p className="eyebrow mb-6">For corporate procurement teams</p>
@@ -35,12 +68,13 @@ export default function Inclusive() {
               <div key={t} className="bg-paper p-8"><p className="font-display text-2xl">{t}</p><p className="mt-3 leading-relaxed text-stone-ink">{b}</p></div>
             ))}
           </div>
-          <div className="mt-10"><Link href="/quote?type=procurement" className="btn btn-primary">Connect with our inclusive procurement team</Link></div>
+          <div className="mt-10"><Link href="/quote?type=procurement" className="btn btn-primary">Talk to us about inclusive procurement</Link></div>
         </div>
       </section>
       <DeliveredCoordinated d={d} />
       <Faq faqs={[
         { q: "Is NGB Ventures DOBE® certified?", a: "Not yet. Our application/process is underway. We'll update this page and our materials only after Disability:IN formally grants certification." },
+        { q: "What changes for us once you're certified?", a: "You'll be able to find us in Disability:IN's supplier directory, rely on independently verified disability ownership, and, where your programme recognises DOBE® suppliers, report spend with us as disability-owned spend (Tier 1 or Tier 2)." },
         { q: "Can certification guarantee us a contract?", a: "No. Supplier-diversity programmes vary by company. Certification may help start a conversation, but contracts are earned on capability, price and service." },
         { q: "Do you work only with disability-owned suppliers?", a: "No. We source from a broad range of Indian manufacturers and producers. Inclusion means widening access, not narrowing choice." },
       ]} title="Inclusive procurement: FAQs" />

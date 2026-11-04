@@ -1,8 +1,8 @@
+import { Confidentiality, confidentialityFaqs } from "@/components/sections/Confidentiality";
 import Link from "next/link";
 import { getDivision } from "@/content/divisions";
 import { DivisionHero, DeliveredCoordinated, NextDivisions } from "@/components/division/DivisionTemplate";
 import { BrandStudio } from "@/components/home/BrandStudio";
-import { Plate } from "@/components/ui/Plate";
 import { Reveal } from "@/components/ui/Reveal";
 import { Faq } from "@/components/sections/Faq";
 import { CtaBand } from "@/components/sections/CtaBand";
@@ -19,11 +19,6 @@ const groups = [
   ["E", "D2C & expansion", ["Shopify development", "E-commerce websites", "Landing pages", "Email marketing", "Market-entry strategy", "Brand growth consulting"]],
 ] as const;
 
-const concepts = [
-  { name: "Ember & Loom", cat: "Brassware, home", tone: "bronze" as const, glyph: "spot-brass-barware", line: "Hand-hammered barware positioned for premium gifting in the US." },
-  { name: "Kora Field", cat: "Natural bath", tone: "olive" as const, glyph: "spot-loofah", line: "Plastic-free bath essentials built around natural loofah and coir." },
-  { name: "Inkwell & Co.", cat: "Kids' publishing", tone: "sand" as const, glyph: "spot-activity-books", line: "A private-label activity-book line for a European retailer." },
-];
 
 export default function BrandDev() {
   return (
@@ -49,18 +44,11 @@ export default function BrandDev() {
       <section className="container-x py-24 lg:py-32">
         <div className="grid gap-6 lg:grid-cols-12 lg:items-end"><div className="lg:col-span-7"><p className="eyebrow mb-6">Brand Launch Studio</p><h2 className="display text-[clamp(2rem,3.6vw,3.2rem)]">Same product. <em>Different value.</em></h2></div><p className="leading-relaxed text-stone-ink lg:col-span-4 lg:col-start-9">Four stages take a generic factory sample to a positioned, packaged, listing-ready brand. Tap a stage to explore.</p></div>
         <div className="mt-10"><BrandStudio /></div>
-        <div className="mt-24"><p className="eyebrow mb-6">Concept portfolio</p><h3 className="display text-[clamp(2rem,3.6vw,3.2rem)]">Studio concepts</h3>
-          <p className="mt-3 max-w-2xl text-sm text-stone-ink">These are fictional brands created to show our thinking. They aren&apos;t client work, and no results are implied. We publish real case studies only with client permission.</p>
-          <ul className="mt-10 grid gap-8 md:grid-cols-3">
-            {concepts.map((c) => (
-              <li key={c.name}><div className="relative aspect-[4/5] overflow-hidden"><Plate plate={{ slot: c.glyph, motif: "jali", tone: c.tone, alt: `${c.name} concept`, brief: "" }} className="h-full w-full" sizes="33vw" /><span className="ledger absolute left-3 top-3 rounded-full bg-ivory/90 px-2.5 py-1 text-[0.6rem] text-charcoal">Concept</span></div>
-                <p className="ledger mt-4 text-bronze-ink">{c.cat}</p><p className="mt-1 font-display text-3xl">{c.name}</p><p className="mt-2 text-sm leading-relaxed text-stone-ink">{c.line}</p></li>
-            ))}
-          </ul>
-        </div>
       </section>
+      <Confidentiality />
       <DeliveredCoordinated d={d} />
       <Faq faqs={[
+        ...confidentialityFaqs,
         { q: "Do you only work with products sourced through NGB?", a: "No. We can build and advertise brands for products made anywhere, but we're strongest where we also know the supply chain." },
         { q: "Can you guarantee sales or ROAS?", a: "No. Nobody honest can. We set targets, test, measure and report transparently on ROAS, CAC and conversion rate." },
         { q: "Do you manage ad spend?", a: "We manage campaigns in your ad accounts. Media spend is paid by you directly to the platforms, and our fees are agreed separately." },

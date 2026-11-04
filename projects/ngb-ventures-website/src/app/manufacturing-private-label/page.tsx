@@ -1,3 +1,4 @@
+import { Confidentiality } from "@/components/sections/Confidentiality";
 import { getDivision } from "@/content/divisions";
 import { DivisionHero, DeliveredCoordinated, NextDivisions } from "@/components/division/DivisionTemplate";
 import { ProcessTimeline } from "@/components/sections/ProcessTimeline";
@@ -49,6 +50,7 @@ export default function ManufacturingPL() {
         { q: "Can you manage samples if I'm overseas?", a: "Yes. We coordinate sample rounds, record feedback, and courier approved samples to you for sign-off." },
       ]} title="Manufacturing: FAQs" />
       <NextDivisions current={d.slug} />
+      <Confidentiality />
       <CtaBand title="Have a product idea? Let's build it." topic="Sourcing project" />
       <JsonLd data={serviceLd({ name: "OEM, ODM and private label manufacturing coordination", description: metadata.description as string, path: d.route, serviceType: "Manufacturing coordination" })} />
     </>

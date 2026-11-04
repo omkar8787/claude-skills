@@ -1,3 +1,4 @@
+import { SocialLinks } from "@/components/social/SocialLinks";
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import Link from "next/link";
 import { ContactForm } from "@/components/forms/ContactForm";
@@ -22,6 +23,7 @@ export default function ContactPage() {
           <dl className="divide-y divide-line border-y border-charcoal">
             {rows.map(({ Icon, k, v }) => <div key={k} id={`contact-${k.toLowerCase()}`} className="flex gap-5 py-6"><Icon className="mt-1 h-5 w-5 shrink-0 text-bronze-ink" strokeWidth={1.4} /><div><dt className="ledger text-stone-ink">{k}</dt><dd className="mt-2 leading-relaxed">{v}</dd></div></div>)}
           </dl>
+          <div className="mt-8"><p className="ledger mb-3 text-bronze-ink">Follow NGB Ventures</p><SocialLinks labels /><p className="text-sm text-stone-ink [ul+&]:hidden">Social channels coming soon.</p></div>
           <p className="mt-8 text-sm leading-relaxed text-stone-ink">We support buyers worldwide from Pune, India. We don’t operate overseas offices. Looking for a manufacturer directory? We don’t publish one, because we match suppliers to each brief instead. <Link href="/services/supplier-identification" className="underline underline-offset-2">How supplier identification works →</Link></p>
         </div>
         <div className="lg:col-span-7 lg:col-start-6"><ContactForm /></div>

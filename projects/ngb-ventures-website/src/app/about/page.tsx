@@ -1,3 +1,4 @@
+import { Confidentiality } from "@/components/sections/Confidentiality";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
@@ -39,14 +40,11 @@ export default function AboutPage() {
         </div>
       </section>
       <CapabilityGrid dark eyebrow="How we work" title={<>Four <em>principles</em></>} items={principles} />
-      <section className="container-x py-24 lg:py-32">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <Reveal className="lg:col-span-5"><p className="eyebrow mb-6">Leadership</p><h2 className="display text-[clamp(2.2rem,4vw,3.5rem)]">The people <em>behind the work</em></h2><p className="lede mt-6">Team profiles will be published here.</p></Reveal>
-          <div className="space-y-4 lg:col-span-6 lg:col-start-7">
-            <Placeholder label="Founder & team profiles" note="Add verified names, roles, backgrounds and photos. Don't publish invented experience, clients or numbers." />
-            <Placeholder label="Company registration" note="Add the legal entity name, registration type, GSTIN and IEC once confirmed. They strengthen trust and Organization schema." />
-            <Placeholder label="DOBE® status" note="Update the site-wide status text (src/content/site.ts → dobeStatus) only when Disability:IN formally grants certification." />
-          </div>
+      <Confidentiality />
+      <section className="container-x py-12">
+        <div className="space-y-4">
+          <Placeholder label="Company registration" note="Add the legal entity name, registration type, GSTIN and IEC once confirmed. They strengthen trust and Organization schema." />
+          <Placeholder label="DOBE® status" note="Update the site-wide status text (src/content/site.ts → dobeStatus) only when Disability:IN formally grants certification." />
         </div>
       </section>
       <CtaBand />

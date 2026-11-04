@@ -1,3 +1,4 @@
+import { SocialLinks } from "@/components/social/SocialLinks";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { Logo } from "./Logo";
@@ -52,6 +53,7 @@ export function Footer() {
               {site.contact.phone && <a className="link-u block w-fit" href={`tel:${site.contact.phone.replace(/\s/g, "")}`}>{site.contact.phone}</a>}
               {whatsappHref && <a className="link-u block w-fit" href={whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp</a>}
               <p className="ledger pt-3 text-ivory/75">{site.city}, {site.region}, {site.country}</p>
+              <SocialLinks className="pt-4" />
             </div>
           </div>
           <FooterCol title="Capabilities" className="lg:col-span-2" links={divisions.map((d) => ({ label: d.name, href: d.route }))} />
@@ -68,11 +70,6 @@ export function Footer() {
         <div className="mt-8 flex flex-col gap-6 text-sm text-ivory/75 md:flex-row md:items-center md:justify-between">
           <p>© {year} {site.legalName}. {site.signoff}</p>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
-            {(["linkedin", "instagram", "youtube"] as const).map((k) =>
-              site.social[k] ? (
-                <li key={k}><a href={site.social[k]} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 hover:text-ivory">{k === "linkedin" ? "LinkedIn" : k === "youtube" ? "YouTube" : "Instagram"} <ArrowUpRight className="h-3.5 w-3.5" /></a></li>
-              ) : null,
-            )}
             <li><Link href="/privacy" className="hover:text-ivory">Privacy policy</Link></li>
             <li><Link href="/terms" className="hover:text-ivory">Terms &amp; conditions</Link></li>
             <li><Link href="/sitemap.xml" className="hover:text-ivory">Sitemap</Link></li>

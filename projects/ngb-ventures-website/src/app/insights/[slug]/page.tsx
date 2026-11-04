@@ -1,3 +1,4 @@
+import { ShareBar } from "@/components/social/ShareBar";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { guides, getGuide } from "@/content/guides";
@@ -32,7 +33,8 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
               {s.list && <ul className="mt-6 space-y-2.5">{s.list.map((l) => <li key={l} className="flex gap-3 leading-relaxed text-stone-ink"><span className="mt-2.5 h-1 w-3 shrink-0 bg-bronze" />{l}</li>)}</ul>}
             </section>
           ))}
-          <p className="mt-16 border-t border-line pt-6 text-sm text-stone-ink">This article is general information, not legal, tax or customs advice. Last updated {g.updated}. See also: <Link href="/tools/landed-cost-calculator" className="underline underline-offset-2">landed-cost estimator</Link> · <Link href="/tools/supplier-evaluation-checklist" className="underline underline-offset-2">supplier checklist</Link>.</p>
+          <ShareBar title={g.title} className="mt-14" />
+          <p className="mt-10 border-t border-line pt-6 text-sm text-stone-ink">This article is general information, not legal, tax or customs advice. Last updated {g.updated}. See also: <Link href="/tools/landed-cost-calculator" className="underline underline-offset-2">landed-cost estimator</Link> · <Link href="/tools/supplier-evaluation-checklist" className="underline underline-offset-2">supplier checklist</Link>.</p>
         </div>
       </article>
       {(g.related?.length || more.length > 0) && (

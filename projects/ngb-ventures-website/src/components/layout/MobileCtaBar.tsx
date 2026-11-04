@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ArrowRight } from "lucide-react";
 
-const HIDE_ON = ["/quote", "/contact", "/quote?type=manufacturing"];
+const HIDE_ON = ["/quote", "/contact", "/quote?type=manufacturing", "/links"];
 
 /** Discreet mobile-only CTA that appears after the hero and hides near the footer and on form pages. */
 export function MobileCtaBar() {

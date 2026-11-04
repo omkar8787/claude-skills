@@ -1,5 +1,6 @@
 import { guides } from "@/content/guides";
 import Link from "next/link";
+import { Confidentiality } from "@/components/sections/Confidentiality";
 import { ArrowRight, ArrowUpRight, ShieldCheck } from "lucide-react";
 import { Plate } from "@/components/ui/Plate";
 import { Reveal } from "@/components/ui/Reveal";
@@ -194,6 +195,8 @@ export default function Home() {
         </ul>
       </section>
 
+      <Confidentiality />
+
       {/* ═════════ ATLAS ═════════ */}
       <section id="atlas" className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="atlas-h">
         <div className="container-x">
@@ -266,7 +269,7 @@ export default function Home() {
             <div className="rounded-sm border border-ivory/20 p-6">
               <p className="flex items-center gap-2 font-semibold"><ShieldCheck className="h-5 w-5 text-bronze-soft" /> DOBE® certification</p>
               <p className="mt-2 text-sm text-ivory/70">Application / process underway with Disability:IN. We don&apos;t display a certification badge until approval is granted.</p>
-              <Link href="/inclusive-procurement" className="btn btn-bronze mt-6 w-full">Looking to diversify your supplier base?</Link>
+              <Link href="/inclusive-procurement#benefits" className="btn btn-bronze mt-6 w-full">What certification will mean for buyers</Link>
             </div>
           </div>
         </div>

@@ -22,7 +22,7 @@ const pages: SearchDoc[] = [
   { t: "Landed-cost estimator", d: "Model product cost, freight, insurance, duty and taxes.", h: "/tools/landed-cost-calculator", k: "Tool", x: "duty freight cost calculator" },
   { t: "CBM & container calculator", d: "Cubic metres, chargeable weight and container fit.", h: "/tools/cbm-calculator", k: "Tool", x: "container volume shipping" },
   { t: "Supplier evaluation checklist", d: "Score a supplier across seven areas.", h: "/tools/supplier-evaluation-checklist", k: "Tool", x: "audit verification vendor" },
-  { t: "About NGB Ventures", d: "A disability-owned sourcing and brand partner from Pune, India.", h: "/about", k: "Page", x: "company team pune" },
+  { t: "About NGB Ventures", d: "A disability-owned sourcing and brand partner from Pune, India.", h: "/about", k: "Page", x: "company pune disability-owned nda confidential" },
   { t: "Contact", d: "Email, WhatsApp or send an enquiry.", h: "/contact", k: "Page", x: "email whatsapp phone" },
 ];
 

@@ -31,7 +31,7 @@ const sitemap = await (await fetch(base + "/sitemap.xml")).text();
 const basePathPrefix = (process.env.LIVE_BASE || "").replace(/\/$/, "");
 const routes = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((m) => { const p = new URL(m[1]).pathname; return (basePathPrefix && p.startsWith(basePathPrefix) ? p.slice(basePathPrefix.length) : p) || "/"; });
 // Pages that are deliberately not in the sitemap (noindex) but still need exporting.
-for (const extra of ["/search", "/thank-you"]) if (!routes.includes(extra)) routes.push(extra);
+for (const extra of ["/search", "/thank-you", "/links"]) if (!routes.includes(extra)) routes.push(extra);
 const routeSet = new Set(routes);
 
 const LIVE = process.env.LIVE_BASE || "";

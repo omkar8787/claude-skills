@@ -1,3 +1,4 @@
+import { ShareBar } from "@/components/social/ShareBar";
 import Link from "next/link";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { PageHero } from "@/components/sections/PageHero";
@@ -115,6 +116,7 @@ export default function CorporateGifting() {
         <div className="mt-14 flex flex-wrap gap-3"><Link href={quote("Corporate gift programme")} className="btn btn-primary">Start a gifting brief <ArrowRight className="arrow h-4 w-4" /></Link><Link href="/industries/gifting" className="btn btn-ghost">Gifting industry guide</Link><Link href="/insights/corporate-gifting-from-india" className="btn btn-ghost">Read: planning a gift programme</Link></div>
       </section>
 
+      <div className="container-x pb-16"><ShareBar title="Corporate gifting from India: NGB Ventures" /></div>
       <ComplianceGrid items={ind.compliance} title="Before you ship gifts abroad" />
       <Faq faqs={faqs} title="Corporate gifting: FAQs" />
       <CtaBand title="Planning gifts for this season? Let's curate them in India." lede="Tell us the occasion, the number of recipients and your budget per gift. We'll come back with concepts, costs and a realistic timeline." />
