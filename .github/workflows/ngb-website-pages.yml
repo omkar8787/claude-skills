@@ -41,7 +41,14 @@ jobs:
           cache: npm
           cache-dependency-path: projects/ngb-ventures-website/package-lock.json
       - run: npm ci
-      - run: npm run build
+      - name: Build (retries transient Google Fonts download failures)
+        run: |
+          for attempt in 1 2 3; do
+            npm run build && exit 0
+            echo "Build attempt $attempt failed; retrying in 20s"
+            sleep 20
+          done
+          exit 1
       - name: Export static site
         run: |
           npx next start -p 3000 &
