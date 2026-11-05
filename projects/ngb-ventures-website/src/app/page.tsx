@@ -41,12 +41,12 @@ const heroTiles = [
 ];
 const featuredGi = ["darjeeling-tea", "kancheepuram-silk", "kannauj-perfume", "moradabad-metal-craft", "paithani", "agates-of-cambay"].map((s) => giProducts.find((g) => g.slug === s)!);
 const pathways = [
-  { who: "Importers & international buyers", title: "Find a product and its maker", body: "Describe what you need. We map clusters and manufacturers, then build a qualified shortlist.", href: "/quote?type=sourcing", cta: "Source a product" },
-  { who: "Retailers & distributors", title: "Build a range from India", body: "Explore categories, regions and origin products, then ask us to source a collection.", href: "/discover", cta: "Explore products" },
-  { who: "Private-label & Amazon sellers", title: "Launch your own label", body: "Private-label development with FBA-ready labelling, packaging and inspection.", href: "/quote?type=private-label", cta: "Start private label" },
-  { who: "Brand-launch clients", title: "Turn a product into a brand", body: "Positioning, packaging, Amazon, Meta and Google: launch and grow internationally.", href: "/quote?type=brand", cta: "Launch your brand" },
-  { who: "Corporate procurement teams", title: "Import from a disability-owned exporter", body: "We export under our own IEC, and our DOBE® certification application is underway.", href: "/export#dobe", cta: "How it helps your diversity goals" },
-  { who: "Manufacturers & publishers", title: "Work with NGB Ventures", body: "Indian producers, printers and publishers: tell us what you make and where you export.", href: "/quote?type=supplier", cta: "Introduce your business" },
+  { who: "Importers & international buyers", title: "Find a product and its maker", body: "Describe what you need. We research manufacturing clusters and suppliers, then present a qualified shortlist.", href: "/quote?type=sourcing", cta: "Request a sourcing proposal" },
+  { who: "Retailers & distributors", title: "Build a range from India", body: "Explore categories, regions and origin products, then ask us to source a collection.", href: "/discover", cta: "Explore product categories" },
+  { who: "Private-label & Amazon sellers", title: "Launch your own label", body: "Private-label development with marketplace-ready labelling, packaging and quality inspection.", href: "/quote?type=manufacturing", cta: "Develop a private-label product" },
+  { who: "Brand owners", title: "Turn a product into a brand", body: "Positioning, packaging and advertising on Amazon, Meta and Google to launch and grow internationally.", href: "/quote?type=brand", cta: "Build your global brand" },
+  { who: "Corporate procurement teams", title: "Import from a disability-owned exporter", body: "NGB Ventures is a disability-owned business. Disability:IN DOBE® certification application in progress.", href: "/export#dobe", cta: "Supplier diversity and DOBE®" },
+  { who: "Manufacturers & publishers", title: "Work with NGB Ventures", body: "Indian manufacturers, printers and publishers: tell us what you make and which markets you export to.", href: "/quote?type=supplier", cta: "Introduce your business" },
 ];
 const brandSteps = ["Product idea", "Manufacturing", "Brand identity", "Packaging", "Advertising", "Marketplace", "Global customer"];
 
@@ -84,15 +84,14 @@ export default function Home() {
         <div className="container-x grid min-h-[100svh] items-center gap-12 pb-12 pt-28 lg:grid-cols-12 lg:pb-16 lg:pt-32">
           <div className="lg:col-span-6">
             <p className="eyebrow fade-up mb-8">{site.positioning}</p>
-            <h1 id="hero-h" className="display text-[clamp(3.1rem,7vw,7.4rem)]">
-              <MaskLines lines={["The world", "wants more", <em key="e">from India.</em>]} delay={0.1} />
+            <h1 id="hero-h" className="display text-[clamp(3rem,6.4vw,6.6rem)]">
+              <MaskLines lines={["Discover India.", "Source Better.", <em key="e">Build Global Brands.</em>]} delay={0.1} />
             </h1>
             <div className="fade-up" style={{ ["--d" as string]: "0.45s" }}>
               <p className="lede mt-8 max-w-xl">{messaging.heroSub}</p>
               <div className="mt-10 flex flex-wrap gap-3">
-                <Link href="/discover" className="btn btn-bronze">Explore India&apos;s products <ArrowRight className="arrow h-4 w-4" /></Link>
-                <Link href="/quote" className="btn btn-ghost">Source a product</Link>
-                <Link href="/brand-development" className="btn btn-ghost">Build your global brand</Link>
+                <Link href="/quote" className="btn btn-bronze">Request a Sourcing Proposal <ArrowRight className="arrow h-4 w-4" /></Link>
+                <Link href="/manufacturing" className="btn btn-ghost">Explore Manufacturing Clusters</Link>
               </div>
             </div>
           </div>
@@ -101,11 +100,17 @@ export default function Home() {
               {heroTiles.map((t, i) => <Plate key={t.p.slot} plate={t.p} className="h-full w-full" sizes="25vw" priority={i < 2} />)}
             </HeroMosaic>
           </div>
-          <dl className="col-span-full grid grid-cols-2 gap-6 border-t border-ivory/15 pt-6 md:grid-cols-4">
-            {[["Philosophy", site.philosophy], ["Base", "Pune, Maharashtra, India"], ["Divisions", "Sourcing · Manufacturing · Export · Brand"], ["Supplier diversity", site.dobeStatus]].map(([k, v]) => (
-              <div key={k}><dt className="ledger text-ivory/75">{k}</dt><dd className="mt-2 text-sm text-ivory/85">{v}</dd></div>
+          {/* The business model, in the first screen: four divisions. */}
+          <ol className="col-span-full grid grid-cols-1 gap-px overflow-hidden rounded-sm border border-ivory/15 bg-ivory/15 sm:grid-cols-2 lg:grid-cols-4" aria-label="What NGB Ventures does">
+            {divisions.map((d) => (
+              <li key={d.slug} className="bg-charcoal">
+                <Link href={d.route} className="group flex h-full flex-col gap-2 p-5 transition-colors hover:bg-ink">
+                  <span className="ledger text-bronze-soft">{d.index} · {d.kicker}</span>
+                  <span className="font-display text-[1.35rem] leading-tight">{d.name}</span>
+                </Link>
+              </li>
             ))}
-          </dl>
+          </ol>
         </div>
       </section>
 
@@ -123,7 +128,7 @@ export default function Home() {
       {/* ═════════ DIVISIONS ═════════ */}
       <section className="bg-paper py-24 lg:py-32" aria-labelledby="div-h">
         <div className="container-x">
-          <SectionHead id="div-h" eyebrow="Four divisions. One partner." title={<>Anything from India. <em>Everything from concept to commerce.</em></>} lede="Use one division, or let them work together: from finding the maker to selling the finished brand abroad." />
+          <SectionHead id="div-h" eyebrow="Four divisions. One partner." title={<>From product discovery <em>to your customer&apos;s door.</em></>} lede="Use one division, or let them work together: from finding the maker to selling the finished brand abroad." />
           <div className="mt-16">
             <DivisionList items={divisions} previews={divisions.map((d) => <Plate key={d.slug} plate={P(`div-${d.slug}`, "jali", d.tone, d.name)} className="h-full w-full" sizes="180px" />)} />
           </div>
@@ -133,7 +138,7 @@ export default function Home() {
       {/* ═════════ PINNED JOURNEY ═════════ */}
       <section className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-0" aria-labelledby="journey-h">
         <div className="container-x">
-          <div className="lg:pt-32"><SectionHead id="journey-h" dark eyebrow="From India's factory floor to the global marketplace" title={<>Source. Manufacture. Customise. <em>Brand. Advertise. Export.</em></>} /></div>
+          <div className="lg:pt-32"><SectionHead id="journey-h" dark eyebrow="How a project moves" title={<>Source. Manufacture. Customise. <em>Brand. Advertise. Export.</em></>} /></div>
           <div className="mt-14 lg:mt-0">
             <PinnedJourney
               stages={journeyStages.map((s) => ({ key: s.key, label: s.label, title: s.title, body: s.body }))}
@@ -146,18 +151,18 @@ export default function Home() {
 
       {/* ═════════ HORIZONTAL SPOTLIGHT ═════════ */}
       <section className="on-dark tone-light bg-ink pt-24 text-ivory lg:pt-32" aria-labelledby="spot-h">
-        <div className="container-x mb-12"><SectionHead id="spot-h" dark eyebrow="Product spotlight" title={<>Extraordinary things <em>India makes.</em></>} lede="Handicrafts and textiles, yes. But also spices, millets, tea, superfoods, corporate gifts, leather, ceramics and precision parts. Each card leads to a guide or a pre-filled sourcing request. It's not a stock list." /></div>
+        <div className="container-x mb-12"><SectionHead id="spot-h" dark eyebrow="Product spotlight" title={<>Products India <em>makes well.</em></>} lede="Handicrafts and textiles, but also spices, millets, tea, superfoods, corporate gifts, leather, ceramics and precision components. Each card opens a guide or a pre-filled sourcing request. This is not a stock list: every project starts with supplier research." /></div>
         <HorizontalSpotlight
-          cards={spotlightItems.map((s) => ({ slug: s.slug, name: s.name, meta: `${s.cluster} · ${s.state}`, story: s.story, href: s.href, cta: s.href.startsWith("/quote") ? "Source this" : "Explore" }))}
+          cards={spotlightItems.map((s) => ({ slug: s.slug, name: s.name, meta: `${s.cluster} · ${s.state}`, story: s.story, href: s.href, cta: s.href.startsWith("/quote") ? "Request a proposal" : "Explore" }))}
           plates={spotlightItems.map((s) => <Plate key={s.slug} plate={s.plate} className="h-full w-full" sizes="30vw" />)}
         />
         <div className="h-16 lg:h-24" />
       </section>
 
 
-      {/* ═════════ ONE-STOP: CATEGORIES ═════════ */}
+      {/* ═════════ PRODUCT CATEGORIES ═════════ */}
       <section className="container-x py-24 lg:py-32" aria-labelledby="cat-h">
-        <SectionHead id="cat-h" eyebrow="One country. Every category." title={<>Your one-stop desk for <em>everything India makes.</em></>} lede="From the farm to the factory to the craft workshop: one partner to find it, check it, brand it and ship it." />
+        <SectionHead id="cat-h" eyebrow="Product categories" title={<>One partner across <em>India&apos;s manufacturing categories.</em></>} lede="From farms and food processors to craft workshops and engineering units: one partner to find the maker, qualify it, develop the product and ship it." />
         <ul className="mt-14 grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-4">
           {oneStop.map((c, i) => (
             <Reveal as="li" key={c.t} delay={(i % 4) * 0.04} className="bg-ivory">
@@ -175,8 +180,8 @@ export default function Home() {
         <div className="container-x grid gap-14 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <p className="eyebrow mb-6">Source anything from India</p>
-            <h2 id="src-h" className="display text-[clamp(2.6rem,5vw,4.8rem)]">Can&apos;t find it? <em>We&apos;ll help you source it.</em></h2>
-            <p className="lede mt-8">You don&apos;t need to know where India makes it. That&apos;s what we help you discover.</p>
+            <h2 id="src-h" className="display text-[clamp(2.6rem,5vw,4.8rem)]">Can&apos;t find it? <em>We can research it.</em></h2>
+            <p className="lede mt-8">You don&apos;t need to know where in India it is made. Finding that out is part of our work.</p>
             <p className="mt-6 max-w-md text-sm leading-relaxed text-ivory/75">{messaging.honesty} We don&apos;t offer instant quotes or live inventory. A person researches every request.</p>
           </div>
           <div className="lg:col-span-6 lg:col-start-7"><SourceQuickStart /></div>
@@ -185,7 +190,7 @@ export default function Home() {
 
       {/* ═════════ LEAD PATHWAYS ═════════ */}
       <section className="container-x py-24 lg:py-32" aria-labelledby="path-h">
-        <SectionHead id="path-h" eyebrow="Choose your path" title={<>However you buy, <em>start here.</em></>} lede="Each path leads to a short form that asks only what matters for your kind of request." />
+        <SectionHead id="path-h" eyebrow="Choose your path" title={<>Choose the route <em>that fits your business.</em></>} lede="Each route opens a short enquiry form that asks only for the details relevant to your request." />
         <ul className="mt-14 grid gap-px overflow-hidden bg-line sm:grid-cols-2 lg:grid-cols-3">
           {pathways.map((pw, i) => (
             <Reveal as="li" key={pw.title} delay={(i % 3) * 0.05} className="bg-ivory">
@@ -203,7 +208,7 @@ export default function Home() {
       {/* ═════════ ATLAS ═════════ */}
       <section id="atlas" className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="atlas-h">
         <div className="container-x">
-          <SectionHead id="atlas-h" dark eyebrow="India Manufacturing Atlas" title={<>Select a state. <em>Meet its makers.</em></>} lede="Clusters, crafts, GI products and industrial strengths, state by state. These are research starting points, not claims of existing supplier relationships." />
+          <SectionHead id="atlas-h" dark eyebrow="India Manufacturing Atlas" title={<>Explore India&apos;s <em>manufacturing landscape.</em></>} lede="From traditional craft clusters to modern industrial centres, state by state. The Atlas is an educational overview; every sourcing engagement involves independent, project-specific supplier research, and our supplier network remains confidential." />
           <div className="mt-14"><AtlasLazy states={atlasStates} gi={giMini} clusterSlugs={clusters.map((c) => c.slug)} initial="up" /></div>
           <div className="mt-12"><Link href="/atlas" className="btn btn-ghost">Open the full Atlas <ArrowUpRight className="h-4 w-4" /></Link></div>
         </div>
@@ -211,7 +216,7 @@ export default function Home() {
 
       {/* ═════════ ORIGIN COLLECTION ═════════ */}
       <section className="container-x py-24 lg:py-32" aria-labelledby="origin-h">
-        <SectionHead id="origin-h" eyebrow="India's Origin Collection" title={<>Shaped by geography. <em>Protected by law.</em></>} lede="Products whose character comes from where they're made, with their Geographical Indication registration details, sources and verification dates on every page." />
+        <SectionHead id="origin-h" eyebrow="India's Origin Collection" title={<>Shaped by geography. <em>Protected by law.</em></>} lede="Products whose character comes from where they are made, with Geographical Indication (GI) registration details, sources and verification dates on every page." />
         <ul className="mt-14 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {featuredGi.map((g) => (
             <Reveal as="li" key={g.slug}>
@@ -239,7 +244,7 @@ export default function Home() {
           <div className="lg:col-span-5">
             <p className="eyebrow mb-6">Export IQ</p>
             <h2 id="quiz-h" className="display text-[clamp(2.4rem,5vw,4.4rem)]">How well do you <em>know India?</em></h2>
-            <p className="lede mt-8 max-w-md">Six quick true-or-false questions about what India makes and how the world trades it. Every answer comes with its source.</p>
+            <p className="lede mt-8 max-w-md">Six short true-or-false questions about what India makes and how it is traded. Every answer includes its source.</p>
           </div>
           <div className="lg:col-span-6 lg:col-start-7"><ExportQuiz facts={facts} /></div>
         </div>
@@ -248,7 +253,7 @@ export default function Home() {
       {/* ═════════ BRAND ═════════ */}
       <section className="bg-paper py-24 lg:py-32" aria-labelledby="brand-h">
         <div className="container-x">
-          <SectionHead id="brand-h" eyebrow="Brand development & advertising" title={<>We don&apos;t just source products. <em>We help build brands that sell.</em></>} lede="Positioning, identity, packaging, Amazon, Meta and Google advertising, and D2C growth, for products made in India and sold anywhere." />
+          <SectionHead id="brand-h" eyebrow="Brand development & advertising" title={<>Well-made products <em>deserve strong brands.</em></>} lede="Positioning, identity, packaging, marketplace listings and advertising on Amazon, Meta and Google, for products made in India and sold in your market." />
           <ol className="mt-14 flex snap-x gap-px overflow-x-auto bg-line scrollbar-none" aria-label="From factory floor to global customer">
             {brandSteps.map((s, i) => (
               <li key={s} className="min-w-[10.5rem] flex-1 snap-start bg-paper p-5"><span className="ledger text-bronze-ink">{String(i + 1).padStart(2, "0")}</span><p className="mt-6 font-display text-[1.4rem] leading-tight">{s}</p></li>
@@ -266,7 +271,7 @@ export default function Home() {
       {/* ═════════ EXPORT ═════════ */}
       <section className="on-dark tone-light bg-charcoal py-24 text-ivory lg:py-32" aria-labelledby="exp-h">
         <div className="container-x">
-          <SectionHead id="exp-h" dark eyebrow="Global export solutions" title={<>Made in India. <em>Ready for the world.</em></>} lede="Tariffs, product rules and import requirements depend on HS classification and destination. We help you ask the right questions early and coordinate licensed partners to move the goods." />
+          <SectionHead id="exp-h" dark eyebrow="Global export solutions" title={<>Prepared for <em>your destination market.</em></>} lede="Duties, product rules and import requirements depend on HS classification and destination. We help you resolve the right questions early and coordinate licensed partners to move the goods." />
           <div className="mt-14"><WorldMarkets /></div>
           <div className="mt-10 flex flex-wrap gap-3"><Link href="/export" className="btn btn-bronze">Export solutions <ArrowRight className="arrow h-4 w-4" /></Link><Link href="/tools/market-readiness" className="btn btn-ghost">Check market readiness</Link></div>
         </div>
@@ -278,7 +283,7 @@ export default function Home() {
       {/* ═════════ JOURNAL ═════════ */}
       <section className="bg-paper py-24 lg:py-32" aria-labelledby="journal-h">
         <div className="container-x">
-          <SectionHead id="journal-h" eyebrow="Insights & stories" title={<>Know India <em>before you buy.</em></>} lede="Stories from India's craft and food regions, and practical buyer guides, written for international teams." />
+          <SectionHead id="journal-h" eyebrow="Insights & stories" title={<>Know India <em>before you buy.</em></>} lede="Practical buyer guides and research on India's craft, food and manufacturing regions, written for international procurement teams." />
           <ul className="mt-14 grid gap-10 md:grid-cols-3">
             {guides.slice(0, 3).map((g) => (
               <li key={g.slug}><Link href={`/insights/${g.slug}`} className="group block"><div className="shine relative aspect-[16/10] overflow-hidden"><div className="absolute inset-0 transition-transform duration-[1.4s] group-hover:scale-105"><Plate plate={g.plate} className="h-full w-full" sizes="33vw" /></div></div><p className="ledger mt-5 text-bronze-ink">{g.kind === "story" ? "Story" : "Guide"} · {g.category}</p><h3 className="mt-2 font-display text-[1.75rem] leading-tight"><span className="link-u">{g.title}</span></h3></Link></li>
@@ -288,7 +293,7 @@ export default function Home() {
         </div>
       </section>
 
-      <CtaBand title="Have a product in mind? Let's find it in India." lede="Tell us what you're looking to source, make or launch. We'll come back with an honest view of what's possible, and how." />
+      <CtaBand title="Have a product in mind? Request a sourcing proposal." lede="Tell us what you want to source, develop or launch. We will reply with a feasibility assessment and a proposed sourcing approach." />
       <JsonLd data={itemListLd("India's Origin Collection", giProducts.map((g) => ({ name: g.officialName, href: `/origin/${g.slug}` })))} />
     </>
   );

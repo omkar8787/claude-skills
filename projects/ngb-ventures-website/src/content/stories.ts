@@ -112,6 +112,7 @@ export const stories: Guide[] = [
   },
   {
     slug: "indian-tea-and-coffee-private-label",
+    seoTitle: "Private-Label Tea & Coffee from India: Buyer's Guide",
     kind: "guide",
     category: "Food & nutrition",
     date: "2026-11-01",
@@ -132,6 +133,7 @@ export const stories: Guide[] = [
   },
   {
     slug: "indian-superfoods-buyers-guide",
+    seoTitle: "Indian Superfoods: Makhana, Moringa & Ashwagandha Guide",
     kind: "guide",
     category: "Food & nutrition",
     date: "2026-11-01",
@@ -153,6 +155,7 @@ export const stories: Guide[] = [
   },
   {
     slug: "authentic-indian-block-print-handloom",
+    seoTitle: "Hand Block Print vs Screen Print: Sourcing Indian Textiles",
     kind: "guide",
     category: "Craft & origin",
     date: "2026-10-30",
@@ -194,6 +197,7 @@ export const stories: Guide[] = [
   },
   {
     slug: "sustainable-packaging-from-india",
+    seoTitle: "Plastic-Free Packaging from India: Jute, Coir & Bamboo",
     kind: "story",
     category: "Sustainability",
     date: "2026-10-26",

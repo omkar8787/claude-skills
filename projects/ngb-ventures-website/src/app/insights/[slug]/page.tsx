@@ -13,7 +13,7 @@ export function generateStaticParams() { return guides.map((g) => ({ slug: g.slu
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
   const g = getGuide((await params).slug);
   if (!g) return {};
-  const m = buildMetadata({ title: g.title, description: g.description, path: `/insights/${g.slug}` });
+  const m = buildMetadata({ title: g.seoTitle ?? g.title, description: g.description, path: `/insights/${g.slug}` });
   return { ...m, keywords: g.keywords, openGraph: { ...m.openGraph, type: "article", publishedTime: g.date, section: g.category } };
 }
 
@@ -23,7 +23,7 @@ export default async function GuidePage({ params }: { params: Promise<{ slug: st
   const more = guides.filter((x) => x.slug !== g.slug).sort((a, b) => Number(b.category === g.category) - Number(a.category === g.category)).slice(0, 4);
   return (
     <>
-      <PageHero plate={g.plate} crumbs={[{ name: "Insights", href: "/insights" }, { name: g.kind === "story" ? "Story" : "Guide", href: `/insights/${g.slug}` }]} eyebrow={`${g.kind === "story" ? "Story" : "Guide"} · ${g.category ?? "Sourcing"} · ${g.readTime}`} title={g.title.split(":")[0]} italic={g.title.includes(":") ? g.title.split(":")[1].trim() : undefined} lede={g.description} />
+      <PageHero plate={g.plate} crumbs={[{ name: "Insights", href: "/insights" }, { name: g.kind === "story" ? "Story" : "Guide", href: `/insights/${g.slug}` }]} eyebrow={`${g.kind === "story" ? "Story" : "Guide"} · ${g.category ?? "Sourcing"} · ${g.readTime}`} title={g.title.includes(":") ? `${g.title.split(":")[0]}:` : g.title} italic={g.title.includes(":") ? g.title.split(":").slice(1).join(":").trim() : undefined} lede={g.description} />
       <article className="container-x grid gap-16 py-24 lg:grid-cols-12 lg:py-32">
         <aside className="lg:col-span-3"><nav aria-label="Contents" className="lg:sticky lg:top-28"><p className="ledger mb-4 text-bronze-ink">Contents</p><ol className="space-y-2 text-sm text-stone-ink">{g.sections.map((s, i) => <li key={s.h}><a href={`#s${i}`} className="hover:text-charcoal">{s.h}</a></li>)}</ol></nav></aside>
         <div className="max-w-2xl lg:col-span-8 lg:col-start-5">

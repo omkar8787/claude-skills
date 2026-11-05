@@ -17,7 +17,7 @@ export default function ContactPage() {
   ];
   return (
     <>
-      <PageHero compact plate={{ slot: "page-contact", motif: "jali", tone: "charcoal", alt: "NGB Ventures, Pune", brief: "Pune cityscape at dusk" }} crumbs={[{ name: "Contact", href: "/contact" }]} eyebrow="Contact" title="Let’s talk about" italic="your product." lede="For detailed sourcing requests, use the sourcing brief. For everything else, write to us here." ctas={[{ label: "Use the detailed sourcing brief", href: "/quote" }]} />
+      <PageHero compact plate={{ slot: "page-contact", motif: "jali", tone: "charcoal", alt: "NGB Ventures, Pune", brief: "Pune cityscape at dusk" }} crumbs={[{ name: "Contact", href: "/contact" }]} eyebrow="Contact" title="Contact" italic="NGB Ventures." lede="For product enquiries, request a sourcing proposal. For partnerships, media and general questions, use the form below." ctas={[{ label: "Use the detailed sourcing brief", href: "/quote" }]} />
       <section className="container-x grid gap-16 py-20 lg:grid-cols-12 lg:py-28">
         <div className="lg:col-span-4">
           <dl className="divide-y divide-line border-y border-charcoal">

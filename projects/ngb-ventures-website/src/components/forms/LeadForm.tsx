@@ -19,7 +19,7 @@ type Pathway = keyof typeof PATHWAY_META;
 const CATEGORIES = ["Not sure yet", "Home décor & handicrafts", "Textiles & apparel", "Furniture & woodcraft", "Kitchen & tableware", "Beauty, essential oils & natural products", "Eco-friendly products", "Jewellery & accessories", "Footwear & leather", "Toys & educational", "Packaging, printing & publishing", "Engineering & components", "Food, spices & nutrition", "Corporate & festive gifting", "GI / origin products", "Other"];
 const DEST = [...COUNTRY_OPTIONS.slice(0, 8), "Singapore", "Southeast Asia (other)", "Other EU country", "Other"];
 
-const init = { details: "", category: CATEGORIES[0], destination: "", quantity: "", budget: "", customization: "", timeline: "", region: "", name: "", email: "", company: "", phone: "", country: "", role: "" as string, consent: false };
+const init = { details: "", category: CATEGORIES[0], destination: "", quantity: "", budget: "", customization: "", certifications: "", timeline: "", region: "", name: "", email: "", company: "", phone: "", country: "", role: "" as string, consent: false };
 
 export function LeadForm({ defaultPathway = "sourcing" }: { defaultPathway?: Pathway }) {
   const router = useRouter();
@@ -76,8 +76,6 @@ export function LeadForm({ defaultPathway = "sourcing" }: { defaultPathway?: Pat
     if (v.details.trim().length < 10) er.details = "Tell us a little more (10+ characters)";
     if (!v.name.trim()) er.name = "Name is required";
     if (!/^\S+@\S+\.\S+$/.test(v.email)) er.email = "Enter a valid email";
-    if (!v.country) er.country = "Country is required";
-    if (!v.role) er.role = "Choose the option that fits best";
     if (!v.consent) er.consent = "Please accept the privacy policy";
     setErrors(er);
     if (Object.keys(er).length) { formRef.current?.querySelector<HTMLElement>("[aria-invalid='true']")?.focus(); return; }
@@ -121,12 +119,16 @@ export function LeadForm({ defaultPathway = "sourcing" }: { defaultPathway?: Pat
             <Field label="Category" name="category"><select id="category" className="field" value={v.category} onChange={(e) => set("category", e.target.value)}>{CATEGORIES.map((c) => <option key={c}>{c}</option>)}</select></Field>
             <Field label="Destination country" name="destination"><select id="destination" className="field" value={v.destination} onChange={(e) => set("destination", e.target.value)}><option value="">Select…</option>{DEST.map((c) => <option key={c}>{c}</option>)}</select></Field>
             <Field label="Estimated quantity" name="quantity"><input id="quantity" className="field" value={v.quantity} onChange={(e) => set("quantity", e.target.value)} placeholder="e.g. 2,000 units" /></Field>
-            <Field label="Budget / target price" name="budget"><input id="budget" className="field" value={v.budget} onChange={(e) => set("budget", e.target.value)} placeholder="e.g. USD 6 per unit" /></Field>
+            <Field label="Target purchase price" name="budget"><input id="budget" className="field" value={v.budget} onChange={(e) => set("budget", e.target.value)} placeholder="e.g. USD 6 per unit" /></Field>
           </div>
         )}
         {(pathway === "sourcing" || pathway === "manufacturing" || pathway === "brand") && (
-          <Field label="Customisation requirements (optional)" name="customization"><input id="customization" className="field" value={v.customization} onChange={(e) => set("customization", e.target.value)} placeholder="Logo, colours, materials, packaging, certifications…" /></Field>
+          <div className="grid gap-8 sm:grid-cols-2">
+            <Field label="Customisation requirements (optional)" name="customization"><input id="customization" className="field" value={v.customization} onChange={(e) => set("customization", e.target.value)} placeholder="Logo, colours, materials, packaging…" /></Field>
+            <Field label="Required certifications (optional)" name="certifications"><input id="certifications" className="field" value={v.certifications} onChange={(e) => set("certifications", e.target.value)} placeholder="e.g. GOTS, BRCGS, FDA food contact, CE" /></Field>
+          </div>
         )}
+        <Field label="Expected timeline (optional)" name="timeline"><input id="timeline" className="field" value={v.timeline} onChange={(e) => set("timeline", e.target.value)} placeholder="e.g. samples in 6 weeks, first order in Q2" /></Field>
         {v.region && <p className="ledger text-bronze-ink">Region of interest · {v.region} <button type="button" className="ml-2 underline" onClick={() => set("region", "")}>clear</button></p>}
 
         {meta.upload && (
@@ -156,8 +158,8 @@ export function LeadForm({ defaultPathway = "sourcing" }: { defaultPathway?: Pat
           <Field label="Full name" name="name" error={errors.name}><input id="name" autoComplete="name" className="field" value={v.name} onChange={(e) => set("name", e.target.value)} {...inv("name")} /></Field>
           <Field label="Business email" name="email" error={errors.email}><input id="email" type="email" autoComplete="email" className="field" value={v.email} onChange={(e) => set("email", e.target.value)} {...inv("email")} /></Field>
           <Field label="Company" name="company"><input id="company" autoComplete="organization" className="field" value={v.company} onChange={(e) => set("company", e.target.value)} /></Field>
-          <Field label="Your country" name="country" error={errors.country}><select id="country" className="field" value={v.country} onChange={(e) => set("country", e.target.value)} {...inv("country")}><option value="">Select…</option>{[...COUNTRY_OPTIONS.slice(0, 8), "India", "Singapore", "Other EU country", "Other"].map((c) => <option key={c}>{c}</option>)}</select></Field>
-          <Field label="Which best describes you?" name="role" error={errors.role}><select id="role" className="field" value={v.role} onChange={(e) => set("role", e.target.value)} {...inv("role")}><option value="">Select…</option>{ROLES.map((r) => <option key={r}>{r}</option>)}</select></Field>
+          <Field label="Your country (optional)" name="country" error={errors.country}><select id="country" className="field" value={v.country} onChange={(e) => set("country", e.target.value)} {...inv("country")}><option value="">Select…</option>{[...COUNTRY_OPTIONS.slice(0, 8), "India", "Singapore", "Other EU country", "Other"].map((c) => <option key={c}>{c}</option>)}</select></Field>
+          <Field label="Which best describes you? (optional)" name="role" error={errors.role}><select id="role" className="field" value={v.role} onChange={(e) => set("role", e.target.value)} {...inv("role")}><option value="">Select…</option>{ROLES.map((r) => <option key={r}>{r}</option>)}</select></Field>
           <Field label="Phone / WhatsApp (optional)" name="phone"><input id="phone" type="tel" autoComplete="tel" className="field" value={v.phone} onChange={(e) => set("phone", e.target.value)} /></Field>
         </div>
         <Consent checked={v.consent} onChange={(c) => set("consent", c)} error={errors.consent} />
@@ -166,8 +168,8 @@ export function LeadForm({ defaultPathway = "sourcing" }: { defaultPathway?: Pat
 
       <StatusPanel status={status} />
       <div className="flex flex-wrap items-center gap-5">
-        <button type="submit" className="btn btn-primary" disabled={status.state === "submitting"}>{status.state === "submitting" ? "Sending…" : <>Send my request <ArrowRight className="arrow h-4 w-4" /></>}</button>
-        <p className="text-sm text-stone-ink">A person at NGB reads every request. No automated quotes.</p>
+        <button type="submit" className="btn btn-primary" disabled={status.state === "submitting"}>{status.state === "submitting" ? "Sending…" : <>Request a sourcing proposal <ArrowRight className="arrow h-4 w-4" /></>}</button>
+        <p className="text-sm text-stone-ink">Only name, email and a short description are required. A person reviews every enquiry; we do not send automated quotations.</p>
       </div>
     </form>
   );

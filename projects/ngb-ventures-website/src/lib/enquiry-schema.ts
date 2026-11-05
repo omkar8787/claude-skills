@@ -70,7 +70,10 @@ export const leadSchema = z.object({
   type: z.literal("lead"),
   ...contactBlock,
   pathway: z.enum(PATHWAYS),
-  role: z.enum(ROLES),
+  // First enquiries may be partial: only name, email and a short description are required.
+  country: str(80).optional().default(""),
+  role: z.union([z.enum(ROLES), z.literal("")]).optional().default(""),
+  certifications: str(400).optional().default(""),
   details: req(4000, "Description").refine((v) => v.length >= 10, "Tell us a little more (10+ characters)"),
   category: str(80).optional().default(""),
   destination: str(80).optional().default(""),
@@ -87,7 +90,7 @@ export const enquirySchema = z.discriminatedUnion("type", [sourcingSchema, conta
 export type Enquiry = z.infer<typeof enquirySchema>;
 
 export const CATEGORY_OPTIONS = [
-  "Apparel & Garments", "Home Textiles", "Handicrafts & Home Décor", "Furniture & Woodcraft", "Jewelry & Accessories",
+  "Apparel & Garments", "Home Textiles", "Handicrafts & Home Décor", "Furniture & Woodcraft", "Jewellery & Accessories",
   "Essential Oils & Natural Products", "Beauty & Personal Care", "Packaging Materials", "Eco-Friendly Products",
   "Lighting & Home Accessories", "Kitchenware & Tableware", "Footwear & Leather Goods", "Sports & Fitness",
   "Toys & Educational Products", "Stationery & Paper Products", "Engineering & Industrial Products", "Not sure / Other",

@@ -3,7 +3,7 @@ import { Check } from "lucide-react";
 import { buildMetadata } from "@/lib/seo";
 import { RefLine } from "./RefLine";
 
-export const metadata = buildMetadata({ title: "Thank You | Request Received", description: "Your request has reached NGB Ventures.", path: "/thank-you", noindex: true });
+export const metadata = buildMetadata({ title: "Thank You | Request Received", description: "Your enquiry has reached NGB Ventures. A member of the team will review it and reply by email.", path: "/thank-you", noindex: true });
 
 export default function ThankYou() {
   return (

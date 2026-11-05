@@ -170,7 +170,7 @@ export function Plate({ plate, className = "", label, number, priority, sizes = 
       {photo ? (
         <Image src={photo} alt={plate.alt} fill priority={priority} sizes={sizes} className="object-cover" />
       ) : (
-        <svg role="img" aria-label={plate.alt} className="absolute inset-0 h-full w-full" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
+        <svg {...(plate.alt ? { role: "img", "aria-label": plate.alt } : { "aria-hidden": true })} className="absolute inset-0 h-full w-full" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid slice">
           <defs>
             <linearGradient id={`${id}-g`} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stopColor={t.b} /><stop offset="1" stopColor={t.a} /></linearGradient>
             <radialGradient id={`${id}-l`} cx="0.7" cy="0.25" r="0.75"><stop offset="0" stopColor={t.light} /><stop offset="1" stopColor="rgba(0,0,0,0)" /></radialGradient>

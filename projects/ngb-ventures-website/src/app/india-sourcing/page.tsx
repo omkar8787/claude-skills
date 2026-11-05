@@ -29,9 +29,9 @@ export default function IndiaSourcing() {
         { q: "Can you source from artisans and small producers?", a: "Yes. Many of India's most distinctive products come from artisan clusters and small enterprises. We'll be clear about the realistic volumes, lead times and consistency for each." },
         { q: "How do you charge?", a: "Fees are scoped per engagement, for example a fixed research fee, a project fee or a service fee. We agree it in writing before work starts. Ask us for a proposal." },
         { q: "What if I don't know the HS code or category?", a: "That's fine. Describe the product and we'll work out the category, the likely clusters and the questions to answer." },
-      ]} title="India sourcing: FAQs" />
+      ]} title="Frequently asked questions" />
       <NextDivisions current={d.slug} />
-      <CtaBand title="If it's made in India, let's find it." topic="Sourcing project" />
+      <CtaBand title="Looking for a product from India? Request a sourcing proposal." topic="Sourcing project" />
       <JsonLd data={serviceLd({ name: "India product sourcing", description: metadata.description as string, path: d.route, serviceType: "Product sourcing" })} />
     </>
   );

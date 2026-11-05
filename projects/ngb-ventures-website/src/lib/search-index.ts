@@ -11,7 +11,7 @@ import { spotlightItems } from "@/content/discovery";
 export type SearchDoc = { t: string; d: string; h: string; k: string; x: string };
 
 const pages: SearchDoc[] = [
-  { t: "Request a quote", d: "Tell us what you want to source, make or launch. Upload a reference image.", h: "/quote", k: "Page", x: "enquiry rfq quotation brief" },
+  { t: "Request a sourcing proposal", d: "Tell us what you want to source, develop or launch. Upload a reference image.", h: "/quote", k: "Page", x: "enquiry rfq quotation brief" },
   { t: "Corporate gifting from India", d: "Curated hampers, welcome kits and festive collections from Indian craft, tea and spices.", h: "/corporate-gifting", k: "Page", x: "gifts hampers diwali christmas employee client" },
   { t: "Product Discovery Engine", d: "Filter India's products by state, category, GI status and type.", h: "/discover", k: "Tool", x: "browse catalogue products" },
   { t: "India Manufacturing Atlas", d: "Select a state to see its clusters, crafts, GI products and industrial strengths.", h: "/atlas", k: "Tool", x: "map states regions" },

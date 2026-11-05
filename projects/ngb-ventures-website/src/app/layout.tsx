@@ -6,7 +6,6 @@ import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { MobileCtaBar } from "@/components/layout/MobileCtaBar";
 import { site, mainNav, primaryCta } from "@/content/site";
-import { industries } from "@/content/industries";
 import { JsonLd, organizationLd, websiteLd } from "@/lib/seo";
 import { Analytics } from "@/components/analytics/Analytics";
 import { PointerShine } from "@/components/ui/PointerShine";
@@ -18,7 +17,7 @@ const plex = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variabl
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
-  title: { default: "NGB Ventures | Your Global Sourcing Desk in India", template: "%s | NGB Ventures" },
+  title: { default: "NGB Ventures | India Sourcing, Manufacturing & Export", template: "%s | NGB Ventures" },
   description: site.description,
   applicationName: site.name,
   openGraph: { siteName: site.name, type: "website", locale: "en_US" },
@@ -34,45 +33,53 @@ export const viewport: Viewport = { themeColor: "#1d2a45", width: "device-width"
 
 const menus: MenuData = {
   capabilities: {
-    intro: "Four divisions, one partner, from finding a product in India to selling it worldwide.",
+    intro: "Four divisions, one partner: from finding a product in India to selling it in your market.",
     links: [
-      { label: "All capabilities", href: "/capabilities", meta: "→" },
       { label: "India Sourcing", href: "/india-sourcing", meta: "01" },
-      { label: "Manufacturing & Private Label", href: "/manufacturing-private-label", meta: "02" },
+      { label: "OEM & ODM Manufacturing", href: "/manufacturing-private-label#oem-odm", meta: "02" },
+      { label: "Private Label Development", href: "/manufacturing-private-label#private-label", meta: "02" },
       { label: "Global Export Solutions", href: "/export", meta: "03" },
       { label: "Brand Development", href: "/brand-development", meta: "04" },
-      { label: "Advertising & Marketing", href: "/advertising", meta: "04" },
-      { label: "Industries we serve", href: "/industries", meta: "→" },
-      { label: "Corporate Gifting", href: "/corporate-gifting", meta: "→" },
-      { label: "Publishers & Printing", href: "/publishers-printing", meta: "→" },
-      { label: "All services", href: "/services", meta: "→" },
+      { label: "All capabilities", href: "/capabilities", meta: "→" },
+      { label: "Corporate gifting", href: "/corporate-gifting", meta: "→" },
+      { label: "Publishers & printing", href: "/publishers-printing", meta: "→" },
+      { label: "Procurement tools", href: "/tools", meta: "→" },
     ],
-    feature: { title: "Can't find it? We'll help you source it.", body: "You don't need to know where India makes it. Discovering that is our job.", href: "/quote", cta: "Source a product" },
+    feature: { title: "Request a sourcing proposal", body: "Share your requirement. We reply with a feasibility assessment and a proposed sourcing approach.", href: "/quote", cta: "Start your enquiry" },
   },
   discover: {
-    intro: "Explore India by product, by region and by origin.",
+    intro: "Explore India's manufacturing landscape, from traditional craft clusters to modern industrial centres.",
     links: [
+      { label: "Product Categories", href: "/industries", meta: "→" },
       { label: "Product Discovery", href: "/discover", meta: "→" },
-      { label: "India Manufacturing Atlas", href: "/atlas", meta: "→" },
+      { label: "Manufacturing Atlas", href: "/atlas", meta: "→" },
+      { label: "Manufacturing Clusters", href: "/manufacturing", meta: "→" },
       { label: "GI & Origin Collection", href: "/origin", meta: "→" },
-      ...industries.filter((i) => ["food-nutrition", "gifting", "apparel", "home-textiles", "handicrafts", "engineering-industrial"].includes(i.slug)).map((i) => ({ label: i.name, href: `/industries/${i.slug}`, meta: i.index })),
-      { label: "Manufacturing clusters", href: "/manufacturing", meta: "→" },
       { label: "Product guides", href: "/products", meta: "→" },
       { label: "Global markets", href: "/markets", meta: "→" },
     ],
-    feature: { title: "The India Manufacturing Atlas", body: "Select a state to see its clusters, crafts, GI products and sourcing ideas.", href: "/atlas", cta: "Open the Atlas" },
+    feature: { title: "India Manufacturing Atlas", body: "Select a state to see its manufacturing clusters, craft traditions, GI products and industrial strengths.", href: "/atlas", cta: "Explore the Atlas" },
   },
-  about: {
-    intro: "A disability-owned business from Pune, building a modern gateway to India's manufacturing ecosystem.",
+  brand: {
+    intro: "Positioning, identity, packaging and advertising for products made in India.",
     links: [
-      { label: "About NGB Ventures", href: "/about" },
-      { label: "Importing from a disability-owned exporter", href: "/export#dobe" },
-      { label: "Insights & Research", href: "/insights" },
-      { label: "Market readiness check", href: "/tools/market-readiness" },
-      { label: "Contact", href: "/contact" },
-      { label: "Request a quote", href: "/quote" },
+      { label: "Product Positioning", href: "/brand-development#positioning", meta: "→" },
+      { label: "Brand Identity", href: "/brand-development#identity", meta: "→" },
+      { label: "Packaging", href: "/brand-development#packaging", meta: "→" },
+      { label: "Advertising & Marketing", href: "/advertising", meta: "→" },
     ],
-    feature: { title: "Business with purpose.", body: "Our Disability:IN DOBE® certification application is underway.", href: "/export#dobe", cta: "Import from us" },
+    feature: { title: "Brand Studio", body: "See how one product moves from factory sample to a listing-ready brand.", href: "/brand-development", cta: "Visit the Brand Studio" },
+  },
+  insights: {
+    intro: "Research and practical guidance for international buyers sourcing from India.",
+    links: [
+      { label: "Buyer Guides", href: "/insights#buyer-guides", meta: "→" },
+      { label: "Sourcing Research", href: "/insights#sourcing-research", meta: "→" },
+      { label: "Manufacturing Insights", href: "/insights#manufacturing-insights", meta: "→" },
+      { label: "Export Compliance", href: "/insights#export-compliance", meta: "→" },
+      { label: "Procurement tools", href: "/tools", meta: "→" },
+    ],
+    feature: { title: "How to source from India", body: "A step-by-step framework: briefs, clusters, supplier qualification, sampling, inspection and documentation.", href: "/insights/how-to-source-from-india", cta: "Read the guide" },
   },
 };
 

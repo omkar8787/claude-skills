@@ -12,7 +12,7 @@ export const metadata = buildMetadata({ title: "Capabilities | India Sourcing, M
 export default function Capabilities() {
   return (
     <>
-      <PageHero plate={{ slot: "page-capabilities", motif: "jali", tone: "bronze", alt: "Capabilities", brief: "" }} crumbs={[{ name: "Capabilities", href: "/capabilities" }]} eyebrow="Our capabilities" title="Your global sourcing desk" italic="in India." lede="Four divisions that work alone or together, so you can go from an idea to a product in your customers' hands." ctas={[{ label: "Source a product", href: "/quote" }]} />
+      <PageHero plate={{ slot: "page-capabilities", motif: "jali", tone: "bronze", alt: "Capabilities", brief: "" }} crumbs={[{ name: "Capabilities", href: "/capabilities" }]} eyebrow="Our capabilities" title="Four divisions," italic="one accountable partner." lede="India sourcing, OEM, ODM and private-label manufacturing, global export and brand development. Use one division or combine them, from product idea to your customer." ctas={[{ label: "Request a Sourcing Proposal", href: "/quote" }]} />
       <section className="container-x py-24 lg:py-32">
         <ul className="space-y-24">
           {divisions.map((d, i) => (
@@ -24,7 +24,7 @@ export default function Capabilities() {
                 <p className="mt-3 font-display text-2xl italic text-bronze-ink">{d.headline}</p>
                 <p className="mt-5 leading-relaxed text-stone-ink">{d.lede}</p>
                 <ul className="mt-6 grid gap-x-6 gap-y-1.5 text-sm sm:grid-cols-2">{d.delivered.slice(0, 6).map((x) => <li key={x} className="border-b border-line py-1.5">{x}</li>)}</ul>
-                <div className="mt-8 flex flex-wrap gap-3"><Link href={d.route} className="btn btn-primary">Explore {d.name} <ArrowUpRight className="h-4 w-4" /></Link><Link href={d.cta.href} className="btn btn-ghost">{d.cta.label}</Link></div>
+                <div className="mt-8 flex flex-wrap gap-3"><Link href={d.route} className="btn btn-primary">Explore {d.short} <ArrowUpRight className="h-4 w-4" /></Link><Link href={d.cta.href} className="btn btn-ghost">{d.cta.label}</Link></div>
               </div>
             </Reveal>
           ))}

@@ -36,7 +36,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
       <ComplianceGrid items={p.compliance} />
       {cls.length > 0 && <section className="container-x py-24"><p className="eyebrow mb-6">Where it’s made</p><h2 className="display mb-12 text-[clamp(2.2rem,4vw,3.5rem)]">Relevant <em>clusters</em></h2><ClusterCards items={cls} /></section>}
       <WorkflowStrip enquireHref={enquire} />
-      <Faq faqs={p.faqs} title={`${p.name}: FAQs`} />
+      <Faq faqs={p.faqs} title="Frequently asked questions" />
       {rel.length > 0 && <section className="border-t border-line py-24"><div className="container-x"><div className="mb-12 flex flex-wrap items-end justify-between gap-4"><h2 className="display text-[clamp(2.2rem,4vw,3.5rem)]">Related <em>products</em></h2><Link href="/products" className="link-u text-sm font-semibold">All product guides →</Link></div><ProductCards items={rel} /></div></section>}
       <CtaBand title={`Ready to source ${p.name.toLowerCase()}? Send us your spec.`} />
       <JsonLd data={serviceLd({ name: `${p.name} sourcing from India`, description: p.metaDescription, path: `/products/${p.slug}`, serviceType: "Product sourcing" })} />

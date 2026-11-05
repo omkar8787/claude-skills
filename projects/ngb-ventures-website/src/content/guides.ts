@@ -2,12 +2,24 @@ import type { Plate } from "./types";
 import { stories } from "./stories";
 import { loadMarkdownArticles } from "@/lib/markdown-articles";
 
+export type InsightSection = "buyer-guides" | "sourcing-research" | "manufacturing-insights" | "export-compliance";
+export const INSIGHT_SECTIONS: { id: InsightSection; title: string; intro: string }[] = [
+  { id: "buyer-guides", title: "Buyer guides", intro: "Step-by-step guidance for planning and running a sourcing project in India." },
+  { id: "sourcing-research", title: "Sourcing research", intro: "Research on India's product categories, regions and producing communities." },
+  { id: "manufacturing-insights", title: "Manufacturing insights", intro: "How products are developed and made, from sampling to private label." },
+  { id: "export-compliance", title: "Export compliance", intro: "Trade terms, documentation and the destination-market rules that affect landed cost." },
+];
+
 export type Guide = {
   slug: string; title: string; description: string; readTime: string; updated: string; plate: Plate;
   sections: { h: string; p: string[]; list?: string[] }[];
   /** "story" = editorial feature; "guide" = practical how-to. */
   kind?: "story" | "guide";
   category?: string;
+  /** Insights section the article is listed under. Defaults: guides → buyer-guides, stories → sourcing-research. */
+  section?: InsightSection;
+  /** Shorter title for search results when `title` exceeds about 60 characters. */
+  seoTitle?: string;
   /** ISO publish date. */
   date?: string;
   /** ISO last-modified date (drives sitemap lastmod and dateModified). Defaults to `date`. */
@@ -19,6 +31,7 @@ export type Guide = {
 const coreGuides: Guide[] = [
   {
     slug: "how-to-source-from-india",
+    seoTitle: "How to Source from India: A Practical Guide for Buyers",
     kind: "guide",
     category: "Sourcing basics",
     date: "2026-10-20",
@@ -59,6 +72,15 @@ const coreGuides: Guide[] = [
     ],
   },
 ];
+
+const SECTION_BY_SLUG: Record<string, InsightSection> = {
+  "how-to-source-from-india": "buyer-guides", "corporate-gifting-from-india": "buyer-guides", "indian-tea-and-coffee-private-label": "buyer-guides",
+  "indian-superfoods-buyers-guide": "buyer-guides", "importing-from-a-disability-owned-exporter-india": "buyer-guides",
+  "indian-millets-international-buyers": "sourcing-research", "moradabad-brass-city": "sourcing-research", "kannauj-perfume-city": "sourcing-research", "sustainable-packaging-from-india": "sourcing-research",
+  "private-label-from-india": "manufacturing-insights", "authentic-indian-block-print-handloom": "manufacturing-insights",
+  "incoterms-for-india-imports": "export-compliance", "sourcing-spices-from-india": "export-compliance",
+};
+export const sectionOf = (g: Guide): InsightSection => g.section ?? SECTION_BY_SLUG[g.slug] ?? (g.kind === "story" ? "sourcing-research" : "buyer-guides");
 
 /** All articles, newest first. */
 export const guides: Guide[] = [...loadMarkdownArticles(), ...stories, ...coreGuides].sort((a, b) => (b.date ?? "").localeCompare(a.date ?? ""));

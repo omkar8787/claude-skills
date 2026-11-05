@@ -27,7 +27,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <IntroBlock eyebrow="What it is" title={s.short} paragraphs={[]} aside={[{ k: "Best for", v: s.bestFor.join(" · ") }, { k: "Fees", v: "Quoted per scope. Contact us." }]} />
       <TwoLists a={{ eyebrow: "What it involves", title: "Scope of work", items: s.involves }} b={{ eyebrow: "Deliverables", title: "What you receive", items: s.deliverables }} />
       <WorkflowStrip enquireHref={enquire} />
-      <Faq faqs={s.faqs} title={`${s.name}: FAQs`} />
+      <Faq faqs={s.faqs} title="Frequently asked questions" />
       <section className="bg-paper py-24"><div className="container-x"><p className="eyebrow mb-6">Pairs well with</p><h2 className="display mb-12 text-[clamp(2.2rem,4vw,3.5rem)]">Related services</h2><ServicesLedger items={rel} /></div></section>
       <CtaBand title={`Need ${s.name.toLowerCase()}? Tell us about your project.`} />
       <JsonLd data={serviceLd({ name: s.name, description: s.metaDescription, path: `/services/${s.slug}`, serviceType: s.name })} />

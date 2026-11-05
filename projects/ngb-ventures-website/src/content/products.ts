@@ -205,7 +205,7 @@ export const products: Product[] = [
     ],
     variants: [
       { title: "Carved décor", body: "Wall art, panels and sculptural objects." },
-      { title: "Boxes & storage", body: "Jewelry boxes, trinket boxes, storage." },
+      { title: "Boxes & storage", body: "Jewellery boxes, trinket boxes and storage." },
       { title: "Serveware", body: "Boards, bowls and utensils with food-safe finishes." },
       { title: "Toys & gifts", body: "Turned and lacquered items." },
     ],

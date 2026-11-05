@@ -12,12 +12,12 @@ export const metadata = buildMetadata({ title: "Links", description: "NGB Ventur
 export default function LinksPage() {
   const latest = guides[0];
   const links = [
-    { label: "Source a product from India", sub: "Tell us what you need. A person replies.", href: "/quote" },
+    { label: "Request a sourcing proposal", sub: "Tell us what you need. A person reviews every enquiry.", href: "/quote" },
     { label: "Corporate & festive gifting", sub: "Hampers, welcome kits, Diwali and year-end", href: "/corporate-gifting" },
     { label: "Explore what India makes", sub: "23 product spotlights, filters and GI origins", href: "/discover" },
     { label: `Read: ${latest.title}`, sub: `${latest.kind === "story" ? "Story" : "Guide"} · ${latest.readTime}`, href: `/insights/${latest.slug}` },
     { label: "India Manufacturing Atlas", sub: "Select a state, meet its makers", href: "/atlas" },
-    { label: "Import from a disability-owned exporter", sub: "DOBE® certification application underway", href: "/export#dobe" },
+    { label: "Import from a disability-owned exporter", sub: "Disability:IN DOBE® certification application in progress", href: "/export#dobe" },
   ];
   return (
     <>

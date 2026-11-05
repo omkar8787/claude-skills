@@ -1,3 +1,12 @@
+/** The buyer enquiry process, shown wherever a visitor decides whether to get in touch. */
+export const enquirySteps = [
+  { t: "Share your requirement", b: "Describe the product, quantity, target price and destination market. Partial information is fine to start." },
+  { t: "Receive a feasibility assessment", b: "We assess whether, where and at what level India can make it, and flag compliance questions early." },
+  { t: "Review the proposed sourcing approach", b: "You receive a proposal covering manufacturing clusters, manufacturer types, sampling and timelines." },
+  { t: "Agree on the project scope", b: "Deliverables, responsibilities and fees are set out in a written agreement, with an NDA where needed." },
+  { t: "Begin supplier qualification and development", b: "We qualify manufacturers, manage samples and coordinate development towards an approved golden sample." },
+];
+
 export const processSteps = [
   { n: "01", title: "Understand buyer requirements", body: "We turn your product, target price, quantity, market and compliance needs into a written brief that suppliers can quote against accurately.", output: "Sourcing brief" },
   { n: "02", title: "Identify suitable manufacturers", body: "We map the right clusters and manufacturer types, from artisan workshops to export factories, and approach a long-list.", output: "Long-list" },
@@ -19,7 +28,7 @@ export const whyIndia = [
 ];
 
 export const audiences = [
-  { title: "Amazon FBA sellers", body: "Private-label products with FBA-ready labelling and cartons.", href: "/quote?type=private-label&market=usa", cta: "Plan a private-label launch" },
+  { title: "Amazon FBA sellers", body: "Private-label products with FBA-ready labelling and cartons.", href: "/quote?type=manufacturing&market=usa", cta: "Plan a private-label launch" },
   { title: "Sustainable brands (EU)", body: "Natural-fibre and certified products, with claim-ready documentation.", href: "/industries/eco-friendly", cta: "Explore eco products" },
   { title: "Home-décor importers (UK)", body: "Brass, wood, textiles and lighting from India's craft clusters.", href: "/industries/handicrafts", cta: "Explore home décor" },
   { title: "Wholesalers (Australia)", body: "Handicrafts and homewares, with ECTA and biosecurity planning.", href: "/markets/australia", cta: "Sourcing for Australia" },

@@ -32,8 +32,8 @@ export function buildMetadata({ title: rawTitle, description: rawDesc, path, noi
     title: { absolute: title },
     description,
     alternates: { canonical: url },
-    openGraph: { title, description, url, siteName: site.name, type: "website", locale: "en_US" },
-    twitter: { card: "summary_large_image", title, description },
+    openGraph: { title, description, url, siteName: site.name, type: "website", locale: "en_GB", images: [{ url: absUrl("/opengraph-image"), width: 1200, height: 630, alt: `${site.name}: ${site.positioning}` }] },
+    twitter: { card: "summary_large_image", title, description, images: [absUrl("/opengraph-image")] },
     robots: noindex ? { index: false, follow: true } : undefined,
   };
 }

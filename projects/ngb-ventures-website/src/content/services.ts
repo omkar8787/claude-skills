@@ -131,7 +131,7 @@ export const services: Service[] = [
     bestFor: ["Amazon sellers", "DTC brands", "Catalogue and wholesale line sheets"],
     faqs: [{ q: "Who owns the photos?", a: "Usage rights are agreed in writing with the photographer before the shoot." }],
     related: ["private-label-manufacturing", "product-development"],
-    plate: { slot: "service-photography", motif: "radial", tone: "stone", alt: "Product photography studio set-up", brief: "Softbox lighting a product on a seamless backdrop; behind-the-scenes." },
+    plate: { slot: "service-photography", motif: "radial", tone: "stone", alt: "Product photography studio set-up", brief: "Softbox lighting a product on a plain studio backdrop; behind-the-scenes." },
   },
   {
     slug: "sourcing-consultancy", name: "Sourcing Consultancy", index: "12", icon: "Compass",

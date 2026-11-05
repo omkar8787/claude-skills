@@ -23,7 +23,7 @@ const metrics = [
 export default function Advertising() {
   return (
     <>
-      <PageHero plate={{ slot: "page-advertising", motif: "jali", tone: "clay", alt: "Advertising", brief: "" }} crumbs={[{ name: "Capabilities", href: "/capabilities" }, { name: "Advertising & Marketing", href: "/advertising" }]} eyebrow="Division 04 · Advertising & marketing" title="Put your product" italic="in front of buyers." lede="Marketplace and performance advertising for consumer brands, planned around unit economics, not vanity metrics." ctas={[{ label: "Launch your brand with NGB", href: "/quote?type=brand" }, { label: "Brand development", href: "/brand-development", variant: "ghost" }]} />
+      <PageHero plate={{ slot: "page-advertising", motif: "jali", tone: "clay", alt: "Advertising", brief: "" }} crumbs={[{ name: "Capabilities", href: "/capabilities" }, { name: "Advertising & Marketing", href: "/advertising" }]} eyebrow="Division 04 · Advertising & marketing" title="Put your product" italic="in front of buyers." lede="Marketplace and performance advertising for consumer brands, planned around unit economics and measurable results." ctas={[{ label: "Launch your brand with NGB", href: "/quote?type=brand" }, { label: "Brand development", href: "/brand-development", variant: "ghost" }]} />
       <section className="container-x py-24 lg:py-32">
         <div className="grid gap-px overflow-hidden bg-line md:grid-cols-2">
           {channels.map(([t, b], i) => <Reveal key={t} delay={i * 0.05} className="bg-ivory p-8 lg:p-12"><p className="display text-5xl">{t}</p><p className="mt-5 leading-relaxed text-stone-ink">{b}</p></Reveal>)}
@@ -38,9 +38,9 @@ export default function Advertising() {
       <Faq faqs={[
         { q: "What does a typical engagement include?", a: "Usually an audit or launch plan, account setup or restructure, creative and listing work, campaign management and monthly reporting. Scope and fees are agreed per brand." },
         { q: "Do you work with brands outside India?", a: "Yes. Most of our advertising focus is international marketplaces and D2C sites in the US, UK, EU, UAE and Australia." },
-      ]} title="Advertising: FAQs" />
+      ]} title="Frequently asked questions" />
       <NextDivisions current="brand-development" />
-      <CtaBand title="Want to grow your brand abroad? Let's plan your launch." topic="Sourcing project" />
+      <CtaBand title="Growing your brand abroad? Plan your launch with us." topic="Sourcing project" />
       <JsonLd data={serviceLd({ name: "Amazon PPC, Meta and Google advertising", description: metadata.description as string, path: "/advertising", serviceType: "Digital advertising" })} />
     </>
   );

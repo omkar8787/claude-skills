@@ -70,7 +70,7 @@ export default function CorporateGifting() {
         eyebrow="Corporate & premium gifting"
         title="Gifts people keep,"
         italic="made in India."
-        lede="Curated hampers, welcome kits and festive collections, built from Indian craft, tea, spices and textiles. Branded for you, assembled with care and dispatched worldwide."
+        lede="Curated hampers, welcome kits and festive collections built from Indian craft, tea, spices and textiles, branded for your organisation and planned for international dispatch."
         ctas={[{ label: "Plan a gift programme", href: quote("Corporate gift programme") }, { label: "See collections", href: "#collections", variant: "ghost" }]}
         meta={[{ k: "For", v: "HR, marketing, sales and events teams" }, { k: "Formats", v: "Hampers · kits · festive · VIP" }, { k: "Branding", v: "Engraving · print · packaging" }, { k: "Dispatch", v: "Bulk or multi-address" }]}
       />
@@ -118,8 +118,8 @@ export default function CorporateGifting() {
 
       <div className="container-x pb-16"><ShareBar title="Corporate gifting from India: NGB Ventures" /></div>
       <ComplianceGrid items={ind.compliance} title="Before you ship gifts abroad" />
-      <Faq faqs={faqs} title="Corporate gifting: FAQs" />
-      <CtaBand title="Planning gifts for this season? Let's curate them in India." lede="Tell us the occasion, the number of recipients and your budget per gift. We'll come back with concepts, costs and a realistic timeline." />
+      <Faq faqs={faqs} title="Frequently asked questions" />
+      <CtaBand title="Planning a gift programme? Request a proposal." lede="Tell us the occasion, the number of recipients and your budget per gift. We will reply with concepts, costs and a realistic timeline." />
       <JsonLd data={[serviceLd({ name: "Corporate gifting from India", description: metadata.description as string, path: "/corporate-gifting", serviceType: "Corporate gift sourcing and fulfilment" }), faqLd(faqs), breadcrumbLd([{ name: "Home", href: "/" }, { name: "Corporate Gifting", href: "/corporate-gifting" }])]} />
     </>
   );

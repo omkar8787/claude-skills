@@ -4,7 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { Logo } from "./Logo";
 import { divisions } from "@/content/divisions";
 import { guides } from "@/content/guides";
-import { site, contactEmail, whatsappHref, messaging } from "@/content/site";
+import { site, contactEmail, whatsappHref } from "@/content/site";
 
 const discover = [
   { label: "Product Discovery", href: "/discover" },
@@ -34,7 +34,7 @@ const company = [
   { label: "All services", href: "/services" },
   { label: "Advertising & Marketing", href: "/advertising" },
   { label: "Contact", href: "/contact" },
-  { label: "Request a quote", href: "/quote" },
+  { label: "Request a sourcing proposal", href: "/quote" },
 ];
 
 export function Footer() {
@@ -43,13 +43,13 @@ export function Footer() {
     <footer className="on-dark tone-light relative overflow-hidden bg-charcoal text-ivory">
       <div className="container-x pb-10 pt-24">
         <div className="grid gap-12 border-b border-ivory/10 pb-16 lg:grid-cols-12 lg:items-end">
-          <p className="display text-[clamp(2.4rem,5vw,4.6rem)] lg:col-span-8">{messaging.promise.split(". ")[0]}. <em>{messaging.promise.split(". ")[1]}</em></p>
-          <div className="lg:col-span-4 lg:text-right"><Link href="/quote" className="btn btn-bronze">Source a product <ArrowUpRight className="h-4 w-4" /></Link></div>
+          <p className="display text-[clamp(2.4rem,5vw,4.6rem)] lg:col-span-8">From concept <em>to commerce.</em></p>
+          <div className="lg:col-span-4 lg:text-right"><Link href="/quote" className="btn btn-bronze">Request a Sourcing Proposal <ArrowUpRight className="h-4 w-4" /></Link></div>
         </div>
         <div className="mt-16 grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-3">
             <Logo />
-            <p className="mt-8 max-w-sm text-[0.95rem] leading-relaxed text-ivory/65">{site.positioning} A disability-owned sourcing, manufacturing, export and brand-development partner based in Pune, India.</p>
+            <p className="mt-8 max-w-sm text-[0.95rem] leading-relaxed text-ivory/65">A disability-owned sourcing, manufacturing-coordination, export and brand-development business based in Pune, India.</p>
             <p className="ledger mt-5 text-bronze-soft">{site.dobeStatus}</p>
             <div className="mt-8 space-y-2 text-[0.95rem]">
               {contactEmail ? <a className="link-u block w-fit" href={`mailto:${contactEmail}`}>{contactEmail}</a> : <Link className="link-u block w-fit" href="/contact">Send us an enquiry</Link>}

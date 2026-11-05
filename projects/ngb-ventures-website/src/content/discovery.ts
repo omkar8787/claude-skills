@@ -1,6 +1,7 @@
 import type { Plate } from "./types";
 import { products } from "./products";
 import { giProducts } from "./gi";
+import { productCards, type ProductCard } from "./product-cards";
 
 /**
  * Product Discovery Engine dataset.
@@ -26,6 +27,8 @@ export type DiscoveryItem = {
   story: string;
   href: string;
   plate: Plate;
+  /** Structured product-card details (spotlight products). */
+  card?: ProductCard;
 };
 
 const spotlight: DiscoveryItem[] = [
@@ -71,5 +74,15 @@ const fromGi: DiscoveryItem[] = giProducts.map((g) => ({
 }));
 
 export const discoveryItems: DiscoveryItem[] = [...spotlight, ...fromGi, ...fromProducts];
+// Apply the structured product-card content (name, description and details) to every spotlight product.
+for (const it of spotlight) {
+  const c = productCards[it.slug];
+  if (!c) throw new Error(`Missing product card for ${it.slug}`);
+  it.name = c.name;
+  it.story = c.description;
+  it.card = c;
+  it.plate = { ...it.plate, alt: c.name };
+}
+
 const SPOT_ORDER = ["brass-barware", "millets", "block-print-linen", "spices", "gift-hampers", "natural-attars", "tea-coffee", "ikat-textiles", "makhana", "machined-components", "leather-goods", "moringa", "mango-wood-furniture", "festive-gifting", "hand-knotted-rugs", "herbal-extracts", "coir-doormats", "silver-jewellery", "khurja-ceramics", "jaggery", "printed-activity-books", "natural-loofah-range", "jute-totes"];
 export const spotlightItems = SPOT_ORDER.map((s) => spotlight.find((x) => x.slug === s)!).filter(Boolean);

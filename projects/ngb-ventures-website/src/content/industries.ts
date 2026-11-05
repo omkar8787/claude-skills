@@ -140,7 +140,7 @@ export const industries: Industry[] = [
     faqs: [
       { q: "Can artisans reproduce my design consistently at volume?", a: "Often yes, with the right controls: dimensioned drawings, an approved golden sample, defined tolerance on hand-made variation, and inline inspection. Some hand-made variation is inherent and should be written into your product description." },
       { q: "Do you work with GI-tagged crafts?", a: "We can help you source products made in GI-registered craft regions. Using a GI name in marketing has its own rules, so we'll flag what documentation the producer can provide." },
-      { q: "How are fragile handicrafts packed for export?", a: "Usually with individual protection (foam, honeycomb, molded pulp), inner cartons and export master cartons. Products can be drop-tested to ISTA-style protocols on request. Packaging development is one of our services." },
+      { q: "How are fragile handicrafts packed for export?", a: "Usually with individual protection (foam, honeycomb, moulded pulp), inner cartons and export master cartons. Products can be drop-tested to ISTA-style protocols on request. Packaging development is one of our services." },
     ],
     related: ["furniture-woodcraft", "lighting", "jewelry-accessories"],
     keywords: ["handicraft manufacturers India", "home decor manufacturers India", "Indian handicrafts wholesale", "home decor sourcing agent India"],
@@ -187,18 +187,18 @@ export const industries: Industry[] = [
   },
   {
     slug: "jewelry-accessories",
-    name: "Jewelry & Accessories",
+    name: "Jewellery & Accessories",
     index: "05",
-    short: "Fashion jewelry, silver, gemstones, beads and textile accessories.",
-    seoTitle: "Jewelry Manufacturers in India | Fashion & Silver Jewelry Sourcing",
+    short: "Fashion jewellery, silver, gemstones, beads and textile accessories.",
+    seoTitle: "Jewellery Manufacturers in India | Silver & Fashion Jewelry Sourcing",
     metaDescription:
-      "Source jewelry and accessories from India: sterling silver, gemstone, fashion jewelry, agate beads, bags and scarves. Jaipur and Khambhat clusters, sampling, testing and export.",
+      "Source jewellery and accessories from India: sterling silver, gemstone, fashion jewellery, agate beads, bags and scarves. Jaipur and Khambhat clusters, sampling, testing and export.",
     heroLine: "Stones, silver and craft, set to your design.",
     intro: [
-      "Jaipur is internationally known for coloured gemstones, silver and fashion jewelry. Khambhat, in Gujarat, has a long tradition of agate and semi-precious bead work. Surat is a major centre for diamond processing. Accessories such as scarves, stoles and textile bags draw on India's textile clusters.",
-      "For brands, the key decisions are metal, plating, stone and testing. A few disciplined specifications (plating thickness, nickel and lead limits, stone treatment disclosure) separate a dependable jewelry programme from an inconsistent one.",
+      "Jaipur is internationally known for coloured gemstones, silver and fashion jewellery. Khambhat, in Gujarat, has a long tradition of agate and semi-precious bead work. Surat is a major centre for diamond processing. Accessories such as scarves, stoles and textile bags draw on India's textile clusters.",
+      "For brands, the key decisions are metal, plating, stone and testing. A few disciplined specifications (plating thickness, nickel and lead limits, stone treatment disclosure) separate a dependable jewellery programme from an inconsistent one.",
     ],
-    products: ["Sterling silver jewelry", "Gemstone and beaded jewelry", "Brass and plated fashion jewelry", "Agate and semi-precious beads", "Scarves and stoles", "Textile and leather bags", "Hair accessories", "Gift-boxed sets"],
+    products: ["Sterling silver jewellery", "Gemstone and beaded jewellery", "Brass and plated fashion jewellery", "Agate and semi-precious beads", "Scarves and stoles", "Textile and leather bags", "Hair accessories", "Gift-boxed sets"],
     productSlugs: [],
     clusterSlugs: ["jaipur", "khambhat", "surat"],
     capabilities: [
@@ -211,18 +211,18 @@ export const industries: Industry[] = [
     quality: ["Metal purity and plating-thickness testing", "Nickel-release testing for EU markets", "Lead and cadmium testing", "Stone-setting security and finish checks"],
     compliance: [
       { title: "Nickel (EU/UK)", body: "REACH Annex XVII limits nickel release from items in prolonged skin contact." },
-      { title: "Lead & cadmium", body: "REACH restricts lead and cadmium in jewelry. In the US, children's jewelry falls under CPSIA and state laws." },
+      { title: "Lead & cadmium", body: "REACH restricts lead and cadmium in jewellery. In the US, children's jewellery falls under CPSIA and state laws." },
       { title: "Precious-metal marking", body: "Fineness marks and hallmarking rules vary by market. The UK has a statutory hallmarking regime." },
       { title: "Gemstone disclosure", body: "The FTC Jewelry Guides (US) require disclosing treatments that significantly affect value." },
     ],
     faqs: [
-      { q: "Can I source 925 sterling silver jewelry in India?", a: "Yes. Jaipur and other centres have many silver jewelry workshops. Ask for purity testing and decide on stamping before production." },
-      { q: "Which tests should fashion jewelry pass for Europe?", a: "At minimum, nickel release (EN 1811), plus lead and cadmium content under REACH. Your retailer may ask for more." },
+      { q: "Can I source 925 sterling silver jewellery in India?", a: "Yes. Jaipur and other centres have many silver jewellery workshops. Ask for purity testing and decide on stamping before production." },
+      { q: "Which tests should fashion jewellery pass for Europe?", a: "At minimum, nickel release (EN 1811), plus lead and cadmium content under REACH. Your retailer may ask for more." },
       { q: "Are natural gemstones and agate beads consistent in colour?", a: "Natural stones vary. Agree a colour range with approved reference strands or stones, and write the natural variation into product copy." },
     ],
     related: ["handicrafts", "apparel", "beauty-personal-care"],
-    keywords: ["jewelry manufacturers India", "silver jewelry manufacturer Jaipur", "fashion jewelry wholesale India", "agate beads Khambhat"],
-    plate: { slot: "industry-jewelry", motif: "facet", tone: "charcoal", alt: "Silver and gemstone jewelry laid out on a dark workbench", brief: "Macro of silver rings and cut gemstones on dark slate; single hard light; sparkle and deep shadow." },
+    keywords: ["jewellery manufacturers India", "silver jewellery manufacturer Jaipur", "fashion jewellery wholesale India", "agate beads Khambhat"],
+    plate: { slot: "industry-jewelry", motif: "facet", tone: "charcoal", alt: "Silver and gemstone jewellery laid out on a dark workbench", brief: "Macro of silver rings and cut gemstones on dark slate; single hard light; sparkle and deep shadow." },
   },
   {
     slug: "essential-oils",
@@ -335,7 +335,7 @@ export const industries: Industry[] = [
     faqs: [
       { q: "Can packaging be sourced together with my product?", a: "Yes, and that's often the most efficient route. We coordinate packaging development with the product manufacturer, so packing happens at the source and goods arrive retail-ready." },
       { q: "What MOQs apply to custom printed boxes?", a: "Offset printing usually needs higher minimums than digital printing. We'll compare options for your quantities." },
-      { q: "Do you offer plastic-free packaging?", a: "We can source paper, board, molded-pulp, jute and cotton alternatives. Performance needs testing, because plastic-free formats protect products differently." },
+      { q: "Do you offer plastic-free packaging?", a: "We can source paper, board, moulded-pulp, jute and cotton alternatives. Performance needs testing, because plastic-free formats protect products differently." },
     ],
     related: ["eco-friendly", "stationery-paper", "beauty-personal-care"],
     keywords: ["packaging manufacturers India", "custom box manufacturer India", "eco friendly packaging India", "jute bag manufacturer India"],
@@ -648,7 +648,7 @@ export const industries: Industry[] = [
     metaDescription: "Source spices, millets, tea, coffee, makhana, moringa and Ayurvedic botanicals from India. Processor identification, lab testing, export registrations and private-label packing coordinated by NGB Ventures.",
     heroLine: "From spice gardens and millet fields to retail-ready packs.",
     intro: [
-      "India grows an exceptional range of food crops across very different climates: pepper and cardamom in Kerala's hills, cumin and fennel in Gujarat and Rajasthan, chilli in Andhra Pradesh, tea in Assam and Darjeeling, coffee in the Western Ghats, and millets across the dry interior. Many of these products have long export histories, but buyers still need to choose processors carefully.",
+      "India grows a very wide range of food crops across very different climates: pepper and cardamom in Kerala's hills, cumin and fennel in Gujarat and Rajasthan, chilli in Andhra Pradesh, tea in Assam and Darjeeling, coffee in the Western Ghats, and millets across the dry interior. Many of these products have long export histories, but buyers still need to choose processors carefully.",
       "For food, the processor matters as much as the farm. Cleaning, sorting, sterilisation, moisture control, packing hygiene and batch testing decide whether a shipment clears your border and sells. NGB Ventures helps you find processors with the right registrations, specify residue and contaminant limits for your market, and arrange independent lab testing before goods ship.",
     ],
     products: [

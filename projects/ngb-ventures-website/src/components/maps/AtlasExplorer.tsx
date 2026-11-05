@@ -122,7 +122,7 @@ export function AtlasExplorer({ states, gi, clusterSlugs, initial = "up" }: Prop
 
                 <div className="mt-10 rounded-sm border border-ivory/15 p-6">
                   <p className="font-display text-2xl">Looking for something from {current.name}?</p>
-                  <p className="mt-2 text-sm text-ivory/75">These are research starting points, not existing NGB supplier relationships. Tell us what you need and we&apos;ll investigate.</p>
+                  <p className="mt-2 text-sm text-ivory/75">This overview shows regional capability, not NGB supplier relationships. Every engagement involves independent, project-specific supplier research and qualification.</p>
                   <Link href={`/quote?type=sourcing&region=${encodeURIComponent(current.name)}`} className="btn btn-bronze mt-5">Request sourcing from {current.name} <ArrowRight className="arrow h-4 w-4" /></Link>
                 </div>
               </div>
@@ -130,7 +130,7 @@ export function AtlasExplorer({ states, gi, clusterSlugs, initial = "up" }: Prop
               <div>
                 <p className="ledger text-bronze-soft">Not yet profiled</p>
                 <h2 className="display mt-3 text-[clamp(2.6rem,5vw,4.2rem)]">{currentName}</h2>
-                <p className="mt-6 max-w-xl leading-relaxed text-ivory/70">We haven&apos;t published a profile for {currentName} yet, but every Indian state has its own manufacturing story. Tell us what you&apos;re looking for, and we&apos;ll research suppliers and clusters there.</p>
+                <p className="mt-6 max-w-xl leading-relaxed text-ivory/70">We have not yet published a profile for {currentName}. Tell us what you are looking for and we will research its manufacturing clusters and suppliers for your project.</p>
                 <Link href={`/quote?type=sourcing&region=${encodeURIComponent(currentName)}`} className="btn btn-bronze mt-8">Ask about {currentName} <ArrowUpRight className="h-4 w-4" /></Link>
               </div>
             )}

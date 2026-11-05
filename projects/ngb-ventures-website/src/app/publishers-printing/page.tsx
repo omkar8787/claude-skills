@@ -42,7 +42,7 @@ export default function Publishers() {
         { q: "What MOQs apply to offset book printing?", a: "Offset printing has set-up costs, so unit prices fall as quantities rise. Digital printing suits short runs. We'll compare both for your quantities." },
         { q: "Are you a publisher?", a: "No. We coordinate sourcing and production with independent publishers and printers. Rights and licensing stay with the content owner." },
       ]} title="Publishing & printing: FAQs" />
-      <CtaBand title="Printing books or packaging? Let's get you quotes." />
+      <CtaBand title="Printing books or packaging? Request comparable quotations." />
       <JsonLd data={serviceLd({ name: "Book printing and publishing production sourcing", description: metadata.description as string, path: "/publishers-printing", serviceType: "Print sourcing" })} />
     </>
   );

@@ -4,7 +4,7 @@ import { useMemo, useState, type ReactNode } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { ArrowUpRight, RotateCcw, Search } from "lucide-react";
 
-export type DItem = { slug: string; name: string; state: string; category: string; material: string; giStatus: string; cluster: string; customizable: boolean; type: string; story: string; href: string };
+export type DItem = { slug: string; name: string; state: string; category: string; material: string; giStatus: string; cluster: string; customizable: boolean; type: string; story: string; href: string; card?: { processes: string[]; customisation: string[]; privateLabel: string; segments: string[]; compliance?: string[] } };
 const GI_LABEL: Record<string, string> = { "registered-gi": "Registered GI", "reported-gi": "Reported GI (unverified)", traditional: "Traditional product", industrial: "Manufactured category" };
 
 export function DiscoveryEngine({ items, plates }: { items: DItem[]; plates: Record<string, ReactNode> }) {
@@ -22,7 +22,7 @@ export function DiscoveryEngine({ items, plates }: { items: DItem[]; plates: Rec
 
   return (
     <div>
-      <div className="sticky top-[72px] z-20 -mx-5 border-b border-line bg-ivory/95 px-5 py-5 backdrop-blur lg:top-20 lg:mx-0 lg:px-0">
+      <div className="z-20 -mx-5 border-b border-line bg-ivory/95 px-5 py-5 backdrop-blur lg:sticky lg:top-20 lg:mx-0 lg:px-0">
         <div className="grid gap-4 lg:grid-cols-12 lg:items-end">
           <label className="relative lg:col-span-4"><span className="field-label">Search</span><Search className="absolute bottom-3.5 right-0 h-4 w-4 text-stone-ink" aria-hidden /><input className="field pr-6" value={q} onChange={(e) => setQ(e.target.value)} placeholder="brass, silk, toys, coir…" /></label>
           {([["state", "State"], ["category", "Category"], ["type", "Product type"]] as const).map(([k, l]) => (
@@ -47,14 +47,26 @@ export function DiscoveryEngine({ items, plates }: { items: DItem[]; plates: Rec
                 <p className="ledger mt-4 text-bronze-ink">{i.cluster} · {i.state}</p>
                 <h3 className="mt-1 font-display text-[1.6rem] leading-tight"><span className="link-u">{i.name}</span></h3>
                 <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-stone-ink">{i.story}</p>
-                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold">{i.href.startsWith("/quote") ? "Source this" : "Explore"} <ArrowUpRight className="h-4 w-4" /></span>
+                <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold">{i.href.startsWith("/quote") ? "Request a sourcing proposal" : "Explore"} <ArrowUpRight className="h-4 w-4" /></span>
               </Link>
+              {i.card && (
+                <details className="group/d mt-3 border-t border-line pt-3 text-sm">
+                  <summary className="ledger cursor-pointer list-none text-stone-ink hover:text-charcoal">Details <span className="inline-block transition-transform group-open/d:rotate-45">+</span></summary>
+                  <dl className="mt-3 space-y-2.5 leading-relaxed text-stone-ink">
+                    <div><dt className="ledger text-[0.6rem] text-bronze-ink">Processes</dt><dd>{i.card.processes.join(" · ")}</dd></div>
+                    <div><dt className="ledger text-[0.6rem] text-bronze-ink">Customisation</dt><dd>{i.card.customisation.join(" · ")}</dd></div>
+                    <div><dt className="ledger text-[0.6rem] text-bronze-ink">Private label</dt><dd>{i.card.privateLabel}</dd></div>
+                    <div><dt className="ledger text-[0.6rem] text-bronze-ink">Typical buyers</dt><dd>{i.card.segments.join(" · ")}</dd></div>
+                    {i.card.compliance && <div><dt className="ledger text-[0.6rem] text-bronze-ink">Compliance to check</dt><dd>{i.card.compliance.join(" · ")}</dd></div>}
+                  </dl>
+                </details>
+              )}
             </motion.li>
           ))}
         </AnimatePresence>
       </motion.ul>
       {shown.length === 0 && (
-        <div className="mt-12 rounded-sm bg-paper p-10 text-center"><p className="font-display text-3xl">Nothing matches, but that doesn&apos;t mean India doesn&apos;t make it.</p><Link href={`/quote?type=sourcing&product=${encodeURIComponent(q)}`} className="btn btn-primary mt-6">Ask us to source it</Link></div>
+        <div className="mt-12 rounded-sm bg-paper p-10 text-center"><p className="font-display text-3xl">No products match these filters. India may still make it.</p><Link href={`/quote?type=sourcing&product=${encodeURIComponent(q)}`} className="btn btn-primary mt-6">Request a sourcing proposal</Link></div>
       )}
     </div>
   );

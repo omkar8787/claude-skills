@@ -75,7 +75,7 @@ function rewrite(html, depth) {
   html = html.replace(/<script>self\.__next_f\.push\(([\s\S]*?)\)<\/script>/g, (m, body) =>
     `<script>self.__next_f.push(${body.replace(/(?<!children\\":)\\"(\/[^"\\]*)\\"/g, (mm, url) => `\\"${fix(url)}\\"`)})</script>`);
   html = html.replace("<head>", "<head>" + shim(prefix));
-  if (LIVE) html = html.replace(/opengraph-image\?[^"\\]*/g, "opengraph-image.png");
+  if (LIVE) html = html.replace(/opengraph-image(\?[^"\\]*)?(?=["\\])/g, "opengraph-image.png");
   return html;
 }
 

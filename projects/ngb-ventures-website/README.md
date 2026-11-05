@@ -18,6 +18,7 @@ Next.js 15 (App Router) · React 19 · TypeScript · Tailwind CSS v4 · Motion �
 | [docs/08-transformation-report.md](docs/08-transformation-report.md) | Transformation audit, IA, signature features, quality iterations, weighted scorecard |
 | [docs/09-header-and-parallax-brief.md](docs/09-header-and-parallax-brief.md) | Header visibility and parallax brief with before/after measurements |
 | [docs/10-content-and-seo-playbook.md](docs/10-content-and-seo-playbook.md) | **Publish articles via Markdown**, IndexNow, Search Console setup, writing to rank |
+| [docs/11-website-overhaul-report.md](docs/11-website-overhaul-report.md) | **Full content, brand, image & UX audit**: findings, fixes, image inventory, owner verifications, ratings |
 | [research/README.md](research/README.md) | Internal supplier/publisher lead database (unverified, never published) |
 
 ## Quick start

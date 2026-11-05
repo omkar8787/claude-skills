@@ -23,7 +23,7 @@ export function configuredChannels() {
 
 /** Lead category used for routing, e.g. "sourcing / Retailer / United States". */
 export function leadCategory(e: Enquiry) {
-  if (e.type === "lead") return `${e.pathway} / ${e.role} / ${e.destination || e.country}`;
+  if (e.type === "lead") return `${e.pathway} / ${e.role || "role not given"} / ${e.destination || e.country || "market not given"}`;
   if (e.type === "sourcing") return `sourcing / ${e.category} / ${e.targetCountry}`;
   if (e.type === "product-development") return `manufacturing / product-development / ${e.targetMarket}`;
   return `general / ${e.topic}`;

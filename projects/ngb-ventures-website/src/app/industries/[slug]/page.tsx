@@ -53,7 +53,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <TwoLists a={{ eyebrow: "Customisation", title: "Make it yours", items: it.customization }} b={{ eyebrow: "Quality assurance", title: "What we check", items: it.quality }} />
       <ComplianceGrid items={it.compliance} />
       <div id="workflow" className="scroll-mt-24"><WorkflowStrip enquireHref={enquire} /></div>
-      <Faq faqs={it.faqs} title={`${it.name}: buyer FAQs`} />
+      <Faq faqs={it.faqs} title="Frequently asked questions" />
       <section className="border-t border-line bg-ivory py-24">
         <div className="container-x"><p className="eyebrow mb-6">Related industries</p><h2 className="display mb-14 text-[clamp(2.2rem,4vw,3.5rem)]">Often sourced <em>alongside</em></h2><IndustryGrid items={related} compact /></div>
       </section>

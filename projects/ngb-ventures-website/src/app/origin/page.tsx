@@ -13,7 +13,7 @@ const CATS = ["Agricultural", "Food", "Textile", "Handicraft", "Manufactured", "
 export default function Origin() {
   return (
     <>
-      <PageHero plate={{ slot: "page-origin", motif: "block", tone: "forest", alt: "India's Origin Collection", brief: "" }} crumbs={[{ name: "GI & Origin Collection", href: "/origin" }]} eyebrow="India's Origin Collection" title="Shaped by geography." italic="Carried by generations." lede="Discover extraordinary products shaped by geography, heritage, traditional craftsmanship and generations of knowledge, each with its Geographical Indication details and sources." ctas={[{ label: "Source a GI product", href: "/quote?type=sourcing&category=GI%20%2F%20origin%20products" }, { label: "How we verify", href: "#method", variant: "ghost" }]} />
+      <PageHero plate={{ slot: "page-origin", motif: "block", tone: "forest", alt: "India's Origin Collection", brief: "" }} crumbs={[{ name: "GI & Origin Collection", href: "/origin" }]} eyebrow="India's Origin Collection" title="Shaped by geography." italic="Protected by law." lede="Products whose character comes from their place of origin, each with its Geographical Indication (GI) registration details, status and sources." ctas={[{ label: "Source a GI product", href: "/quote?type=sourcing&category=GI%20%2F%20origin%20products" }, { label: "How we verify", href: "#method", variant: "ghost" }]} />
       <section className="container-x py-20 lg:py-28">
         {CATS.map((cat) => {
           const list = giProducts.filter((g) => g.category === cat);
@@ -50,7 +50,7 @@ export default function Origin() {
           </div>
         </div>
       </section>
-      <CtaBand title="Looking for authentic GI products? Let's find authorised producers." />
+      <CtaBand title="Looking for authentic GI products? We source from authorised users." />
       <JsonLd data={itemListLd("India's Origin Collection", giProducts.map((g) => ({ name: g.officialName, href: `/origin/${g.slug}` })))} />
     </>
   );

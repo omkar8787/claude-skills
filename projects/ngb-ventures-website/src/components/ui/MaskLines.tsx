@@ -7,6 +7,8 @@ export function MaskLines({ lines, className, delay = 0 }: { lines: ReactNode[];
       {lines.map((l, i) => (
         <span key={i} className="-mb-[0.08em] block overflow-hidden pb-[0.08em]">
           <span className="mask-line" style={{ ["--d" as string]: `${delay + i * 0.1}s` }}>{l}</span>
+          {/* Real space between lines so search engines and screen readers read separate words. */}
+          {i < lines.length - 1 && " "}
         </span>
       ))}
     </span>

@@ -33,9 +33,9 @@ export default function ExportPage() {
         { q: "Are you a freight forwarder or customs broker?", a: "No. We coordinate with licensed forwarders and customs brokers, who carry out carriage and clearance." },
         { q: "Can you tell me my exact import duty?", a: "We can research indicative HS codes and point you to the official tariff tools. Exact duty is set by customs on the declared classification, origin and value. Confirm it with a licensed broker." },
         { q: "Do you handle Amazon FBA shipments?", a: "We coordinate FBA-compliant labelling and cartons with the manufacturer, and hand over to forwarders that deliver to FBA warehouses." },
-      ]} title="Export: FAQs" />
+      ]} title="Frequently asked questions" />
       <NextDivisions current={d.slug} />
-      <CtaBand title="Shipping from India? Let's plan it properly." topic="Sourcing project" />
+      <CtaBand title="Shipping from India? Discuss an export project." topic="Sourcing project" />
       <JsonLd data={serviceLd({ name: "India export coordination", description: metadata.description as string, path: d.route, serviceType: "Export coordination" })} />
     </>
   );

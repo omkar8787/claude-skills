@@ -85,6 +85,7 @@ export function loadMarkdownArticles(): Guide[] {
     out.push({
       slug,
       kind: data.kind === "story" ? "story" : "guide",
+      section: (["buyer-guides", "sourcing-research", "manufacturing-insights", "export-compliance"].includes(data.section) ? data.section : undefined) as Guide["section"],
       category: data.category || "Insights",
       date: data.date,
       modified: /^\d{4}-\d{2}-\d{2}$/.test(data.updated || "") ? data.updated : data.date,
